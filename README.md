@@ -15,7 +15,7 @@ elevator slides: https://docs.google.com/presentation/d/1IiXpdrlXnrALJPanTABblA7
 ###Hayden, thatrandomguy80.  
 -Skype (internel username): thatrandomguy80  
 -Ph: 0416455059  
--Email(s): thatrandomguy80@gmail.com, hayden.munday@student.mq.edu.au  
+-Email(s): thatrandomguy80@gmail.com, hayden.munday@students.mq.edu.au  
 -Others:  
 ###Harrison, StellarSoup.  
 -Skype:  
