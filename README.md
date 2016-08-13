@@ -13,15 +13,15 @@ elevator slides: https://docs.google.com/presentation/d/1IiXpdrlXnrALJPanTABblA7
 
 #Contacts
 ###Hayden, thatrandomguy80.  
-Skype (internel username): thatrandomguy80  
-Ph: 0416455059  
-Email(s): thatrandomguy80@gmail.com, hayden.munday@student.mq.edu.au  
-Others:  
+-Skype (internel username): thatrandomguy80  
+-Ph: 0416455059  
+-Email(s): thatrandomguy80@gmail.com, hayden.munday@student.mq.edu.au  
+-Others:  
 ###Harrison, StellarSoup.  
-Skype: 
-Ph: 0450107716  
-Email(s): hccampbell13@gmail.com  
-Others:  
+-Skype:  
+-Ph: 0450107716  
+-Email(s): hccampbell13@gmail.com  
+-Others:  
 ###Micheal.  
 -Skype: michael.marr  
 -Ph: 0405301925    
