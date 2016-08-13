@@ -25,7 +25,7 @@ elevator slides: https://docs.google.com/presentation/d/1IiXpdrlXnrALJPanTABblA7
 ###Micheal.  
 -Skype: michael.marr  
 -Ph: 0405301925    
--Email(s): michael.marr@hotmail.com, michael.marr414@gmail  
+-Email(s): michael.marr@hotmail.com, michael.marr414@gmail.com   
 -Others:  
 ###Kaethe.  
 -Skype:   
