@@ -52,9 +52,21 @@ public class BridgeSuspender : ObstacleInteraction
 
     }
 
-    public override void Interact()
-    {
+    public void CutSuspender(Vector3 input) {
+        GameObject platform = GameObject.Find(transform.parent.parent.name + "/Platform");
+        SpringJoint2D spring = platform.GetComponent<PlatformControls>().springJoints[suspenderIndex];
+        float off = 0.5f;//off set for new anchors
+        Vector3 upperA = new Vector3(input.x,input.y+off,input.z);//position new anchors
+        Vector3 lowerA = new Vector3(input.x,input.y-off,input.z);
+        Object tempRope = Instantiate(Resources.Load("04_Prefabs/rope"), new Vector3(0, 0, 0), Quaternion.identity);
+    }
+
+    public override void Interact() {
         base.Interact();
         RemoveSuspender();
+    }
+    public override void Interact(Vector3 input) {
+        base.Interact(input);
+        CutSuspender(input);
     }
 }

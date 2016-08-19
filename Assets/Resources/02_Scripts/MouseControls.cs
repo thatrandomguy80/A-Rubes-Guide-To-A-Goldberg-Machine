@@ -27,7 +27,11 @@ public class MouseControls : MonoBehaviour {
         if (newObject != null)
         {
             //It will process the action
-            newObject.Interact();
+            if (newObject.gameObject.GetComponent<BridgeSuspender>() != null) {//if it's a suspender send hit location(world space)
+                newObject.Interact(hit.point);
+            } else {//default
+                newObject.Interact();
+            }
         }
     }
 	

@@ -7,4 +7,7 @@ public class ObstacleInteraction : MonoBehaviour {
     {
         print("Player interacted with " + gameObject.name);
     }
+    public virtual void Interact(Vector3 input) {
+        print("Player interacted with " + gameObject.name + "At Location" + input.ToString());
+    }
 }
