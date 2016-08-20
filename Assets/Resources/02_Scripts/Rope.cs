@@ -11,18 +11,18 @@ public class Rope : MonoBehaviour {
     private HingeJoint2D headjoint;
 
     public void startUp(GameObject anchor, float rot, Vector3 tailPos) {
-        float Hlength = 1.5f;//half the length
-        //tailPos.y - anchor.transform.position.y;
-        // if (length < 0) length = -length;//make pos
-        //this.transform.localScale = new Vector3(0, length * 0.0166f, 0);
+        float length = tailPos.y - anchor.transform.position.y;
+        if (length < 0) length = -length;//make pos
+        this.transform.Translate(new Vector3(0, -1.5f, 0));//trashes
         this.transform.Rotate(new Vector3(0f, 0f, rot));
-        this.transform.Translate(new Vector3(0, -Hlength, 0));
-
+        this.transform.localScale = new Vector3(0.1f,  0.0166f*length, 0.1f);
         if (anchor.GetComponent<Rigidbody2D>() == null) {//stationary anchors have rbs platfom ones dont
-            Rigidbody2D rb = anchor.transform.parent.parent.GetComponentInChildren<Rigidbody2D>();
+            Rigidbody2D rb = anchor.GetComponentInChildren<Rigidbody2D>();
             headjoint = head.GetComponent<HingeJoint2D>();
             if (rb != null && headjoint != null) {
+                headjoint.autoConfigureConnectedAnchor = false;
                 headjoint.connectedBody = rb;
+                headjoint.connectedAnchor = new Vector2(0, 0);
             }
         }
         //tail.transform.position = tailPos;
