@@ -10,6 +10,8 @@ public class BridgeSuspender : ObstacleInteraction
     public GameObject stationaryAnchor, bridgeAnchor;//Keep track of the anchors
     public int suspenderIndex;//Keeps track of what suspender is being cut [CHANGE]
 
+    private bool tick = false; //for testing [CHANGE]
+
     void Update()
     {
         //Re-adjust Suspender
@@ -47,7 +49,7 @@ public class BridgeSuspender : ObstacleInteraction
         GameObject platform = GameObject.Find(transform.parent.parent.name + "/Platform");
         SpringJoint2D spring = platform.GetComponent<PlatformControls>().springJoints[suspenderIndex];
         spring.enabled = false;
-        transform.GetComponent<MeshRenderer>().enabled = false;
+        transform.GetComponent<MeshRenderer>().enabled = false;//does this still need to be here it can collide with objects sometimes
 
 
     }
@@ -56,9 +58,12 @@ public class BridgeSuspender : ObstacleInteraction
         GameObject platform = GameObject.Find(transform.parent.parent.name + "/Platform");
         SpringJoint2D spring = platform.GetComponent<PlatformControls>().springJoints[suspenderIndex];
         float off = 0.5f;//off set for new anchors
-        Vector3 upperA = new Vector3(input.x,input.y+off,input.z);//position new anchors
+        Vector3 upperA = new Vector3(input.x,input.y+off,input.z);//position of tails
         Vector3 lowerA = new Vector3(input.x,input.y-off,input.z);
-        Object tempRope = Instantiate(Resources.Load("04_Prefabs/rope"), new Vector3(0, 0, 0), Quaternion.identity);
+        GameObject tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), bridgeAnchor.transform.position, Quaternion.identity) as GameObject;
+        tempRope.GetComponent<Rope>().startUp(bridgeAnchor, 180f, lowerA);
+        tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), stationaryAnchor.transform.position, Quaternion.identity) as GameObject;
+        tempRope.GetComponent<Rope>().startUp(stationaryAnchor, 0f, upperA);
     }
 
     public override void Interact() {
@@ -66,7 +71,11 @@ public class BridgeSuspender : ObstacleInteraction
         RemoveSuspender();
     }
     public override void Interact(Vector3 input) {
-        base.Interact(input);
-        CutSuspender(input);
+        if (!tick) {
+            base.Interact(input);
+            RemoveSuspender();
+            CutSuspender(input);
+            tick = !tick;
+        }
     }
 }
