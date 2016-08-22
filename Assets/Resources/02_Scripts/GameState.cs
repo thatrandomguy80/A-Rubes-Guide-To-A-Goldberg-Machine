@@ -69,9 +69,31 @@ public class GameState : MonoBehaviour {
             //Loads the next level
             SceneManager.LoadScene(previousLevel);
         }
+
+        //Handles all of the star aspects
+        public static class Stars
+        {
+            //The player can get three starts in each level
+            private static int stars;
+            //When the player collides with the star they get a point
+            public static void Add()
+            {
+                stars += 1;
+            }
+            //Gets the current number of stars collected
+            public static int Get()
+            {
+                return stars;
+            }
+            //Resets the star count to 0
+            public static void Reset()
+            {
+                stars = 0;
+            }
+        }
+        
     }
     //Controls end of game controls
-    //Like winning and loseing
     protected static class EndGame
     {
         //Player Wins the Game
@@ -80,6 +102,7 @@ public class GameState : MonoBehaviour {
             print("Player Wins");
             InGame.NextLevel();
         }
+        //Player Loses the Game
         public static void Lose()
         {
             print("Player Lost");
