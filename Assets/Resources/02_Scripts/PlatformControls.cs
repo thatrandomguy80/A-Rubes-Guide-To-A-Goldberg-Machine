@@ -42,7 +42,7 @@ public class PlatformControls : MonoBehaviour {
         //Remove the boxCollider
         Destroy(newPlatform.GetComponent<BoxCollider>());
         //Change the material to the one from the main platform
-        newPlatform.transform.GetComponent<Renderer>().material = transform.GetComponent<Renderer>().material;
+        newPlatform.transform.GetComponent<Renderer>().material = Resources.Load("03_Materials/Primary Color") as Material;
 
         //Place the platform in the center
         transform.position = Vector2.Lerp(leftAnchor.transform.position, rightAnchor.transform.position, 0.5f);

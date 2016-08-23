@@ -13,10 +13,11 @@ public class Rope : MonoBehaviour {
     public void startUp(GameObject anchor, float rot, Vector3 tailPos) {
         float length = tailPos.y - anchor.transform.position.y;
         if (length < 0) length = -length;//make pos
-        this.transform.Translate(new Vector3(0, -1.5f, 0));//trashes
+        float scale = 0.0166f * length;
+        this.transform.Translate(new Vector3(0, -(length/2), 0));//trashes
         this.transform.Rotate(new Vector3(0f, 0f, rot));
-        this.transform.localScale = new Vector3(0.1f,  0.0166f*length, 0.1f);
-        if (anchor.GetComponent<Rigidbody2D>() == null) {//stationary anchors have rbs platfom ones dont
+        this.transform.localScale = new Vector3(0.1f, scale, 0.1f);
+        if (anchor.GetComponent<Rigidbody2D>() == null) {//stationary anchors have rbs platform ones dont
             Rigidbody2D rb = anchor.GetComponentInChildren<Rigidbody2D>();
             headjoint = head.GetComponent<HingeJoint2D>();
             if (rb != null && headjoint != null) {
