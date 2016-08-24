@@ -19,16 +19,18 @@
 
 			Pass//outline pass seen through objects
 			{
-			Tags{"Queue" = "Overlay" "RenderType" = "Opaque"}
+			Tags{"Queue" = "Transparent" "RenderType" = "Opaque"}
 			ZTest Always
-			Cull Back
+			Cull front
 			ZWrite Off
-			Blend SrcAlpha OneMinusSrcAlpha // Traditional transparency
-												//Blend One OneMinusSrcAlpha // Premultiplied transparency
-												//Blend One One // Additive
-												//Blend OneMinusDstColor One // Soft Additive
-												//Blend DstColor Zero // Multiplicative
-												//Blend DstColor SrcColor // 2x Multiplicative
+			Lighting Off
+			//Blend One Zero
+			//Blend SrcAlpha OneMinusSrcAlpha // Traditional transparency
+			//Blend One OneMinusSrcAlpha // Premultiplied transparency
+			//Blend One One // Additive
+			//Blend OneMinusDstColor One // Soft Additive
+			//Blend DstColor Zero // Multiplicative
+			//Blend DstColor SrcColor // 2x Multiplicative
 				CGPROGRAM
 				#pragma vertex vert
 				#pragma fragment frag
@@ -71,7 +73,7 @@
 			}
 			ENDCG
 		}
-			//normal default pass
+			//normal default pass surface shaders don't need passes
 				Tags{"RenderType" = "Opaque"}
 				ZWrite On
 				ZTest Less
