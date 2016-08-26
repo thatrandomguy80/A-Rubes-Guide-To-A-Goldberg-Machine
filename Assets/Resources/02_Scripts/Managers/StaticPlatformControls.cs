@@ -32,7 +32,6 @@ public class StaticPlatformControls : PlatformBuilder {
 
     private void Build() {
         int amount = anchors.transform.childCount;
-        Debug.Log(Joints.Count);
         for (int i = 0; i < amount - 1; i++) {
             base.CreatePlatform(Joints.ElementAt(i), Joints.ElementAt(i + 1));//Look at scale setter
         }

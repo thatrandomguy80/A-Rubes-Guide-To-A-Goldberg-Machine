@@ -4,22 +4,8 @@ using System.Collections;
 public class PlatformBuilder : MonoBehaviour {
     [Header("This gets Mats from the Materail folder")]
     public string MatName = "Primary Color";
-	// Use this for initialization
-	void Start () {
-        //Get the left and right platform anchors only base class now
-
-        /*GameObject anchors = GameObject.Find(transform.parent.name + "/PlatformAnchors");
-        GameObject leftAnchor = anchors.transform.GetChild(0).gameObject;
-        GameObject rightAnchor = anchors.transform.GetChild(1).gameObject;
-        CreatePlatform(leftAnchor, rightAnchor);
-        */
-
-	}
-
 
     protected void CreatePlatform(GameObject leftAnchor, GameObject rightAnchor) {
-
-
         //Create a new Platform
         GameObject newPlatform = GameObject.CreatePrimitive(PrimitiveType.Cube);
         newPlatform.name = "Platform (Display)";
@@ -31,12 +17,13 @@ public class PlatformBuilder : MonoBehaviour {
 
         //Remove the boxCollider
         Destroy(newPlatform.GetComponent<BoxCollider>());
+
         //Change the material to the one from the main platform
-        //newPlatform.transform.GetComponent<Renderer>().material = transform.GetComponent<Renderer>().material;
         Material temp = Resources.Load("03_Materials/" + MatName) as Material;
         if (temp != null) {
             newPlatform.transform.GetComponent<Renderer>().material = temp;
-            newPlatform.transform.GetComponent<Renderer>().reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.BlendProbesAndSkybox;//Don't accept the balls reflection prob
+            newPlatform.transform.GetComponent<Renderer>().reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.BlendProbesAndSkybox;
+            //Don't accept the balls reflection prob
         } else {
             Debug.LogError("Not a valid Mat name on: " + this.transform.parent.name);
         }
@@ -62,7 +49,6 @@ public class PlatformBuilder : MonoBehaviour {
         newPlatform.transform.localScale = new Vector3(widthOfPlatform, 1, 1);
 
         //Set the anchors to the platform
-        //leftAnchor.transform.parent.SetParent(transform);
         newPlatform.transform.SetParent(leftAnchor.transform.parent);
 
     }
