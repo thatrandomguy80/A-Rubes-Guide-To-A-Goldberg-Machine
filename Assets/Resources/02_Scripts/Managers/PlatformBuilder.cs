@@ -2,18 +2,23 @@
 using System.Collections;
 
 public class PlatformBuilder : MonoBehaviour {
-
+    [Header("This gets Mats from the Materail folder")]
+    public string MatName = "Primary Color";
 	// Use this for initialization
 	void Start () {
-        CreatePlatform();
+        //Get the left and right platform anchors only base class now
+
+        /*GameObject anchors = GameObject.Find(transform.parent.name + "/PlatformAnchors");
+        GameObject leftAnchor = anchors.transform.GetChild(0).gameObject;
+        GameObject rightAnchor = anchors.transform.GetChild(1).gameObject;
+        CreatePlatform(leftAnchor, rightAnchor);
+        */
+
 	}
 
 
-    public void CreatePlatform() {
-        //Get the left and right platform anchors
-        GameObject anchors = GameObject.Find(transform.parent.name + "/PlatformAnchors");
-        GameObject leftAnchor = anchors.transform.GetChild(0).gameObject;
-        GameObject rightAnchor = anchors.transform.GetChild(1).gameObject;
+    protected void CreatePlatform(GameObject leftAnchor, GameObject rightAnchor) {
+
 
         //Create a new Platform
         GameObject newPlatform = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -27,7 +32,13 @@ public class PlatformBuilder : MonoBehaviour {
         //Remove the boxCollider
         Destroy(newPlatform.GetComponent<BoxCollider>());
         //Change the material to the one from the main platform
-        newPlatform.transform.GetComponent<Renderer>().material = transform.GetComponent<Renderer>().material;
+        //newPlatform.transform.GetComponent<Renderer>().material = transform.GetComponent<Renderer>().material;
+        Material temp = Resources.Load("03_Materials/" + MatName) as Material;
+        if (temp != null) {
+            newPlatform.transform.GetComponent<Renderer>().material = temp;
+        } else {
+            Debug.LogError("Not a valid Mat name on: " + this.transform.parent.name);
+        }
 
         //Place the platform in the center
         transform.position = Vector2.Lerp(leftAnchor.transform.position, rightAnchor.transform.position, 0.5f);
@@ -48,7 +59,10 @@ public class PlatformBuilder : MonoBehaviour {
         float widthOfPlatform = Vector2.Distance(leftAnchor.transform.position, rightAnchor.transform.position);
         transform.localScale = new Vector3(widthOfPlatform, 1, 1);
         newPlatform.transform.localScale = new Vector3(widthOfPlatform, 1, 1);
-        anchors.transform.SetParent(transform);
-        newPlatform.transform.SetParent(anchors.transform);
+
+        //Set the anchors to the platform
+        leftAnchor.transform.parent.SetParent(transform);
+        newPlatform.transform.SetParent(leftAnchor.transform.parent);
+
     }
 }
