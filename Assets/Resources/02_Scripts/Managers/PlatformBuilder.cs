@@ -36,6 +36,7 @@ public class PlatformBuilder : MonoBehaviour {
         Material temp = Resources.Load("03_Materials/" + MatName) as Material;
         if (temp != null) {
             newPlatform.transform.GetComponent<Renderer>().material = temp;
+            newPlatform.transform.GetComponent<Renderer>().reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.BlendProbesAndSkybox;//Don't accept the balls reflection prob
         } else {
             Debug.LogError("Not a valid Mat name on: " + this.transform.parent.name);
         }
@@ -61,7 +62,7 @@ public class PlatformBuilder : MonoBehaviour {
         newPlatform.transform.localScale = new Vector3(widthOfPlatform, 1, 1);
 
         //Set the anchors to the platform
-        leftAnchor.transform.parent.SetParent(transform);
+        //leftAnchor.transform.parent.SetParent(transform);
         newPlatform.transform.SetParent(leftAnchor.transform.parent);
 
     }

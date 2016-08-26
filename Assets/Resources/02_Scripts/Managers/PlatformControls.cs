@@ -16,7 +16,8 @@ public class PlatformControls : PlatformBuilder {
 
         //Create The Platform
         base.CreatePlatform(leftAnchor, rightAnchor);
-
+        //this line only needed for non static Platforms
+        leftAnchor.transform.parent.SetParent(transform);
         //link the joints after calling base platform creator
         LinkJoints(leftAnchor, rightAnchor);
        
@@ -33,6 +34,7 @@ public class PlatformControls : PlatformBuilder {
     }
 
     public void LinkJoints(GameObject leftAnchor, GameObject rightAnchor) {
+
         //Get the distance from the centre of the platform to the edge
         float widthOfPlatform = Vector2.Distance(leftAnchor.transform.position, rightAnchor.transform.position);
         float distToEdge = widthOfPlatform / 2;
