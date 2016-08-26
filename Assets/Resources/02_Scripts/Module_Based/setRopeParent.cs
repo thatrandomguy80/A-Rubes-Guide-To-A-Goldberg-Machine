@@ -10,4 +10,8 @@ public class setRopeParent : MonoBehaviour {
         HingeJoint2D joint = this.GetComponent<HingeJoint2D>();
         joint.connectedBody = this.transform.parent.GetComponent<Rigidbody2D>();
 	}
+
+    public void enableD() {
+        this.GetComponent<DistanceJoint2D>().enabled = true;
+    }
 }

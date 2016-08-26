@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/TEST(RopePlatformPhysics).unity
+- path: Assets/Resources/01_Scenes/TEST(StarSystem).unity
   isLoaded: 1
   isActive: 1

@@ -11,6 +11,11 @@ public class Rope : MonoBehaviour {
     private HingeJoint2D headjoint;
 
     public void startUp(GameObject anchor, float rot, Vector3 tailPos) {
+        if (anchor.transform.parent.parent.parent.FindChild("MoveableObj") != null) {
+            //call ropes bones to enable distance joint
+            Debug.Log("called");
+            BroadcastMessage("enableD");
+        }
         float length = tailPos.y - anchor.transform.position.y;
         if (length < 0) length = -length;//make pos
         float scale = 0.0166f * length;
