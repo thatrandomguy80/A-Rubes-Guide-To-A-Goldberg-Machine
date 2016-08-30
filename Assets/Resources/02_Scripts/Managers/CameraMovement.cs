@@ -10,7 +10,7 @@ public class CameraMovement : MonoBehaviour {
     private Vector3 moveTemp;
     private float xDiff, yDiff; //Distance between the center of the camera and the player
     public float moveThresh = 1; //How far the player can move from the center of the camera
-    private float camMoveSpeed = 3;
+    private float camMoveSpeed = 8;
     void Start()
     {
         character = GameObject.FindGameObjectWithTag("Player");
