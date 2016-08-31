@@ -37,10 +37,9 @@ public class GameState : MonoBehaviour {
             //Gets the currently loaded scene
             Scene currentLevel = SceneManager.GetActiveScene();
             //Gets the number of current scenes in the build
-            int numberOfScenes = SceneManager.sceneCount + 1;
+            int numberOfScenes = SceneManager.sceneCountInBuildSettings;
             //Gets the next level index
             int nextLevel = (currentLevel.buildIndex + 1) % numberOfScenes;
-
             Debug.Log("Level : " + nextLevel + " will be loaded");
 
             Time.timeScale = 1;
@@ -53,15 +52,15 @@ public class GameState : MonoBehaviour {
             //Gets the currently loaded scene
             Scene currentLevel = SceneManager.GetActiveScene();
             //Gets the number of current scenes in the build
-            int numberOfScenes = SceneManager.sceneCount + 1;
+            int numberOfScenes = SceneManager.sceneCountInBuildSettings;
             //Gets the previous level index
             int previousLevel = (currentLevel.buildIndex - 1) % numberOfScenes;
 
-            if (previousLevel < 0)
-            {
-                previousLevel = SceneManager.sceneCount;
-            }//FIXS WEIRD BUG
             print(previousLevel);
+            if(previousLevel < 0)
+            {
+                previousLevel = numberOfScenes - 1;
+            }
 
             Debug.Log("Level : " + previousLevel + "will be loaded");
 
