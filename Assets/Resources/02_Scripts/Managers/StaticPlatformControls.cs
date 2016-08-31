@@ -58,6 +58,7 @@ public class StaticPlatformControls : PlatformBuilder {
 
         if (anchors.name == "PlatformAnchors") {
             GameObject temp = Instantiate(JointPrefab, transform.parent.position, Quaternion.identity) as GameObject;
+            temp.transform.Translate(new Vector3(0, 0, -1f));
             temp.transform.Rotate(new Vector3(90, 0, 0));
             temp.transform.parent = anchors.transform;
             Joints.Add(temp);
