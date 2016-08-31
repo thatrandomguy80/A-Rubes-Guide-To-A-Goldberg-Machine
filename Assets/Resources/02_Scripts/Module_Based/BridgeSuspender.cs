@@ -12,6 +12,9 @@ public class BridgeSuspender : ObstacleInteraction
 
     private bool tick = false; //for testing [CHANGE]
 
+	void Start(){
+		tick = false;
+	}
     void Update()
     {
         //Re-adjust Suspender
@@ -47,16 +50,20 @@ public class BridgeSuspender : ObstacleInteraction
     {
         //Detach the suspender from the platform
         GameObject platform = GameObject.Find(transform.parent.parent.name + "/Platform");
-        SpringJoint2D spring = platform.GetComponent<PlatformControls>().springJoints[suspenderIndex];
+		DistanceJoint2D spring = platform.GetComponent<PlatformControls>().distJoints[suspenderIndex];
         spring.enabled = false;
-        transform.GetComponent<MeshRenderer>().enabled = false;//does this still need to be here it can collide with objects sometimes
+        //transform.GetComponent<MeshRenderer>().enabled = false;//does this still need to be here it can collide with objects sometimes
+
+
+
+		Destroy(gameObject);
 
 
     }
 
     public void CutSuspender(Vector3 input) {
         GameObject platform = GameObject.Find(transform.parent.parent.name + "/Platform");
-        SpringJoint2D spring = platform.GetComponent<PlatformControls>().springJoints[suspenderIndex];
+		DistanceJoint2D spring = platform.GetComponent<PlatformControls>().distJoints[suspenderIndex];
         float off = 0.5f;//off set for new anchors
         Vector3 upperA = new Vector3(input.x,input.y+off,input.z);//position of tails
         Vector3 lowerA = new Vector3(input.x,input.y-off,input.z);
@@ -65,11 +72,11 @@ public class BridgeSuspender : ObstacleInteraction
         tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), stationaryAnchor.transform.position, Quaternion.identity) as GameObject;
         tempRope.GetComponent<Rope>().startUp(stationaryAnchor, 0f, upperA);
     }
-
+	/*
     public override void Interact() {
         base.Interact();
         RemoveSuspender();
-    }
+    }*/
     public override void Interact(Vector3 input) {
         if (!tick) {
             base.Interact(input);
@@ -77,5 +84,6 @@ public class BridgeSuspender : ObstacleInteraction
             CutSuspender(input);
             tick = !tick;
         }
+
     }
 }

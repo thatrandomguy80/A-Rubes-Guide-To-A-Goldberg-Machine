@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlatformControls : PlatformBuilder {
 
-    public SpringJoint2D[] springJoints;
+	public DistanceJoint2D[] distJoints;
 
     // Use this for initialization
     void Start()
     {
         //Get all the spring joints for the platform
-        springJoints = GetComponents<SpringJoint2D>();
-        GameObject anchors = GameObject.Find(transform.parent.name + "/PlatformAnchors");
+		distJoints = GetComponents<DistanceJoint2D>();
+		GameObject anchors = transform.parent.GetChild (3).gameObject;
         GameObject leftAnchor = anchors.transform.GetChild(0).gameObject;
         GameObject rightAnchor = anchors.transform.GetChild(1).gameObject;
 
@@ -26,13 +28,14 @@ public class PlatformControls : PlatformBuilder {
         //Starts from the top left corner then goes clockwise.
 
         //Turn off autoconfigure of distance and connected anchor
-        for (int i = 0; i < springJoints.Length; i++)
+		for (int i = 0; i < distJoints.Length; i++)
         {
-            springJoints[i].autoConfigureDistance = false;
-            springJoints[i].autoConfigureConnectedAnchor = false;
+			distJoints[i].autoConfigureDistance = false;
+			distJoints[i].autoConfigureConnectedAnchor = false;
         }
     }
 
+	//Sets up the joint positions
     public void LinkJoints(GameObject leftAnchor, GameObject rightAnchor) {
 
         //Get the distance from the centre of the platform to the edge
@@ -43,8 +46,8 @@ public class PlatformControls : PlatformBuilder {
 
         float xdist = distToAnchor / distToEdge;
         float ydist = transform.position.y - leftAnchor.transform.position.y;
-        springJoints[0].anchor = new Vector2(springJoints[0].anchor.x * xdist, -ydist);
-        springJoints[1].anchor = new Vector2(springJoints[1].anchor.x * xdist, ydist);
+		distJoints[0].anchor = new Vector2(distJoints[0].anchor.x * xdist, -ydist);
+		distJoints[1].anchor = new Vector2(distJoints[1].anchor.x * xdist, ydist);
     }
 	
 }

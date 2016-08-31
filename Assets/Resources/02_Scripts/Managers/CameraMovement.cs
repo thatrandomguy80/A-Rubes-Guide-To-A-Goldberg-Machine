@@ -28,14 +28,38 @@ public class CameraMovement : MonoBehaviour {
             moveTemp = character.transform.position;
             moveTemp.z = -10;
             //Camera keeps moving towards player
-            //the further away the character is to the camera
-            //The faster the camera will move to keep up with the player
             transform.position = Vector3.MoveTowards(transform.position, moveTemp, Time.deltaTime * camMoveSpeed);
-            //transform.position = Vector3.Lerp(transform.position, moveTemp, Time.deltaTime* camMoveSpeed);
         }
     }
+
+	private bool bDragging;
+	private Vector3 oldPos;
+	private Vector3 panOrigin;
+	private float panSpeed = 3;
+
+	private void MouseCameraMovement(){
+		
+			
+	}
+
+	//Handles camera zoom
+	private void Zoom(float zoomSpeed){
+		float dis = Input.GetAxis ("Mouse ScrollWheel");
+
+		Camera gameCam = Camera.main;
+		if (dis > 0) {//Scroll Forward
+			gameCam.orthographicSize -= zoomSpeed * Time.deltaTime;
+		} else if (dis < 0) {//Scroll Back
+			gameCam.orthographicSize += zoomSpeed * Time.deltaTime;
+
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
-        MoveCamera();      
+        MoveCamera(); 
+		float zoomSpeed = 20;
+		Zoom (zoomSpeed);
+		MouseCameraMovement ();
 	}
 }
