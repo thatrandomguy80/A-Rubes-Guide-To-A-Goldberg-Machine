@@ -62,21 +62,32 @@ public class BridgeSuspender : ObstacleInteraction
     }
 
     public void CutSuspender(Vector3 input) {
+
         GameObject platform = GameObject.Find(transform.parent.parent.name + "/Platform");
 		DistanceJoint2D spring = platform.GetComponent<PlatformControls>().distJoints[suspenderIndex];
-        float off = 0.5f;//off set for new anchors
-        Vector3 upperA = new Vector3(input.x,input.y+off,input.z);//position of tails
-        Vector3 lowerA = new Vector3(input.x,input.y-off,input.z);
+
+        float yoff = 0f, xoff = 0f ;//offset for new anchors 
+        Vector3 upperA = new Vector3(input.x+xoff,input.y+yoff,input.z);//position of tails
+        Vector3 lowerA = new Vector3(input.x+xoff,input.y-yoff,input.z);
+
+        //this is the platforms rope
         GameObject tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), bridgeAnchor.transform.position, Quaternion.identity) as GameObject;
         tempRope.GetComponent<Rope>().startUp(bridgeAnchor, 180f, lowerA);
+        tempRope.transform.parent = bridgeAnchor.transform.GetChild(0);
+        tempRope.name = bridgeAnchor.name + " Rope";
+
+        //this is the upper anchor rope
         tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), stationaryAnchor.transform.position, Quaternion.identity) as GameObject;
         tempRope.GetComponent<Rope>().startUp(stationaryAnchor, 0f, upperA);
+        tempRope.transform.parent = platform.transform.parent.GetChild(1).GetChild(0);
+        tempRope.name = stationaryAnchor.name + " Rope";
     }
-	/*
+	
     public override void Interact() {
         base.Interact();
         RemoveSuspender();
-    }*/
+    }
+
     public override void Interact(Vector3 input) {
         if (!tick) {
             base.Interact(input);

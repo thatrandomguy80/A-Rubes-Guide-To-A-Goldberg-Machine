@@ -9,8 +9,8 @@ public class StaticPlatformControls : PlatformBuilder {
     public int numOfJoints = 2;
     private GameObject anchors;
     private GameObject JointPrefab;
-    private List<GameObject> Joints;
-    private bool Built = false;
+    private List<GameObject> Joints;// scrip maintained list of joints that are in use
+    private bool Built = false;//allows only one build per runtime
 
     // Use this for initialization
     void Start() {
@@ -30,6 +30,7 @@ public class StaticPlatformControls : PlatformBuilder {
         }
     }
 
+    //calls each joint pairs platform to be created
     private void Build() {
         int amount = anchors.transform.childCount;
         for (int i = 0; i < amount - 1; i++) {
@@ -38,6 +39,7 @@ public class StaticPlatformControls : PlatformBuilder {
         Built = !Built;
     }
 
+    //adds all joints required and during runtime inst them properly
     private void CreateJoints() {
         int amount = anchors.transform.childCount;
 
@@ -51,10 +53,11 @@ public class StaticPlatformControls : PlatformBuilder {
         }
     }
 
+    //adds a joint to the object and list
     private void AddJoint() {
 
         if (anchors.name == "PlatformAnchors") {
-            GameObject temp = Instantiate(JointPrefab, transform.parent.parent.position, Quaternion.identity) as GameObject;
+            GameObject temp = Instantiate(JointPrefab, transform.parent.position, Quaternion.identity) as GameObject;
             temp.transform.Rotate(new Vector3(90, 0, 0));
             temp.transform.parent = anchors.transform;
             Joints.Add(temp);
@@ -63,10 +66,12 @@ public class StaticPlatformControls : PlatformBuilder {
         }
     }
 
+    //ensures that there are at least 2 joints
     private void Constrain() {
         //Joints.TrimExcess();
         if (numOfJoints < 2) {
             numOfJoints = 2;
         }
     }
+
 }
