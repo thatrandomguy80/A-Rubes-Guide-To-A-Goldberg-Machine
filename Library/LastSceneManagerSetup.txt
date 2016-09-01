@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Resources/01_Scenes/TEST(RopePlatformPhysics).unity
+=======
+- path: Assets/Resources/01_Scenes/Levels/Debugging/M-02.unity
+>>>>>>> FirstSetOfLevels
   isLoaded: 1
   isActive: 1
