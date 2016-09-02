@@ -12,9 +12,10 @@ public class BridgeSuspender : ObstacleInteraction
 
     private bool tick = false; //for testing [CHANGE]
 
-	void Start(){
-		tick = false;
-	}
+    void Start()
+    {
+        tick = false;
+    }
     void Update()
     {
         //Re-adjust Suspender
@@ -31,7 +32,7 @@ public class BridgeSuspender : ObstacleInteraction
         float distance = Vector3.Distance(stationaryAnchor.transform.position, bridgeAnchor.transform.position);
         transform.localScale = new Vector3(transform.localScale.x, distance / 2, transform.localScale.z);
 
-        
+
         float angle = MathExt.getAngle(transform.position, stationaryAnchor.transform.position);
         //Adjust the angle depending on the position of the platform
         if (transform.position.x >= stationaryAnchor.transform.position.x)
@@ -50,25 +51,26 @@ public class BridgeSuspender : ObstacleInteraction
     {
         //Detach the suspender from the platform
         GameObject platform = GameObject.Find(transform.parent.parent.name + "/Platform");
-		DistanceJoint2D spring = platform.GetComponent<PlatformControls>().distJoints[suspenderIndex];
+        DistanceJoint2D spring = platform.GetComponent<PlatformControls>().distJoints[suspenderIndex];
         spring.enabled = false;
         //transform.GetComponent<MeshRenderer>().enabled = false;//does this still need to be here it can collide with objects sometimes
 
 
 
-		Destroy(gameObject);
+        Destroy(gameObject);
 
 
     }
 
-    public void CutSuspender(Vector3 input) {
+    public void CutSuspender(Vector3 input)
+    {
 
         GameObject platform = GameObject.Find(transform.parent.parent.name + "/Platform");
-		DistanceJoint2D spring = platform.GetComponent<PlatformControls>().distJoints[suspenderIndex];
+        DistanceJoint2D spring = platform.GetComponent<PlatformControls>().distJoints[suspenderIndex];
 
-        float yoff = 0f, xoff = 0f ;//offset for new anchors 
-        Vector3 upperA = new Vector3(input.x+xoff,input.y+yoff,input.z);//position of tails
-        Vector3 lowerA = new Vector3(input.x+xoff,input.y-yoff,input.z);
+        float yoff = 0f, xoff = 0f;//offset for new anchors 
+        Vector3 upperA = new Vector3(input.x + xoff, input.y + yoff, input.z);//position of tails
+        Vector3 lowerA = new Vector3(input.x + xoff, input.y - yoff, input.z);
 
         //this is the platforms rope
         GameObject tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), bridgeAnchor.transform.position, Quaternion.identity) as GameObject;
@@ -82,18 +84,34 @@ public class BridgeSuspender : ObstacleInteraction
         tempRope.transform.parent = platform.transform.parent.GetChild(1).GetChild(0);
         tempRope.name = stationaryAnchor.name + " Rope";
     }
-	
-    public override void Interact() {
+
+    public override void Interact()
+    {
         base.Interact();
         RemoveSuspender();
     }
 
-    public override void Interact(Vector3 input) {
-        if (!tick) {
+    public override void Interact(Vector3 input)
+    {
+        if (!tick)
+        {
             base.Interact(input);
             RemoveSuspender();
             CutSuspender(input);
             tick = !tick;
+        }
+
+    }
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.transform.name.Equals("Trail"))
+        {
+            //Interact(coll.transform.position);
+            if (!tick)
+            {
+                RemoveSuspender();
+                tick = true;
+            }
         }
 
     }
