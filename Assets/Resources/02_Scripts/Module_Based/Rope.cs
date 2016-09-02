@@ -9,6 +9,7 @@ public class Rope : MonoBehaviour {
     public GameObject head;
     private HingeJoint2D headjoint;
 
+
     public void startUp(GameObject anchor, float rot, Vector3 tailPos) {
         Transform moveObj = anchor.transform.parent.parent.FindChild("MoveableObj");
         if (moveObj != null) {

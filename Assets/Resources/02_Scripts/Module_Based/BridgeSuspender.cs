@@ -4,26 +4,22 @@ using System.Collections;
 
 //Executes the code in edit mode
 [ExecuteInEditMode]
-public class BridgeSuspender : ObstacleInteraction
-{
+public class BridgeSuspender : ObstacleInteraction {
 
     public GameObject stationaryAnchor, bridgeAnchor;//Keep track of the anchors
     public int suspenderIndex;//Keeps track of what suspender is being cut [CHANGE]
 
     private bool tick = false; //for testing [CHANGE]
 
-    void Start()
-    {
+    void Start() {
         tick = false;
     }
-    void Update()
-    {
+    void Update() {
         //Re-adjust Suspender
         MoveSuspender();
     }
     //Re-adjust the suspender according to the movement of the platform
-    private void MoveSuspender()
-    {
+    private void MoveSuspender() {
         //Keep the suspender midway between the platform at the anchor
         float midWayPoint = 0.5f;
         transform.position = new Vector3(Mathf.Lerp(stationaryAnchor.transform.position.x, bridgeAnchor.transform.position.x, midWayPoint), Mathf.Lerp(stationaryAnchor.transform.position.y, bridgeAnchor.transform.position.y, midWayPoint), transform.position.z);
@@ -35,20 +31,16 @@ public class BridgeSuspender : ObstacleInteraction
 
         float angle = MathExt.getAngle(transform.position, stationaryAnchor.transform.position);
         //Adjust the angle depending on the position of the platform
-        if (transform.position.x >= stationaryAnchor.transform.position.x)
-        {
+        if (transform.position.x >= stationaryAnchor.transform.position.x) {
             angle = Mathf.Abs(angle - 180);
-        }
-        else
-        {
+        } else {
             angle = angle - 180;
         }
         //Rotate the suspender accordingly
         transform.eulerAngles = new Vector3(0, 0, angle);
     }
     //Remove the suspender from the platform
-    public void RemoveSuspender()
-    {
+    public void RemoveSuspender() {
         //Detach the suspender from the platform
         GameObject platform = GameObject.Find(transform.parent.parent.name + "/Platform");
         DistanceJoint2D spring = platform.GetComponent<PlatformControls>().distJoints[suspenderIndex];
@@ -62,8 +54,7 @@ public class BridgeSuspender : ObstacleInteraction
 
     }
 
-    public void CutSuspender(Vector3 input)
-    {
+    public void CutSuspender(Vector3 input) {
 
         GameObject platform = GameObject.Find(transform.parent.parent.name + "/Platform");
         DistanceJoint2D spring = platform.GetComponent<PlatformControls>().distJoints[suspenderIndex];
@@ -85,16 +76,13 @@ public class BridgeSuspender : ObstacleInteraction
         tempRope.name = stationaryAnchor.name + " Rope";
     }
 
-    public override void Interact()
-    {
+    public override void Interact() {
         base.Interact();
         RemoveSuspender();
     }
 
-    public override void Interact(Vector3 input)
-    {
-        if (!tick)
-        {
+    public override void Interact(Vector3 input) {
+        if (!tick) {
             base.Interact(input);
             RemoveSuspender();
             CutSuspender(input);
@@ -102,17 +90,26 @@ public class BridgeSuspender : ObstacleInteraction
         }
 
     }
-    void OnTriggerEnter2D(Collider2D coll)
-    {
-        if (coll.transform.name.Equals("Trail"))
-        {
+
+    public void OnCollisionEnter2D(Collision2D other) {
+        if (other.transform.name.Equals("Trail")) {
+            ContactPoint2D[] hit = other.contacts;
+            if (hit != null) {
+                Interact(new Vector3(hit[0].point.x, hit[0].point.y, 0));
+                }
+        }
+    }
+    /*
+    void OnTriggerEnter2D(Collider2D coll) {
+        if (coll.transform.name.Equals("Trail")) {
             //Interact(coll.transform.position);
-            if (!tick)
-            {
+
+            if (!tick) {
                 RemoveSuspender();
                 tick = true;
             }
         }
 
     }
+    */
 }
