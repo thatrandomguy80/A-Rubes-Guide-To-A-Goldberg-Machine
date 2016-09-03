@@ -84,6 +84,7 @@ public class TrailRendererWith2DCollider : MonoBehaviour
 
         //get and set the polygon collider on this trail.
         collider = trail.GetComponent<PolygonCollider2D>();
+        collider.offset = new Vector2(0, 1);
         collider.isTrigger = colliderIsTrigger;
         collider.SetPath(0, null);
 
