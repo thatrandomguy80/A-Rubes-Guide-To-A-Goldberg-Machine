@@ -13,10 +13,10 @@ public class GameCanvasController : GameState {
 
     void Update()
     {
-        //If the game is paused display the pause panel
-        pausePanel.SetActive(InGame.gamePaused);
+        //If the game is paused and the player has not won display the pause panel
+        pausePanel.SetActive(InGame.gamePaused && !EndGame.playerWon);
         //And Hide the pause button
-        pauseButton.SetActive(!InGame.gamePaused);
+        pauseButton.SetActive(!InGame.gamePaused && !EndGame.playerWon);
 
         winPanel.SetActive(EndGame.playerWon);
 
