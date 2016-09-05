@@ -47,6 +47,10 @@ public class GameState : MonoBehaviour {
             int numberOfScenes = SceneManager.sceneCountInBuildSettings;
             //Gets the next level index
             int nextLevel = (currentLevel.buildIndex + 1) % numberOfScenes;
+            if(nextLevel < 1)
+            {
+                nextLevel = 1;
+            }
             Debug.Log("Level : " + nextLevel + " will be loaded");
 
             Time.timeScale = 1;
@@ -65,7 +69,7 @@ public class GameState : MonoBehaviour {
             int previousLevel = (currentLevel.buildIndex - 1) % numberOfScenes;
 
             print(previousLevel);
-            if(previousLevel < 0)
+            if(previousLevel < 1)
             {
                 previousLevel = numberOfScenes - 1;
             }
@@ -82,6 +86,9 @@ public class GameState : MonoBehaviour {
         {
             //number of stars player currently has
             private static int stars;
+            //Key to save and get star rating
+            private static string starKey = "StarCount";
+
             //When the player collides with the star they get a point
             public static void Add()
             {
@@ -97,6 +104,39 @@ public class GameState : MonoBehaviour {
             {
                 stars = 0;
             }
+
+            //Saves the star rating for the level
+            public static void SaveHighScore(int levelNum,int starCount)
+            {
+                PlayerPrefs.SetInt(levelNum + starKey, starCount);
+            }
+            //Returns the star rating for the level
+            public static int GetHighScore(int levelNum)
+            {
+                return PlayerPrefs.GetInt(levelNum + starKey);
+            }
+            //Returns a list of all the highscores
+            public static int[] GetAllHighScores()
+            {
+                //Gets all levels (excluding the main menu)
+                int[] allScores = new int[SceneManager.sceneCountInBuildSettings-1];
+                //Gets the highscores for each level
+                for(int i = 0; i < allScores.Length; i++)
+                {
+                    allScores[i] = GetHighScore(i+1);
+                }
+                return allScores;
+            }
+            //Erases all of the highscores
+            public static void EraseAllHighScores()
+            {
+                //Sets all the highscores to 0
+                for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+                {
+                    SaveHighScore(i, 0);
+                }
+            }
+
         }
         
     }
@@ -111,7 +151,35 @@ public class GameState : MonoBehaviour {
         {
             print("Player Wins");
             playerWon = true;
+
+            //if the players current star count is higher the highscore
+            //Save the new score
+            SetNewHighScore(InGame.Stars.Get());
+
         }
+
+        //Handles setting new highscore
+        private static void SetNewHighScore(int starCount)
+        {
+            //Gets the current scene number
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
+
+            //Gets the current highscore for the level
+            int highScoreStars = InGame.Stars.GetHighScore(currentScene);
+
+            //If the player has gained a new highscore
+            if (starCount > highScoreStars)
+            {
+                print("New HighScore");
+                //Then the new highscore will be saved
+                InGame.Stars.SaveHighScore(currentScene, starCount);
+            }
+            else
+            {
+                print("Failed to get new highscore");
+            }
+        }
+
         //Player Loses the Game
         public static void Lose()
         {
@@ -122,8 +190,9 @@ public class GameState : MonoBehaviour {
         //Player moves to main menu
         public static void MainMenu()
         {
-            //playerWon = false;
-            print("Main Menu has not been implemented yet");
+            playerWon = false;
+            InGame.Pause();//Un-pauses the game
+            SceneManager.LoadScene(0);
         }
     }
 }

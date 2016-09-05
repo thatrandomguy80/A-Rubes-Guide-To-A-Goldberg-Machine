@@ -18,14 +18,22 @@ public class ScreenSwipe : MonoBehaviour {
         //also can't hit the ball
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Rope"), LayerMask.NameToLayer("Default"), true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Rope"), LayerMask.NameToLayer("Reflection"), true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Rope"), LayerMask.NameToLayer("Rope"), true);
     }
 
 	void Update()
 	{
-		if(Input.GetMouseButton(0)){
-			transform.position = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-			transform.position = new Vector3 (transform.position.x, transform.position.y-2, 5);
-		}
+        MoveScreenCursor();
 	}
+
+    //If the player holds the mouse button down move the screen cursor
+    private void MoveScreenCursor()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = new Vector3(transform.position.x, transform.position.y - 2, 5);
+        }
+    }
 
 }
