@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Levels/Debugging/HCC-04.unity
+- path: Assets/Resources/01_Scenes/Levels/Debugging/M-01.unity
   isLoaded: 1
   isActive: 1
