@@ -11,6 +11,7 @@ public class MainMenuController : GameState {
     }
 
     //Loads the first level
+    /*Note: Throwaway Code*/
     public void StartGame()
     {
         //Temp Function should change later
@@ -19,7 +20,6 @@ public class MainMenuController : GameState {
 
     void Start()
     {
-        print("Game is paused is " + InGame.gamePaused);
         int[] highscores = InGame.Stars.GetAllHighScores();
         for(int i = 0; i < highscores.Length; i++)
         {

@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 public class GameState : MonoBehaviour {
     /*Can only be accessed if a script inherits the GameState script*/
 
+    //Handles before game controls
+    protected static class PreGame
+    {
+
+    }
     //Used to handle ingame controls
     protected static class InGame
     {
