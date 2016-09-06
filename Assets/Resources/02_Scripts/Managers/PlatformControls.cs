@@ -7,6 +7,8 @@ public class PlatformControls : PlatformBuilder {
 
 	public DistanceJoint2D[] distJoints;
 
+    private bool contacts = false;
+
     // Use this for initialization
     void Start()
     {
@@ -49,5 +51,6 @@ public class PlatformControls : PlatformBuilder {
 		distJoints[0].anchor = new Vector2(distJoints[0].anchor.x * xdist, -ydist);
 		distJoints[1].anchor = new Vector2(distJoints[1].anchor.x * xdist, ydist);
     }
+
 	
 }

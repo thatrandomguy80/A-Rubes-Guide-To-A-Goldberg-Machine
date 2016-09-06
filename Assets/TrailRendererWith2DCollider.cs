@@ -30,6 +30,9 @@ public class TrailRendererWith2DCollider : MonoBehaviour
     private LinkedList<Vertex> leftVertices;        //the left vertices derived from the center positions
     private LinkedList<Vertex> rightVertices;       //the right vertices derived from the center positions
 
+
+    public Vector3 currPos; // added by hayden to track hit locations
+
     //************
     //
     // Public Methods
@@ -72,8 +75,8 @@ public class TrailRendererWith2DCollider : MonoBehaviour
     private void Awake()
     {
         //create an object and mesh for the trail
-        GameObject trail = new GameObject("Trail", new[] { typeof(MeshRenderer), typeof(MeshFilter), typeof(PolygonCollider2D) });
-
+        GameObject trail = new GameObject("Trail", new[] { typeof(MeshRenderer), typeof(MeshFilter), typeof(PolygonCollider2D), typeof(trailCollider)});
+        trail.GetComponent<trailCollider>().parent = this;
 
         Rigidbody2D trailRig = trail.AddComponent<Rigidbody2D>();
         trailRig.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -141,11 +144,12 @@ public class TrailRendererWith2DCollider : MonoBehaviour
             Vector3 cross = Vector3.Cross(renderDirection, dirToCurrentPos);
             Vector3 leftPos = trans.position + (cross * -widthStart * 0.5f);
             Vector3 rightPos = trans.position + (cross * widthStart * 0.5f);
+            currPos = trans.position + (cross * widthStart);
 
             //create two new vertices at the calculated positions
             leftVertices.AddFirst(new Vertex(leftPos, trans.position, (leftPos - trans.position).normalized));
             rightVertices.AddFirst(new Vertex(rightPos, trans.position, (rightPos - trans.position).normalized));
-
+            
             //add the current position as the most recent center position
             centerPositions.AddFirst(trans.position);
             vertsAdded = true;

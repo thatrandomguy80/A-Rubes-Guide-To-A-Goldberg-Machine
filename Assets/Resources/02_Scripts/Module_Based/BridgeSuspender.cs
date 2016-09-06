@@ -65,23 +65,29 @@ public class BridgeSuspender : ObstacleInteraction {
 
         //this is the platforms rope
         GameObject tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), bridgeAnchor.transform.position, Quaternion.identity) as GameObject;
-        tempRope.GetComponent<Rope>().startUp(bridgeAnchor, 180f, lowerA);
+        tempRope.GetComponent<Rope>().startUp(bridgeAnchor, Vector3.Angle(bridgeAnchor.transform.position,input), lowerA);
         tempRope.transform.parent = bridgeAnchor.transform.GetChild(0);
         tempRope.name = bridgeAnchor.name + " Rope";
 
         //this is the upper anchor rope
         tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), stationaryAnchor.transform.position, Quaternion.identity) as GameObject;
-        tempRope.GetComponent<Rope>().startUp(stationaryAnchor, 0f, upperA);
+        tempRope.GetComponent<Rope>().startUp(stationaryAnchor, Vector3.Angle(input, stationaryAnchor.transform.position), upperA);
+        Debug.Log(Vector3.Angle(stationaryAnchor.transform.position, input));
+        Debug.Log(Vector3.Angle(bridgeAnchor.transform.position, input));
         tempRope.transform.parent = platform.transform.parent.GetChild(1).GetChild(0);
         tempRope.name = stationaryAnchor.name + " Rope";
     }
 
     public override void Interact() {
-        base.Interact();
-        RemoveSuspender();
+        if (!tick) {
+            base.Interact();
+            RemoveSuspender();
+            CutSuspender(new Vector3(0, 0, 0));
+            tick = !tick;
+        }
     }
 
-    public override void Interact(Vector3 input) {
+    public override void Interact(Vector3 input) {//called by trail with it's transform as the cut location.
         if (!tick) {
             base.Interact(input);
             RemoveSuspender();
@@ -91,25 +97,12 @@ public class BridgeSuspender : ObstacleInteraction {
 
     }
 
-    public void OnCollisionEnter2D(Collision2D other) {
+    public void OnCollisionEnter2D(Collision2D other) {// this is not used currently as the trail object calls the interact for point passing.
         if (other.transform.name.Equals("Trail")) {
             ContactPoint2D[] hit = other.contacts;
             if (hit != null) {
                 Interact(new Vector3(hit[0].point.x, hit[0].point.y, 0));
-                }
-        }
-    }
-    /*
-    void OnTriggerEnter2D(Collider2D coll) {
-        if (coll.transform.name.Equals("Trail")) {
-            //Interact(coll.transform.position);
-
-            if (!tick) {
-                RemoveSuspender();
-                tick = true;
             }
         }
-
     }
-    */
 }

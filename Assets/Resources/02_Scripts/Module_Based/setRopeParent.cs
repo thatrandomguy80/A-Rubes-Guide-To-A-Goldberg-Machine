@@ -23,12 +23,29 @@ public class setRopeParent : MonoBehaviour {
         this.GetComponent<DistanceJoint2D>().enabled = true;
     }
 
+    public void detach() {//called to detach this section of rope
+        Destroy(joint);
+        Destroy(this.GetComponent<DistanceJoint2D>());
+        Destroy(this.GetComponent<BoxCollider2D>());
+    }
+
     public void OnCollisionEnter2D(Collision2D other) {
         if (other.collider.transform.name.Equals("Trail") && Time.time - timeAlive > aliveTime) {//has it been alive for aliveTime amount of time.
             joint.connectedBody.useAutoMass = false;
             joint.connectedBody.mass = 20f;
             Destroy(joint);
             Destroy(this.GetComponent<BoxCollider2D>());
+        }
+    }
+    public void OnTriggerEnter2D(Collider2D other) {
+        if (other.transform.name.Equals("Trail") && Time.time - timeAlive > aliveTime) {//has it been alive for aliveTime amount of time.
+            joint.connectedBody.useAutoMass = false;
+            joint.connectedBody.mass = 20f;
+            DistanceJoint2D d = joint.connectedBody.transform.GetComponent<DistanceJoint2D>();
+            if (d != null) {
+                d.enabled = true;
+            }
+            BroadcastMessage("detach");//calls detach and all child detaches removing thier joints
         }
     }
 }
