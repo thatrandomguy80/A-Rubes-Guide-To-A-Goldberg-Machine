@@ -7,6 +7,7 @@ using System.Linq;
 [ExecuteInEditMode]
 public class StaticPlatformControls : PlatformBuilder {
     public int numOfJoints = 2;
+    public bool useCircles = false;
     private GameObject anchors;
     private GameObject JointPrefab;
     private List<GameObject> Joints;// scrip maintained list of joints that are in use
@@ -27,6 +28,19 @@ public class StaticPlatformControls : PlatformBuilder {
         CreateJoints();
         if (Application.isPlaying && !Built) {
             Build();
+        }
+        if (!useCircles) {
+            ActivateMesh(!Application.isPlaying);
+        }
+    }
+
+    private void ActivateMesh(bool a) {
+        //remove mesh render at runtime
+        foreach (GameObject j in Joints) {
+            MeshRenderer r = j.GetComponent<MeshRenderer>();
+            if (r != null && r.name == "Joint(Clone)") {
+                r.enabled = a;
+            }
         }
     }
 

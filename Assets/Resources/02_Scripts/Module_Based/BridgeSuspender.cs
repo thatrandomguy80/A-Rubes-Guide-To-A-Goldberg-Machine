@@ -97,9 +97,9 @@ public class BridgeSuspender : ObstacleInteraction {
 
     public void OnCollisionEnter2D(Collision2D other) {// this is not used currently as the trail object calls the interact for point passing.
         if (other.transform.name.Equals("Trail")) {
-            ContactPoint2D[] hit = other.contacts;
+            Vector3 hit = other.contacts[0].point;
             if (hit != null) {
-                Interact(new Vector3(hit[0].point.x, hit[0].point.y, 0));
+                Interact(hit);//fix
             }
         }
     }
