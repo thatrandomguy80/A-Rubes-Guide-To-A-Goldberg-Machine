@@ -157,6 +157,9 @@ public class GameState : MonoBehaviour {
             print("Player Wins");
             playerWon = true;
 
+			//Hide the cutting trail
+			GameObject.Find ("Trail").SetActive (false);
+
             //if the players current star count is higher the highscore
             //Save the new score
             SetNewHighScore(InGame.Stars.Get());

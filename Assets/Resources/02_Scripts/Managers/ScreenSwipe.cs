@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ScreenSwipe : MonoBehaviour {
+public class ScreenSwipe : GameState {
 
 	private TrailRenderer trail;
 
@@ -13,7 +13,9 @@ public class ScreenSwipe : MonoBehaviour {
 
 	void Update()
 	{
-        MoveScreenCursor();
+		if (!EndGame.playerWon) {
+			MoveScreenCursor ();
+		}
 	}
 
     //If the player holds the mouse button down move the screen cursor
