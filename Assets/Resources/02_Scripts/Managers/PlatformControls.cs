@@ -48,8 +48,16 @@ public class PlatformControls : PlatformBuilder {
 
         float xdist = distToAnchor / distToEdge;
         float ydist = transform.position.y - leftAnchor.transform.position.y;
-		distJoints[0].anchor = new Vector2(distJoints[0].anchor.x * xdist, -ydist);
-		distJoints[1].anchor = new Vector2(distJoints[1].anchor.x * xdist, ydist);
+		//If the platform has 2 suspenders
+		if (distJoints.Length == 2) {
+			distJoints [0].anchor = new Vector2 (distJoints [0].anchor.x * xdist, -ydist);
+			distJoints [1].anchor = new Vector2 (distJoints [1].anchor.x * xdist, ydist);
+			//If the platform has 1 suspenders
+		} else if (distJoints.Length == 1) {
+			distJoints [0].anchor = new Vector2 (distJoints [0].anchor.x * xdist, -ydist);
+		} else {
+			Debug.Log ("No Suspenders given");
+		}
     }
 
 	
