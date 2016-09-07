@@ -32,7 +32,7 @@ public class setRopeParent : MonoBehaviour {
     public void OnCollisionEnter2D(Collision2D other) {
         if (other.collider.transform.name.Equals("Trail") && Time.time - timeAlive > aliveTime) {//has it been alive for aliveTime amount of time.
             joint.connectedBody.useAutoMass = false;
-            joint.connectedBody.mass = 20f;
+            joint.connectedBody.mass = 500f;
             Destroy(joint);
             Destroy(this.GetComponent<BoxCollider2D>());
         }
@@ -40,7 +40,7 @@ public class setRopeParent : MonoBehaviour {
     public void OnTriggerEnter2D(Collider2D other) {
         if (other.transform.name.Equals("Trail") && Time.time - timeAlive > aliveTime) {//has it been alive for aliveTime amount of time.
             joint.connectedBody.useAutoMass = false;
-            joint.connectedBody.mass = 20f;
+            joint.connectedBody.mass = 500f;
             DistanceJoint2D d = joint.connectedBody.transform.GetComponent<DistanceJoint2D>();
             if (d != null) {
                 d.enabled = true;

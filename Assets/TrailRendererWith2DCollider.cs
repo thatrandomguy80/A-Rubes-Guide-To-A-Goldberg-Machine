@@ -76,6 +76,7 @@ public class TrailRendererWith2DCollider : MonoBehaviour
     {
         //create an object and mesh for the trail
         GameObject trail = new GameObject("Trail", new[] { typeof(MeshRenderer), typeof(MeshFilter), typeof(PolygonCollider2D), typeof(trailCollider)});
+        trail.layer = LayerMask.NameToLayer("Swipe");
         trail.GetComponent<trailCollider>().parent = this;
 
         Rigidbody2D trailRig = trail.AddComponent<Rigidbody2D>();
