@@ -8,6 +8,9 @@ public class BridgeSuspender : ObstacleInteraction {
 
     public GameObject stationaryAnchor, bridgeAnchor;//Keep track of the anchors
     public int suspenderIndex;//Keeps track of what suspender is being cut [CHANGE]
+    public bool isOneSided = false;
+
+    Vector3 result;
 
     private bool tick = false; //for testing [CHANGE]
 
@@ -17,6 +20,7 @@ public class BridgeSuspender : ObstacleInteraction {
     void Update() {
         //Re-adjust Suspender
         MoveSuspender();
+        Debug.DrawLine(result, Vector3.zero);
     }
     //Re-adjust the suspender according to the movement of the platform
     private void MoveSuspender() {
@@ -63,15 +67,21 @@ public class BridgeSuspender : ObstacleInteraction {
         Vector3 upperA = new Vector3(input.x + xoff, input.y + yoff, input.z);//position of tails
         Vector3 lowerA = new Vector3(input.x + xoff, input.y - yoff, input.z);
 
+        //find rotation needed 
+        Vector3 diff = input - transform.position;
+        diff.Normalize();
+        //remember this from comp330?
+        float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+
         //this is the platforms rope
-        GameObject tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), bridgeAnchor.transform.position, Quaternion.identity) as GameObject;
-        tempRope.GetComponent<Rope>().startUp(bridgeAnchor, input, lowerA);
+        GameObject tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), bridgeAnchor.transform.position, Quaternion.Euler(0f, 0f, rot_z + 90)) as GameObject;
+        tempRope.GetComponent<Rope>().startUp(bridgeAnchor, 180f, lowerA);
         tempRope.transform.parent = bridgeAnchor.transform.GetChild(0);
         tempRope.name = bridgeAnchor.name + " Rope";
 
         //this is the upper anchor rope
-        tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), stationaryAnchor.transform.position, Quaternion.identity) as GameObject;
-        tempRope.GetComponent<Rope>().startUp(stationaryAnchor, input, upperA);
+        tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), stationaryAnchor.transform.position, Quaternion.Euler(0f, 0f, rot_z + 90)) as GameObject;
+        tempRope.GetComponent<Rope>().startUp(stationaryAnchor, 0f, upperA);
         tempRope.transform.parent = platform.transform.parent.GetChild(1).GetChild(0);
         tempRope.name = stationaryAnchor.name + " Rope";
     }
@@ -89,18 +99,19 @@ public class BridgeSuspender : ObstacleInteraction {
         if (!tick) {
             base.Interact(input);
             RemoveSuspender();
-            CutSuspender(input);
+            if (!isOneSided) {
+                CutSuspender(input);
+            }
             tick = !tick;
         }
 
     }
 
-    public void OnCollisionEnter2D(Collision2D other) {// this is not used currently as the trail object calls the interact for point passing.
-        if (other.transform.name.Equals("Trail")) {
-            ContactPoint2D[] hit = other.contacts;
-            if (hit != null) {
-                Interact(new Vector3(hit[0].point.x, hit[0].point.y, 0));
-            }
+    public void OnTriggerEnter2D(Collider2D other) {
+        result = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Swipe")) {
+            result = new Vector3(result.x, result.y - 2, 5);
+            Interact(result);
         }
     }
 }
