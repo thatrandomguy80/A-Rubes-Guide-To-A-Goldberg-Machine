@@ -1,4 +1,4 @@
-﻿Shader "Unlit/outlineGlow"
+﻿Shader "Unlit/outlineInteractable"
 {
 	Properties
 	{
@@ -20,7 +20,7 @@
 			Pass//outline pass seen through objects
 		{
 			Tags{ "Queue" = "Transparent" "RenderType" = "Opaque" }
-			ZTest Always
+			//ZTest Always
 			Cull front
 			ZWrite Off
 			Lighting Off

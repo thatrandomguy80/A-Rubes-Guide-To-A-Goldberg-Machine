@@ -30,9 +30,12 @@ public class PlatformControls_DEBUGGING_ : MonoBehaviour {
             debuggingLine.enabled = false;
         }
     }
-
+    public bool checkDebugging() {
+        return GameControls.Debugging;
+    }
     void Update()
     {
+        checkDebugging();
         displayPlatform();
     }
 }
