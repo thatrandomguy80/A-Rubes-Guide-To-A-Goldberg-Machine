@@ -5,8 +5,8 @@ public class GameCanvasController : GameState {
 
     public GameObject pausePanel;
     public GameObject pauseButton;
-
     public GameObject winPanel;
+    public GameObject restartButton;
 
 
 
@@ -17,6 +17,7 @@ public class GameCanvasController : GameState {
         pausePanel.SetActive(InGame.gamePaused && !EndGame.playerWon);
         //And Hide the pause button
         pauseButton.SetActive(!InGame.gamePaused && !EndGame.playerWon);
+        restartButton.SetActive(!InGame.gamePaused && !EndGame.playerWon);
 
         winPanel.SetActive(EndGame.playerWon);
 
@@ -31,7 +32,7 @@ public class GameCanvasController : GameState {
     public void RestartButton()
     {
         //Un-pauses the game
-        InGame.Pause();
+        InGame.gamePaused = false;
         //Restarts the game
         InGame.RestartLevel();
         
