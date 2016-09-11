@@ -8,7 +8,11 @@ public class GameCanvasController : GameState {
     public GameObject winPanel;
     public GameObject restartButton;
 
-
+    void Start()
+    {
+        Debug.Log("Player has won? : " + EndGame.playerWon);
+        Debug.Log("Game is paused : " + InGame.gamePaused);
+    }
 
 
     void Update()
@@ -31,8 +35,6 @@ public class GameCanvasController : GameState {
     //Restarts the level
     public void RestartButton()
     {
-        //Un-pauses the game
-        InGame.gamePaused = false;
         //Restarts the game
         InGame.RestartLevel();
         

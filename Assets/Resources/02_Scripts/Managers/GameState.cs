@@ -34,18 +34,18 @@ public class GameState : MonoBehaviour {
         /* Restarts the current level*/
         public static void RestartLevel()
         {
-            EndGame.playerWon = false;
             //Gets the currently loaded scene
             Scene currentLevel = SceneManager.GetActiveScene();
 
             Time.timeScale = 1;
+            gamePaused = false;
+            EndGame.playerWon = false;
             //Reloads the scene
             SceneManager.LoadScene(currentLevel.buildIndex);
         }
         /*Load the next Level*/
         public static void NextLevel()
         {
-            EndGame.playerWon = false;
             //Gets the currently loaded scene
             Scene currentLevel = SceneManager.GetActiveScene();
             //Gets the number of current scenes in the build
@@ -59,13 +59,13 @@ public class GameState : MonoBehaviour {
             Debug.Log("Level : " + nextLevel + " will be loaded");
 
             Time.timeScale = 1;
+            gamePaused = EndGame.playerWon = false;
             //Loads the next level
             SceneManager.LoadScene(nextLevel);
         }
         /*Load previous Level*/
         public static void PreviousLevel()
         {
-            EndGame.playerWon = false;
             //Gets the currently loaded scene
             Scene currentLevel = SceneManager.GetActiveScene();
             //Gets the number of current scenes in the build
@@ -82,6 +82,7 @@ public class GameState : MonoBehaviour {
             Debug.Log("Level : " + previousLevel + "will be loaded");
 
             Time.timeScale = 1;
+            gamePaused = EndGame.playerWon = false;
             //Loads the next level
             SceneManager.LoadScene(previousLevel);
         }
@@ -154,15 +155,18 @@ public class GameState : MonoBehaviour {
         //Player Wins the Game
         public static void Win()
         {
-            print("Player Wins");
-            playerWon = true;
+            //Player can only win once each level
+            if (!playerWon)
+            {
+                playerWon = true;
 
-			//Hide the cutting trail
-			GameObject.Find ("Trail").SetActive (false);
+                //Hide the cutting trail
+                GameObject.Find("Trail").SetActive(false);
 
-            //if the players current star count is higher the highscore
-            //Save the new score
-            SetNewHighScore(InGame.Stars.Get());
+                //if the players current star count is higher the highscore
+                //Save the new score
+                SetNewHighScore(InGame.Stars.Get());
+            }
 
         }
 
@@ -192,14 +196,13 @@ public class GameState : MonoBehaviour {
         public static void Lose()
         {
             print("Player Lost");
-            playerWon = false;
             InGame.RestartLevel();
         }
         //Player moves to main menu
         public static void MainMenu()
         {
+            InGame.gamePaused = false;
             playerWon = false;
-            InGame.Pause();//Un-pauses the game
             SceneManager.LoadScene(0);
         }
     }
