@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Test(Trail Collider).unity
+- path: Assets/Resources/01_Scenes/Levels/Debugging/M-02.unity
   isLoaded: 1
   isActive: 1
