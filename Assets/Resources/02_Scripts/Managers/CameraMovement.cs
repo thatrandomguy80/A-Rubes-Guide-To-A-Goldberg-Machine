@@ -10,8 +10,8 @@ public class CameraMovement : MonoBehaviour {
     //new position
     private Vector3 moveTemp;
     private float xDiff, yDiff; //Distance between the center of the camera and the player
-    public float moveThresh = 1; //How far the player can move from the center of the camera
-    public float camMoveSpeed = 8;
+    public float moveThresh = 3; //How far the player can move from the center of the camera
+    public float camMoveSpeed = 10;
     [Header("This will lock the axis for some levels if required")]
     public bool xLoc = false;
     public bool yLoc = false;

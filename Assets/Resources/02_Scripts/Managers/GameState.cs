@@ -203,6 +203,7 @@ public class GameState : MonoBehaviour {
         {
             InGame.gamePaused = false;
             playerWon = false;
+            Time.timeScale = 1;
             SceneManager.LoadScene(0);
         }
     }
