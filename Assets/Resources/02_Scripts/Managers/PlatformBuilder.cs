@@ -22,7 +22,7 @@ public class PlatformBuilder : MonoBehaviour {
         Material temp = Resources.Load("03_Materials/" + MatName) as Material;
         if (temp != null) {
             newPlatform.transform.GetComponent<Renderer>().material = temp;
-            newPlatform.transform.GetComponent<Renderer>().reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.BlendProbesAndSkybox;
+            newPlatform.transform.GetComponent<Renderer>().reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
             //Don't accept the balls reflection prob
         } else {
             Debug.LogError("Not a valid Mat name on: " + this.transform.parent.name);

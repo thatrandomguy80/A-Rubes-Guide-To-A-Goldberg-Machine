@@ -4,7 +4,7 @@ using System.Collections;
 public class GameControls : GameState
 {
     // degbug mode of all scripts
-    public static bool Debugging = true;
+    public bool Debugging = true;
     /**
      * Controls how the game will be played between levels
      **/

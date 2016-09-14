@@ -14,7 +14,7 @@ public class setRopeParent : MonoBehaviour {
     //This sets the joints connected body at start for the rope
     void Start () {
         joint = this.GetComponent<HingeJoint2D>();
-        joint.connectedBody = this.transform.parent.GetComponent<Rigidbody2D>();
+        //joint.connectedBody = this.transform.parent.GetComponent<Rigidbody2D>();
         timeAlive = Time.time;
 	}
 
@@ -45,7 +45,7 @@ public class setRopeParent : MonoBehaviour {
             if (d != null) {
                 d.enabled = true;
             }
-            BroadcastMessage("detach");//calls detach and all child detaches removing thier joints
+            detach();//calls detach and all child detaches removing thier joints
         }
     }
 }

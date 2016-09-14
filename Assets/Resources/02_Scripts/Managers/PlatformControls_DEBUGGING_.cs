@@ -6,36 +6,26 @@ using System.Collections;
 [ExecuteInEditMode]
 public class PlatformControls_DEBUGGING_ : MonoBehaviour {
 
-    //Keep track of debugging mode
-    public bool DEBUGGING_MODE;
-
-    public  Transform leftAnchor, rightAnchor;
+    public Transform leftAnchor, rightAnchor;
     private LineRenderer debuggingLine;
-    void Start()
-    {
+    void Start() {
         debuggingLine = GetComponent<LineRenderer>();
     }
 
     //Displys where the platform will be spawned on play
-    private void displayPlatform()
-    {
-        if (DEBUGGING_MODE)
-        {
+    private void displayPlatform() {
+        if (checkDebugging()) {
             debuggingLine.enabled = true;
             debuggingLine.SetPosition(0, leftAnchor.position);
             debuggingLine.SetPosition(1, rightAnchor.position);
-        }
-        else
-        {
+        } else {
             debuggingLine.enabled = false;
         }
     }
     public bool checkDebugging() {
-        return GameControls.Debugging;
+        return GameObject.Find("Game Managment").GetComponent<GameControls>().Debugging;
     }
-    void Update()
-    {
-        checkDebugging();
+    void Update() {
         displayPlatform();
     }
 }

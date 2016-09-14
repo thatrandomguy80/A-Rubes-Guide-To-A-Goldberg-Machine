@@ -3,7 +3,7 @@ using System.Collections;
 public class Rope : MonoBehaviour {
 
     // Script for handeling rope movement and inst
-    //unit scale is 0.0166 per unit
+    //unit scale is 0.0166 per unit short is 0.05f
 
     public GameObject tail;
     public GameObject head;
@@ -21,7 +21,7 @@ public class Rope : MonoBehaviour {
         //float length = Vector2.Distance(new Vector2(anchor.transform.position.x, anchor.transform.position.y), new Vector2(tailPos.x, tailPos.y));
         float length = anchor.transform.position.y - tailPos.y;
         if (length < 0) length = -length;//make pos
-        float scale = 0.0166f * length;
+        float scale = 0.05f * length;
 
         //trashes
         this.transform.Translate(new Vector3(0, -(length / 2), 0));

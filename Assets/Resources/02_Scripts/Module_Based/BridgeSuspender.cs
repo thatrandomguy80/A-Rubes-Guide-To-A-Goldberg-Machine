@@ -74,13 +74,13 @@ public class BridgeSuspender : ObstacleInteraction {
         float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 
         //this is the platforms rope
-        GameObject tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), bridgeAnchor.transform.position, Quaternion.Euler(0f, 0f, rot_z + 90)) as GameObject;
+        GameObject tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRopeNewshort"), bridgeAnchor.transform.position, Quaternion.Euler(0f, 0f, rot_z + 90)) as GameObject;
         tempRope.GetComponent<Rope>().startUp(bridgeAnchor, 180f, lowerA);
         tempRope.transform.parent = bridgeAnchor.transform.GetChild(0);
         tempRope.name = bridgeAnchor.name + " Rope";
 
         //this is the upper anchor rope
-        tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRope"), stationaryAnchor.transform.position, Quaternion.Euler(0f, 0f, rot_z + 90)) as GameObject;
+        tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRopeNewshort"), stationaryAnchor.transform.position, Quaternion.Euler(0f, 0f, rot_z + 90)) as GameObject;
         tempRope.GetComponent<Rope>().startUp(stationaryAnchor, 0f, upperA);
         tempRope.transform.parent = platform.transform.parent.GetChild(1).GetChild(0);
         tempRope.name = stationaryAnchor.name + " Rope";
@@ -108,10 +108,17 @@ public class BridgeSuspender : ObstacleInteraction {
     }
 
     public void OnTriggerEnter2D(Collider2D other) {
+        Vector3 cutPos = new Vector3(0, 0, 0);
         result = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (other.gameObject.layer == LayerMask.NameToLayer("Swipe")) {
+            TrailRendererWith2DCollider trail = GameObject.Find("SwipeControls").GetComponent<TrailRendererWith2DCollider>();
+            if (trail != null) {
+                cutPos = trail.getPos();
+            }
+
             result = new Vector3(result.x, result.y - 2, 5);
-            Interact(result);
+            Interact(cutPos);
+
         }
     }
 }

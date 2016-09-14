@@ -7,21 +7,17 @@ using System.Collections.Generic;
 [ExecuteInEditMode]
 public class StaticPlatformControls_DEBUGGING_ : MonoBehaviour {
 
-    //Keep track of debugging mode
-    public bool DEBUGGING_MODE;
-
     private GameObject anchors;
     private GameControls controller;
     private LineRenderer debuggingLine;
     void Start() {
         anchors = this.transform.parent.GetChild(0).gameObject;
         debuggingLine = GetComponent<LineRenderer>();
-        controller = GameObject.Find("Ball").transform.GetChild(1).GetComponent<GameControls>();
     }
 
     //Displys where the platform will be spawned on play
     private void displayPlatform() {
-        if (DEBUGGING_MODE) {
+        if (checkDebugging()) {
             debuggingLine.enabled = true;
             //get amount of joints
             int amount = anchors.transform.childCount;
@@ -43,11 +39,10 @@ public class StaticPlatformControls_DEBUGGING_ : MonoBehaviour {
     }
 
     public bool checkDebugging() {
-        return GameControls.Debugging;
+        return GameObject.Find("Game Managment").GetComponent<GameControls>().Debugging;
     }
 
     void Update() {
-        checkDebugging();
         displayPlatform();
     }
 }
