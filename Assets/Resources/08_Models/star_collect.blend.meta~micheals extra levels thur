@@ -1,13 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Resources/08_Models/star_collect.blend.meta
 guid: e86b9b3fe048b634fafff002460b6664
 timeCreated: 1473911566
 licenseType: Free
-=======
-guid: c70f9f8aad2af4040847fd4769f07e68
-timeCreated: 1473910348
-licenseType: Pro
->>>>>>> origin/master:Assets/Resources/08_Models/star_collect.blend.meta
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:

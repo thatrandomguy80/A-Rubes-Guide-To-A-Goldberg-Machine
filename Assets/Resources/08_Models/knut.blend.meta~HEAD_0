@@ -1,13 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Resources/08_Models/star_collect.blend.meta
-guid: e86b9b3fe048b634fafff002460b6664
-timeCreated: 1473911566
-licenseType: Free
-=======
-guid: c70f9f8aad2af4040847fd4769f07e68
-timeCreated: 1473910348
+guid: 13e81d6a34f625e4d8725cc04b9b3244
+timeCreated: 1473910346
 licenseType: Pro
->>>>>>> origin/master:Assets/Resources/08_Models/star_collect.blend.meta
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
@@ -15,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cube
+    4300000: Icosphere
     7400000: Default Take
     9500000: //RootNode
   materials:

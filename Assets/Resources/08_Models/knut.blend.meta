@@ -1,7 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Resources/08_Models/knut.blend.meta
 guid: eaead55adf921b8488cbdf67f6500380
 timeCreated: 1473911567
 licenseType: Free
+=======
+guid: 13e81d6a34f625e4d8725cc04b9b3244
+timeCreated: 1473910346
+licenseType: Pro
+>>>>>>> origin/master:Assets/Resources/08_Models/knut.blend.meta
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:

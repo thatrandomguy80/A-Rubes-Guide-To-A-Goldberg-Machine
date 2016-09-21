@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Resources/01_Scenes/Levels/Debugging/M-07.unity
+=======
+- path: Assets/Resources/01_Scenes/Levels/Debugging/HM-03.unity
+>>>>>>> origin/master
   isLoaded: 1
   isActive: 1
