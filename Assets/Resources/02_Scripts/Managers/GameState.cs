@@ -8,6 +8,26 @@ public class GameState : MonoBehaviour {
     //Handles before game controls
     protected static class PreGame
     {
+		private static string levelKey = "levelKey";
+		//Keeps track of what level the player is up to
+		public static int getCurrentLevel(){
+			int currLevel = PlayerPrefs.GetInt (levelKey);
+			//If the player hasn't beaten anything yet unlock
+			//the first level
+			if (currLevel == 0) {
+				currLevel = 1;
+			}
+			return currLevel;
+		}
+		//Sets the next level cap
+		public static void setNextLevel(){
+			int highestLevel = getCurrentLevel();
+			int sceneNun = SceneManager.GetActiveScene ().buildIndex;
+
+			if (sceneNun == highestLevel) {
+				PlayerPrefs.SetInt (levelKey, highestLevel + 1);
+			}
+		}
 
     }
     //Used to handle ingame controls
@@ -159,6 +179,8 @@ public class GameState : MonoBehaviour {
             if (!playerWon)
             {
                 playerWon = true;
+				//If the highest level move it up one
+				PreGame.setNextLevel ();
 
                 //Hide the cutting trail
                 GameObject.Find("Trail").SetActive(false);
