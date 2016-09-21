@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-public class CameraMovement : MonoBehaviour {
+public class CameraMovement : MonoBehaviour
+{
 
     //Holds the player object
     private Transform character;
@@ -16,11 +17,13 @@ public class CameraMovement : MonoBehaviour {
     public bool xLoc = false;
     public bool yLoc = false;
     //these can be set during runtime if you wan't certain sections to stop looking out.
-    void Start() {
+    void Start()
+    {
         character = GameObject.FindGameObjectWithTag("Player").transform;
     }
     //Controls camera movement
-    private void MoveCamera() {
+    private void MoveCamera()
+    {
         float gameCamSize = Camera.main.orthographicSize;
         //calculate the distance between the 
         xDiff = character.position.x - transform.position.x;
@@ -37,13 +40,16 @@ public class CameraMovement : MonoBehaviour {
         float horzExtent = vertExtent * Screen.width / Screen.height;
 
         //check bounds
-        if (bounds != null) {
-            if (this.transform.position.x + horzExtent >= bounds.position.x + bounds.position.x + bounds.lossyScale.x/2 || //checks if the cameras bounds have reached the death bounds.
-                this.transform.position.x + horzExtent >= -bounds.position.x + bounds.position.x + bounds.lossyScale.x / 2) {
+        if (bounds != null)
+        {
+            if ((this.transform.position.x + horzExtent >= bounds.position.x + bounds.position.x + bounds.lossyScale.x / 2 && xDiff > 0) || //checks if the cameras bounds have reached the death bounds.
+                (this.transform.position.x + horzExtent >= -bounds.position.x + bounds.position.x + bounds.lossyScale.x / 2 && xDiff < 0))
+            {
                 result.x = 0;
             }
-            if (this.transform.position.y + vertExtent >= bounds.position.y + bounds.position.y + bounds.lossyScale.y / 2 ||
-                this.transform.position.y + vertExtent >= -bounds.position.y + bounds.position.y + bounds.lossyScale.y / 2) {
+            if ((this.transform.position.y + vertExtent >= bounds.position.y + bounds.position.y + bounds.lossyScale.y / 2 && yDiff > 0) ||
+                (this.transform.position.y + vertExtent >= -bounds.position.y + bounds.position.y + bounds.lossyScale.y / 2 && yDiff > 0) )
+            {
                 result.y = 0;
             }
         }
@@ -56,26 +62,32 @@ public class CameraMovement : MonoBehaviour {
     private Vector3 panOrigin;
     private float panSpeed = 3;
 
-    private void MouseCameraMovement() {
+    private void MouseCameraMovement()
+    {
 
 
     }
 
     //Handles camera zoom
-    private void Zoom(float zoomSpeed) {
+    private void Zoom(float zoomSpeed)
+    {
         float dis = Input.GetAxis("Mouse ScrollWheel");
 
         Camera gameCam = Camera.main;
-        if (dis > 0) {//Scroll Forward
+        if (dis > 0)
+        {//Scroll Forward
             gameCam.orthographicSize -= zoomSpeed * Time.deltaTime;
-        } else if (dis < 0) {//Scroll Back
+        }
+        else if (dis < 0)
+        {//Scroll Back
             gameCam.orthographicSize += zoomSpeed * Time.deltaTime;
 
         }
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         MoveCamera();
         float zoomSpeed = 20;
         Zoom(zoomSpeed);
