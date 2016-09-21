@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
+- path: Assets/Resources/01_Scenes/Navigational/LevelSelect.unity
+=======
 - path: Assets/Resources/01_Scenes/Levels/Debugging/HM-03.unity
+>>>>>>> 21ef23e797d38090966df85356851720e72a408a
   isLoaded: 1
   isActive: 1
