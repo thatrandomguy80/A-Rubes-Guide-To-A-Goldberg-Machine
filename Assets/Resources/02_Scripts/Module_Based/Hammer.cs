@@ -53,9 +53,8 @@ public class Hammer : MonoBehaviour {
 
                 JointMotor2D jm = hj.motor;
                 //sets motor to run in the correct direction to complete the loopdeloop
-                float speed = 750f;
+                float speed = 750;
                 speed *= getDir(ot).x;
-                Debug.Log(speed);
                 jm.motorSpeed = speed;
                 hj.motor = jm;
             }
