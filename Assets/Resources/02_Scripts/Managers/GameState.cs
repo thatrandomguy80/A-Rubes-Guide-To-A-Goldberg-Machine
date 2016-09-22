@@ -8,6 +8,8 @@ public class GameState : MonoBehaviour {
     //Handles before game controls
     protected static class PreGame
     {
+        public  static int nonGameLevels = 2;
+
 		private static string levelKey = "levelKey";
 		//Keeps track of what level the player is up to
 		public static int getCurrentLevel(){
@@ -28,6 +30,19 @@ public class GameState : MonoBehaviour {
 				PlayerPrefs.SetInt (levelKey, highestLevel + 1);
 			}
 		}
+
+        //Gets the number of all stars collected
+        public static int TotalNumberOfStars()
+        {
+            int[] stars = InGame.Stars.GetAllHighScores();
+            int total = 0;
+
+            for(int i = 0; i < stars.Length; i++)
+            {
+                total += stars[i];
+            }
+            return total;
+        }
 
     }
     //Used to handle ingame controls
@@ -72,9 +87,9 @@ public class GameState : MonoBehaviour {
             int numberOfScenes = SceneManager.sceneCountInBuildSettings;
             //Gets the next level index
             int nextLevel = (currentLevel.buildIndex + 1) % numberOfScenes;
-            if(nextLevel < 1)
+            if(nextLevel < PreGame.nonGameLevels)
             {
-                nextLevel = 1;
+                nextLevel = PreGame.nonGameLevels;
             }
             Debug.Log("Level : " + nextLevel + " will be loaded");
 
@@ -94,7 +109,7 @@ public class GameState : MonoBehaviour {
             int previousLevel = (currentLevel.buildIndex - 1) % numberOfScenes;
 
             print(previousLevel);
-            if(previousLevel < 1)
+            if(previousLevel < PreGame.nonGameLevels)
             {
                 previousLevel = numberOfScenes - 1;
             }
@@ -153,6 +168,8 @@ public class GameState : MonoBehaviour {
                 }
                 return allScores;
             }
+
+
             //Erases all of the highscores
             public static void EraseAllHighScores()
             {
