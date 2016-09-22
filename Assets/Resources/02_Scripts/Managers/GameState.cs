@@ -16,8 +16,8 @@ public class GameState : MonoBehaviour {
 			int currLevel = PlayerPrefs.GetInt (levelKey);
 			//If the player hasn't beaten anything yet unlock
 			//the first level
-			if (currLevel == 0) {
-				currLevel = 1;
+			if (currLevel < nonGameLevels) {
+				currLevel = nonGameLevels;
 			}
 			return currLevel;
 		}
@@ -25,9 +25,10 @@ public class GameState : MonoBehaviour {
 		public static void setNextLevel(){
 			int highestLevel = getCurrentLevel();
 			int sceneNun = SceneManager.GetActiveScene ().buildIndex;
+            print("H - " + highestLevel + " : S - " + sceneNun);
 
 			if (sceneNun == highestLevel) {
-				PlayerPrefs.SetInt (levelKey, highestLevel + 1);
+				PlayerPrefs.SetInt (levelKey, highestLevel+1);
 			}
 		}
 
@@ -196,6 +197,7 @@ public class GameState : MonoBehaviour {
             if (!playerWon)
             {
                 playerWon = true;
+
 				//If the highest level move it up one
 				PreGame.setNextLevel ();
 

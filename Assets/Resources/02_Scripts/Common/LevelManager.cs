@@ -14,13 +14,14 @@ public class LevelManager : GameState {
 
     public readonly int[] starThreshold = { 5, 10, 15 };
 
-    private int latestlevel;//Keeps track of what level the player is up to
+    public int latestlevel;//Keeps track of what level the player is up to
     private int buttonsPlaced;//Keeps track of how many buttons are placed
 	// Use this for initialization
 	void Start () {
-        PlayerPrefs.DeleteAll();
         buttonsPlaced = 0;
-		latestlevel = PreGame.getCurrentLevel ();
+        //PlayerPrefs.DeleteAll();
+		latestlevel = PreGame.getCurrentLevel ()-1;
+        print("Latest Level : " + latestlevel);
         int numberOfWorlds = transform.childCount;
         worlds = new GameObject[numberOfWorlds];
         for(int i = 0; i < numberOfWorlds; i++)
