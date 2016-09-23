@@ -8,9 +8,12 @@ public class GameState : MonoBehaviour {
     //Handles before game controls
     protected static class PreGame
     {
-        public  static int nonGameLevels = 2;
+        public readonly static int nonGameLevels = 2;
+		public readonly static int[] starThreshold = { 3, 6, 9 };
+		public static int[] levelsBetweenWorlds;
 
-		private static string levelKey = "levelKey";
+
+		private readonly static string levelKey = "levelKey";
 		//Keeps track of what level the player is up to
 		public static int getCurrentLevel(){
 			int currLevel = PlayerPrefs.GetInt (levelKey);
@@ -25,8 +28,6 @@ public class GameState : MonoBehaviour {
 		public static void setNextLevel(){
 			int highestLevel = getCurrentLevel();
 			int sceneNun = SceneManager.GetActiveScene ().buildIndex;
-            print("H - " + highestLevel + " : S - " + sceneNun);
-
 			if (sceneNun == highestLevel) {
 				PlayerPrefs.SetInt (levelKey, highestLevel+1);
 			}
@@ -88,16 +89,27 @@ public class GameState : MonoBehaviour {
             int numberOfScenes = SceneManager.sceneCountInBuildSettings;
             //Gets the next level index
             int nextLevel = (currentLevel.buildIndex + 1) % numberOfScenes;
-            if(nextLevel < PreGame.nonGameLevels)
-            {
-                nextLevel = PreGame.nonGameLevels;
-            }
-            Debug.Log("Level : " + nextLevel + " will be loaded");
 
-            Time.timeScale = 1;
-            gamePaused = EndGame.playerWon = false;
-            //Loads the next level
-            SceneManager.LoadScene(nextLevel);
+			bool playerCanProgress = true;
+			for (int i = 0; i < PreGame.levelsBetweenWorlds.Length; i++) {
+				if (nextLevel == PreGame.levelsBetweenWorlds [i] + PreGame.nonGameLevels) {
+					if (PreGame.TotalNumberOfStars () < PreGame.starThreshold[i]) {
+						playerCanProgress = false;
+						break;
+					}
+				}
+			}
+			if (playerCanProgress) {
+				if (nextLevel < PreGame.nonGameLevels) {
+					nextLevel = PreGame.nonGameLevels;
+				}
+				Time.timeScale = 1;
+				gamePaused = EndGame.playerWon = false;
+				//Loads the next level
+				SceneManager.LoadScene (nextLevel);
+			} else {
+				SceneManager.LoadScene (1);
+			}
         }
         /*Load previous Level*/
         public static void PreviousLevel()
