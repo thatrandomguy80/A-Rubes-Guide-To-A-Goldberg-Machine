@@ -9,9 +9,8 @@ public class GameState : MonoBehaviour {
     protected static class PreGame
     {
         public readonly static int nonGameLevels = 2;
-		public readonly static int[] starThreshold = { 3, 6, 9 };
+		public readonly static int[] starThreshold = { 6, 12, 18 };
 		public static int[] levelsBetweenWorlds;
-
 
 		private readonly static string levelKey = "levelKey";
 		//Keeps track of what level the player is up to
@@ -32,20 +31,6 @@ public class GameState : MonoBehaviour {
 				PlayerPrefs.SetInt (levelKey, highestLevel+1);
 			}
 		}
-
-        //Gets the number of all stars collected
-        public static int TotalNumberOfStars()
-        {
-            int[] stars = InGame.Stars.GetAllHighScores();
-            int total = 0;
-
-            for(int i = 0; i < stars.Length; i++)
-            {
-                total += stars[i];
-            }
-            return total;
-        }
-
     }
     //Used to handle ingame controls
     protected static class InGame
@@ -93,7 +78,7 @@ public class GameState : MonoBehaviour {
 			bool playerCanProgress = true;
 			for (int i = 0; i < PreGame.levelsBetweenWorlds.Length; i++) {
 				if (nextLevel == PreGame.levelsBetweenWorlds [i] + PreGame.nonGameLevels) {
-					if (PreGame.TotalNumberOfStars () < PreGame.starThreshold[i]) {
+					if (Stars.Total() < PreGame.starThreshold[i]) {
 						playerCanProgress = false;
 						break;
 					}
@@ -158,7 +143,18 @@ public class GameState : MonoBehaviour {
             {
                 stars = 0;
             }
+            //Gets the number of all stars collected
+            public static int Total()
+            {
+                int[] stars = GetAllHighScores();
+                int total = 0;
 
+                for (int i = 0; i < stars.Length; i++)
+                {
+                    total += stars[i];
+                }
+                return total;
+            }
             //Saves the star rating for the level
             public static void SaveHighScore(int levelNum,int starCount)
             {
@@ -181,8 +177,6 @@ public class GameState : MonoBehaviour {
                 }
                 return allScores;
             }
-
-
             //Erases all of the highscores
             public static void EraseAllHighScores()
             {
