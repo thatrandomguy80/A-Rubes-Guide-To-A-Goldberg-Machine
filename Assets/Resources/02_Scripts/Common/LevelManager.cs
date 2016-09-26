@@ -27,7 +27,8 @@ public class LevelManager : GameState {
     private void Init()
     {
         buttonsPlaced = 0;
-        latestlevel = PreGame.getCurrentLevel() - 1;
+        latestlevel = PreGame.getCurrentLevel()-1;
+		latestlevel = 24;
         print("Latest Level : " + latestlevel + " - Number of Stars : " + InGame.Stars.Total());
         int numberOfWorlds = transform.childCount;
         worlds = new GameObject[numberOfWorlds];
@@ -51,7 +52,7 @@ public class LevelManager : GameState {
         int n = 0;
         for (int i = 0; i < worlds.Length; i++)
         {
-            if (completedLevels < n + PreGame.levelsBetweenWorlds[i])
+            if (completedLevels <= n + PreGame.levelsBetweenWorlds[i])
             {
                 worldSelected = i;
                 break;
