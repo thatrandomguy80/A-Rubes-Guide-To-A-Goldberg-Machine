@@ -15,6 +15,7 @@ public class PlatformControls : PlatformBuilder {
         //Get all the spring joints for the platform
 		distJoints = GetComponents<DistanceJoint2D>();
 		GameObject anchors = transform.parent.GetChild (3).gameObject;
+
         GameObject leftAnchor = anchors.transform.GetChild(0).gameObject;
         GameObject rightAnchor = anchors.transform.GetChild(1).gameObject;
 

@@ -9,7 +9,7 @@ public class GameState : MonoBehaviour {
     protected static class PreGame
     {
         public readonly static int nonGameLevels = 2;
-		public readonly static int[] starThreshold = { 6, 12, 18 };
+		public readonly static int[] starThreshold = { 6, 12, 18 , 24};
 		public static int[] levelsBetweenWorlds;
 
 		private readonly static string levelKey = "levelKey";
