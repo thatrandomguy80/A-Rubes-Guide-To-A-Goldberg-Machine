@@ -5,6 +5,7 @@ public class Hammer : MonoBehaviour {
 
     public float extraForce = 1f;
     public float loopThreshold = .75f;
+    public float rotSpeed = 750f;
 
     private Rigidbody2D rb;
     private GameObject lastCollider;
@@ -53,7 +54,7 @@ public class Hammer : MonoBehaviour {
 
                 JointMotor2D jm = hj.motor;
                 //sets motor to run in the correct direction to complete the loopdeloop
-                float speed = 750;
+                float speed = rotSpeed;
                 speed *= getDir(ot).x;
                 jm.motorSpeed = speed;
                 hj.motor = jm;

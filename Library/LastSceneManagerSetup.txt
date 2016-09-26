@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/M-05.unity
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/HM-02(Hammer intro).unity
   isLoaded: 1
   isActive: 1
