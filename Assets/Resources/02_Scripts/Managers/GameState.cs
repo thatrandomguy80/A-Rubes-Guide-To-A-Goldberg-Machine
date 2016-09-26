@@ -8,7 +8,29 @@ public class GameState : MonoBehaviour {
     //Handles before game controls
     protected static class PreGame
     {
+        public readonly static int nonGameLevels = 2;
+		public readonly static int[] starThreshold = { 6, 12, 18 };
+		public static int[] levelsBetweenWorlds;
 
+		private readonly static string levelKey = "levelKey";
+		//Keeps track of what level the player is up to
+		public static int getCurrentLevel(){
+			int currLevel = PlayerPrefs.GetInt (levelKey);
+			//If the player hasn't beaten anything yet unlock
+			//the first level
+			if (currLevel < nonGameLevels) {
+				currLevel = nonGameLevels;
+			}
+			return currLevel;
+		}
+		//Sets the next level cap
+		public static void setNextLevel(){
+			int highestLevel = getCurrentLevel();
+			int sceneNun = SceneManager.GetActiveScene ().buildIndex;
+			if (sceneNun == highestLevel) {
+				PlayerPrefs.SetInt (levelKey, highestLevel+1);
+			}
+		}
     }
     //Used to handle ingame controls
     protected static class InGame
@@ -52,16 +74,27 @@ public class GameState : MonoBehaviour {
             int numberOfScenes = SceneManager.sceneCountInBuildSettings;
             //Gets the next level index
             int nextLevel = (currentLevel.buildIndex + 1) % numberOfScenes;
-            if(nextLevel < 1)
-            {
-                nextLevel = 1;
-            }
-            Debug.Log("Level : " + nextLevel + " will be loaded");
 
-            Time.timeScale = 1;
-            gamePaused = EndGame.playerWon = false;
-            //Loads the next level
-            SceneManager.LoadScene(nextLevel);
+			bool playerCanProgress = true;
+			for (int i = 0; i < PreGame.levelsBetweenWorlds.Length; i++) {
+				if (nextLevel == PreGame.levelsBetweenWorlds [i] + PreGame.nonGameLevels) {
+					if (Stars.Total() < PreGame.starThreshold[i]) {
+						playerCanProgress = false;
+						break;
+					}
+				}
+			}
+			if (playerCanProgress) {
+				if (nextLevel < PreGame.nonGameLevels) {
+					nextLevel = PreGame.nonGameLevels;
+				}
+				Time.timeScale = 1;
+				gamePaused = EndGame.playerWon = false;
+				//Loads the next level
+				SceneManager.LoadScene (nextLevel);
+			} else {
+				SceneManager.LoadScene (1);
+			}
         }
         /*Load previous Level*/
         public static void PreviousLevel()
@@ -74,7 +107,7 @@ public class GameState : MonoBehaviour {
             int previousLevel = (currentLevel.buildIndex - 1) % numberOfScenes;
 
             print(previousLevel);
-            if(previousLevel < 1)
+            if(previousLevel < PreGame.nonGameLevels)
             {
                 previousLevel = numberOfScenes - 1;
             }
@@ -110,7 +143,18 @@ public class GameState : MonoBehaviour {
             {
                 stars = 0;
             }
+            //Gets the number of all stars collected
+            public static int Total()
+            {
+                int[] stars = GetAllHighScores();
+                int total = 0;
 
+                for (int i = 0; i < stars.Length; i++)
+                {
+                    total += stars[i];
+                }
+                return total;
+            }
             //Saves the star rating for the level
             public static void SaveHighScore(int levelNum,int starCount)
             {
@@ -159,6 +203,9 @@ public class GameState : MonoBehaviour {
             if (!playerWon)
             {
                 playerWon = true;
+
+				//If the highest level move it up one
+				PreGame.setNextLevel ();
 
                 //Hide the cutting trail
                 GameObject.Find("Trail").SetActive(false);
