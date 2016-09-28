@@ -88,6 +88,7 @@ public class PlatformControls : PlatformBuilder {
             GameObject gear = Instantiate(Resources.Load("04_Prefabs/" + gears[rand]) as GameObject, midPos, Quaternion.identity) as GameObject;
             gear.transform.parent = transform.parent.GetChild(0);
             gear.name = "Gear";
+			gear.transform.localEulerAngles += new Vector3 (0, 180, 0); 
             //randomises gear rotating speed
             RotatingObject a  = gear.transform.GetChild(0).GetComponent<RotatingObject>();
             if (a != null) {

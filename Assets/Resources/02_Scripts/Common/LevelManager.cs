@@ -46,20 +46,25 @@ public class LevelManager : GameState {
     /*Sets up which world the camera is looking at*/
     private void SetUpCamStartingPos()
     {
+		//Counts how many buttons are in the scene
         LevelSelectionButton[] levelsButts = FindObjectsOfType(typeof(LevelSelectionButton)) as LevelSelectionButton[];
         completedLevels = levelsButts.Length;
-
-        int n = 0;
+		int cumulativeButtons = 0;
         for (int i = 0; i < worlds.Length; i++)
         {
-            if (completedLevels <= n + PreGame.levelsBetweenWorlds[i])
+			
+			bool notcompletedEnoughLevels = completedLevels <= cumulativeButtons + PreGame.levelsBetweenWorlds [i];
+			bool doesNotHaveEnoughStars = InGame.Stars.Total() <= PreGame.starThreshold[i];
+			//If the player has not completed enough levels or
+			//Does not have enough stars for the threshold
+			if (notcompletedEnoughLevels || doesNotHaveEnoughStars)
             {
                 worldSelected = i;
                 break;
             }
             else
             {
-                n += PreGame.levelsBetweenWorlds[i];
+				cumulativeButtons += PreGame.levelsBetweenWorlds[i];
             }
         }
         Camera.main.transform.position = new Vector3(worlds[worldSelected].transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);

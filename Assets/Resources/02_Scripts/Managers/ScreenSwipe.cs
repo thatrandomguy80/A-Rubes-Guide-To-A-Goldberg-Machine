@@ -13,7 +13,7 @@ public class ScreenSwipe : GameState {
 
 	void Update()
 	{
-		if (!EndGame.playerWon) {
+		if (!EndGame.playerWon && !InGame.gamePaused) {
 			MoveScreenCursor ();
 		}
 	}
