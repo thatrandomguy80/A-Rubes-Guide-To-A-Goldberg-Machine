@@ -1,18 +1,20 @@
 fileFormatVersion: 2
-guid: 45424f0bdf111d648aa589c591643ba4
-timeCreated: 1474962347
+guid: 42c855a5a977ed847a5ebf8e470f71e3
+timeCreated: 1475025525
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: default
+    100002: Field
+    100004: Plane
     400000: //RootNode
-    400002: default
-    2300000: default
-    3300000: default
-    4300000: default
-    6400000: default
+    400002: Field
+    400004: Plane
+    4300000: Plane
+    7400000: Default Take
+    9500000: //RootNode
+    13700000: Plane
   materials:
     importMaterials: 1
     materialName: 0
@@ -39,7 +41,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 1
+    addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -56,7 +58,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     human: []
@@ -71,7 +73,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
