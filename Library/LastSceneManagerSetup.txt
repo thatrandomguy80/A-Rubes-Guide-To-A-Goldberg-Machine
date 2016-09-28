@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Navigational/LevelSelect.unity
+- path: Assets/Resources/01_Scenes/Levels/Debugging/HM-02(catapult).unity
   isLoaded: 1
   isActive: 1

@@ -7,9 +7,14 @@ public class BucketController : GameState {
     //They win and move to the next level
 	void OnCollisionEnter2D(Collision2D coll)
     {
+		
         if (coll.transform.tag.Equals("Player"))
         {
+			Rigidbody2D rig2d = coll.transform.GetComponent<Rigidbody2D> ();
+			rig2d.constraints = RigidbodyConstraints2D.FreezeAll;
+
             EndGame.Win();
+
         }
     }
 }
