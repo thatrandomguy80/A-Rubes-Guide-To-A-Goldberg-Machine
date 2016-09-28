@@ -43,12 +43,12 @@ public class CameraMovement : MonoBehaviour
         if (bounds != null)
         {
             if ((this.transform.position.x + horzExtent >= bounds.position.x + bounds.position.x + bounds.lossyScale.x / 2 && xDiff > 0) || //checks if the cameras bounds have reached the death bounds.
-                (this.transform.position.x + horzExtent >= -bounds.position.x + bounds.position.x + bounds.lossyScale.x / 2 && xDiff < 0))
+                (this.transform.position.x - horzExtent <= bounds.position.x - bounds.position.x - bounds.lossyScale.x *2 && xDiff < 0))
             {
                 result.x = 0;
             }
             if ((this.transform.position.y + vertExtent >= bounds.position.y + bounds.position.y + bounds.lossyScale.y / 2 && yDiff > 0) ||
-                (this.transform.position.y + vertExtent >= -bounds.position.y + bounds.position.y + bounds.lossyScale.y / 2 && yDiff > 0) )
+                (this.transform.position.y - vertExtent <= bounds.position.y - bounds.position.y - bounds.lossyScale.y * 2 && yDiff < 0) )
             {
                 result.y = 0;
             }

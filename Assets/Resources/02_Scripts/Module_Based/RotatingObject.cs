@@ -10,6 +10,6 @@ public class RotatingObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(rotationSpeeds*Time.deltaTime);
+        transform.Rotate(rotationSpeeds*Time.deltaTime,Space.World);
     }
 }

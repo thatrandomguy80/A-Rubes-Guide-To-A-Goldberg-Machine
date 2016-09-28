@@ -11,6 +11,8 @@ public class LevelManager : GameState {
 
 	public GameObject leftArrow, rightArrow;
 
+	public Material activeButtonMat,deactiveButtonMat;
+
     private int latestlevel;//Keeps track of what level the player is up to
     private int buttonsPlaced;//Keeps track of how many buttons are placed
 
@@ -28,8 +30,6 @@ public class LevelManager : GameState {
     {
         buttonsPlaced = 0;
         latestlevel = PreGame.getCurrentLevel()-1;
-		latestlevel = 24;
-        print("Latest Level : " + latestlevel + " - Number of Stars : " + InGame.Stars.Total());
         int numberOfWorlds = transform.childCount;
         worlds = new GameObject[numberOfWorlds];
         PreGame.levelsBetweenWorlds = new int[worlds.Length];
@@ -46,20 +46,25 @@ public class LevelManager : GameState {
     /*Sets up which world the camera is looking at*/
     private void SetUpCamStartingPos()
     {
+		//Counts how many buttons are in the scene
         LevelSelectionButton[] levelsButts = FindObjectsOfType(typeof(LevelSelectionButton)) as LevelSelectionButton[];
         completedLevels = levelsButts.Length;
-
-        int n = 0;
+		int cumulativeButtons = 0;
         for (int i = 0; i < worlds.Length; i++)
         {
-            if (completedLevels <= n + PreGame.levelsBetweenWorlds[i])
+			
+			bool notcompletedEnoughLevels = completedLevels <= cumulativeButtons + PreGame.levelsBetweenWorlds [i];
+			bool doesNotHaveEnoughStars = InGame.Stars.Total() <= PreGame.starThreshold[i];
+			//If the player has not completed enough levels or
+			//Does not have enough stars for the threshold
+			if (notcompletedEnoughLevels || doesNotHaveEnoughStars)
             {
                 worldSelected = i;
                 break;
             }
             else
             {
-                n += PreGame.levelsBetweenWorlds[i];
+				cumulativeButtons += PreGame.levelsBetweenWorlds[i];
             }
         }
         Camera.main.transform.position = new Vector3(worlds[worldSelected].transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
@@ -72,17 +77,17 @@ public class LevelManager : GameState {
         while (currentButton < levelSide.transform.childCount)
         {
             GameObject button = levelSide.transform.GetChild(currentButton).gameObject;
-            Material mat = button.GetComponent<Renderer>().material;
+			Renderer mat = button.GetComponent<Renderer>();
             if (latestlevel > 0)
             {
-                mat.color = Color.red;
+				mat.material = activeButtonMat;
                 LevelSelectionButton lsBut = button.AddComponent<LevelSelectionButton>();
                 lsBut.level = currentButton + PreGame.nonGameLevels + buttonsPlaced;
                 latestlevel--;
             }
             else
             {
-                mat.color = Color.blue;
+				mat.material = deactiveButtonMat;
             }
             currentButton++;
         }

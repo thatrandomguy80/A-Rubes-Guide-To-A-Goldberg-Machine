@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Resources/01_Scenes/Levels/Playtesting/M-12.unity
+=======
+- path: Assets/Resources/01_Scenes/Navigational/LevelSelect.unity
+>>>>>>> 4653442ccd691e60ebac661acda662f212820f8a
   isLoaded: 1
   isActive: 1

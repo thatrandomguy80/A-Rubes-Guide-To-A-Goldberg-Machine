@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameCanvasController : GameState {
 
@@ -7,12 +9,6 @@ public class GameCanvasController : GameState {
     public GameObject pauseButton;
     public GameObject winPanel;
     public GameObject restartButton;
-
-    void Start()
-    {
-        Debug.Log("Player has won? : " + EndGame.playerWon);
-        Debug.Log("Game is paused : " + InGame.gamePaused);
-    }
 
 
     void Update()
@@ -25,7 +21,34 @@ public class GameCanvasController : GameState {
 
         winPanel.SetActive(EndGame.playerWon);
 
+		SetupStars ();
+		DisplayCurrentWorldAndLevel ();
+
     }
+
+	//Sets up what stars are showing
+	private void SetupStars(){
+		int totalStars = InGame.Stars.Get ();
+		GameObject starBorder = GameObject.Find ("StarBorder");
+		for (int i = 0; i < starBorder.transform.childCount; i++) {
+			Image star = starBorder.transform.GetChild (i).GetComponent<Image> ();
+			if (i < totalStars) {
+				star.color = Color.yellow;
+			} else {
+				star.color = Color.white;
+			}
+		}
+	}
+	private void DisplayCurrentWorldAndLevel(){
+		int level = SceneManager.GetActiveScene().buildIndex-1;
+		int[] wrldAndLevel = PreGame.getCurrentWorldAndLevel(level);
+		print ("World : " + wrldAndLevel[0] + " // Level : " + wrldAndLevel[1]);
+
+		Text worldDet = GameObject.Find ("SceneDetails/World").GetComponent<Text> ();
+		worldDet.text = "World " + wrldAndLevel [0] + "-" + wrldAndLevel [1];
+
+	}
+
 
     //Pauses the game and brings up the pause game GUI
 	public void PauseButton()
@@ -39,10 +62,10 @@ public class GameCanvasController : GameState {
         InGame.RestartLevel();
         
     }
-    //Moves to main menu
-    public void MainMenu()
+    //Moves to level select
+    public void LevelSelect()
     {
-        EndGame.MainMenu();
+		EndGame.LevelSelect();
     }
 
     //Player Continues to the next level

@@ -9,8 +9,8 @@ public class GameState : MonoBehaviour {
     protected static class PreGame
     {
         public readonly static int nonGameLevels = 2;
-		public readonly static int[] starThreshold = { 6, 12, 18 , 24};
-		public static int[] levelsBetweenWorlds;
+		public readonly static int[] starThreshold = { 12, 30, 50 , 80};
+		public static int[] levelsBetweenWorlds = {10,12,12,20};
 
 		private readonly static string levelKey = "levelKey";
 		//Keeps track of what level the player is up to
@@ -23,6 +23,23 @@ public class GameState : MonoBehaviour {
 			}
 			return currLevel;
 		}
+		public static int[] getCurrentWorldAndLevel(int CURRENT_LEVEL){
+			int level = CURRENT_LEVEL;
+			int[] wrld = new int[2];
+
+
+			for (int i = 0; i < levelsBetweenWorlds.Length; i++) {
+				if (level <= levelsBetweenWorlds [i]) {
+					wrld [0] = i+1;
+					break;
+				} else {
+					level -= levelsBetweenWorlds [i];
+				}
+			}
+			wrld [1] = level;
+			return wrld;
+		}
+
 		//Sets the next level cap
 		public static void setNextLevel(){
 			int highestLevel = getCurrentLevel();
@@ -246,12 +263,12 @@ public class GameState : MonoBehaviour {
             InGame.RestartLevel();
         }
         //Player moves to main menu
-        public static void MainMenu()
+		public static void LevelSelect()
         {
             InGame.gamePaused = false;
             playerWon = false;
             Time.timeScale = 1;
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
     }
 }
