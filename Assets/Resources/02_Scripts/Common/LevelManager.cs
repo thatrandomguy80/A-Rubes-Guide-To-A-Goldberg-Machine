@@ -11,6 +11,8 @@ public class LevelManager : GameState {
 
 	public GameObject leftArrow, rightArrow;
 
+	public Material activeButtonMat,deactiveButtonMat;
+
     private int latestlevel;//Keeps track of what level the player is up to
     private int buttonsPlaced;//Keeps track of how many buttons are placed
 
@@ -75,17 +77,17 @@ public class LevelManager : GameState {
         while (currentButton < levelSide.transform.childCount)
         {
             GameObject button = levelSide.transform.GetChild(currentButton).gameObject;
-            Material mat = button.GetComponent<Renderer>().material;
+			Renderer mat = button.GetComponent<Renderer>();
             if (latestlevel > 0)
             {
-                mat.color = Color.red;
+				mat.material = activeButtonMat;
                 LevelSelectionButton lsBut = button.AddComponent<LevelSelectionButton>();
                 lsBut.level = currentButton + PreGame.nonGameLevels + buttonsPlaced;
                 latestlevel--;
             }
             else
             {
-                mat.color = Color.blue;
+				mat.material = deactiveButtonMat;
             }
             currentButton++;
         }

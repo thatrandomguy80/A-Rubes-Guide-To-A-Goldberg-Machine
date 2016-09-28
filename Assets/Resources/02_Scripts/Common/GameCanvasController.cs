@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameCanvasController : GameState {
 
@@ -21,6 +22,7 @@ public class GameCanvasController : GameState {
         winPanel.SetActive(EndGame.playerWon);
 
 		SetupStars ();
+		DisplayCurrentWorldAndLevel ();
 
     }
 
@@ -36,6 +38,15 @@ public class GameCanvasController : GameState {
 				star.color = Color.white;
 			}
 		}
+	}
+	private void DisplayCurrentWorldAndLevel(){
+		int level = SceneManager.GetActiveScene().buildIndex-1;
+		int[] wrldAndLevel = PreGame.getCurrentWorldAndLevel(level);
+		print ("World : " + wrldAndLevel[0] + " // Level : " + wrldAndLevel[1]);
+
+		Text worldDet = GameObject.Find ("SceneDetails/World").GetComponent<Text> ();
+		worldDet.text = "World " + wrldAndLevel [0] + "-" + wrldAndLevel [1];
+
 	}
 
 
