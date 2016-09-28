@@ -28,8 +28,6 @@ public class LevelManager : GameState {
     {
         buttonsPlaced = 0;
         latestlevel = PreGame.getCurrentLevel()-1;
-		latestlevel = 24;
-        print("Latest Level : " + latestlevel + " - Number of Stars : " + InGame.Stars.Total());
         int numberOfWorlds = transform.childCount;
         worlds = new GameObject[numberOfWorlds];
         PreGame.levelsBetweenWorlds = new int[worlds.Length];

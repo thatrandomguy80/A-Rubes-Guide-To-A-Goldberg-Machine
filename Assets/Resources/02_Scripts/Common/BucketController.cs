@@ -12,6 +12,7 @@ public class BucketController : GameState {
         {
 			Rigidbody2D rig2d = coll.transform.GetComponent<Rigidbody2D> ();
 			rig2d.constraints = RigidbodyConstraints2D.FreezeAll;
+			InGame.Stars.Add (); //They also get a star
 
             EndGame.Win();
 

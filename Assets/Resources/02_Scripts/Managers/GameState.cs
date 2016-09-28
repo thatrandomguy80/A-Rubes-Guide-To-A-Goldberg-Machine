@@ -9,7 +9,7 @@ public class GameState : MonoBehaviour {
     protected static class PreGame
     {
         public readonly static int nonGameLevels = 2;
-		public readonly static int[] starThreshold = { 6, 12, 18 , 24};
+		public readonly static int[] starThreshold = { 12, 30, 50 , 80};
 		public static int[] levelsBetweenWorlds;
 
 		private readonly static string levelKey = "levelKey";
@@ -246,12 +246,12 @@ public class GameState : MonoBehaviour {
             InGame.RestartLevel();
         }
         //Player moves to main menu
-        public static void MainMenu()
+		public static void LevelSelect()
         {
             InGame.gamePaused = false;
             playerWon = false;
             Time.timeScale = 1;
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
     }
 }
