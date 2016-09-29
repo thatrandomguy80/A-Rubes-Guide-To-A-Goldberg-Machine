@@ -12,6 +12,8 @@ public class PlatformControls : PlatformBuilder {
 
     private bool contacts = false;
 
+    private int recalls = 0;
+
     // Use this for initialization
     void Start() {
 
@@ -30,6 +32,7 @@ public class PlatformControls : PlatformBuilder {
         List<Vector3> prev = new List<Vector3>();
         for (int i = 0; i <= j; j--) {
             prev = AddGears(leftAnchor, rightAnchor, prev);
+            recalls = 0;
         }
 
 
@@ -50,29 +53,32 @@ public class PlatformControls : PlatformBuilder {
     }
 
     public List<Vector3> AddGears(GameObject leftAnchor, GameObject rightAnchor, List<Vector3> prevPos) {
-        Vector2 left = leftAnchor.transform.position;
-        Vector2 right = rightAnchor.transform.position;
-        float zee;
-        if (Random.Range(-1, 1) > -1) {//sets behind or infront of platform.
-            zee = 1f;
-        } else {
-            zee = -1f;
-        }
+        recalls++;
+        if (recalls < 10) {
+            Vector2 left = leftAnchor.transform.position;
+            Vector2 right = rightAnchor.transform.position;
+            float zee;
+            if (Random.Range(-1, 1) > -1) {//sets behind or infront of platform.
+                zee = 1f;
+            } else {
+                zee = -1f;
+            }
 
-        Vector3 midPos = new Vector3(Random.Range(left.x, right.x), Random.Range(left.y, right.y), zee);//pos of the gear
+            Vector3 midPos = new Vector3(Random.Range(left.x, right.x), Random.Range(left.y, right.y), zee);//pos of the gear
 
-        float offset = 1f;//how close the gears are aloud to be
-        bool tooClose = false;
-        for (int i = 0; i < prevPos.Count; i++) {
-            tooClose = tooClose || offsetCheck(midPos, prevPos[i], offset); // accumulate if it's too close for any prev pos
+            float offset = 1f;//how close the gears are aloud to be
+            bool tooClose = false;
+            for (int i = 0; i < prevPos.Count; i++) {
+                tooClose = tooClose || offsetCheck(midPos, prevPos[i], offset); // accumulate if it's too close for any prev pos
+            }
+            //need to check all now.
+            if (tooClose) {//gears are too close
+                AddGears(leftAnchor, rightAnchor, prevPos);
+            } else {//gears arn't too close and isn't first call.
+                makeGear(leftAnchor, rightAnchor, midPos, prevPos);
+            }
+            prevPos.Add(midPos);
         }
-        //need to check all now.
-        if (tooClose) {//gears are too close
-            AddGears(leftAnchor, rightAnchor, prevPos);
-        } else {//gears arn't too close and isn't first call.
-            makeGear(leftAnchor, rightAnchor, midPos, prevPos);
-        }
-        prevPos.Add(midPos);
         return prevPos;//new result with midPos appended
     }
 
@@ -88,9 +94,9 @@ public class PlatformControls : PlatformBuilder {
             GameObject gear = Instantiate(Resources.Load("04_Prefabs/" + gears[rand]) as GameObject, midPos, Quaternion.identity) as GameObject;
             gear.transform.parent = transform.parent.GetChild(0);
             gear.name = "Gear";
-			gear.transform.localEulerAngles += new Vector3 (0, 180, 0); 
+            gear.transform.localEulerAngles += new Vector3(0, 180, 0);
             //randomises gear rotating speed
-            RotatingObject a  = gear.transform.GetChild(0).GetComponent<RotatingObject>();
+            RotatingObject a = gear.transform.GetChild(0).GetComponent<RotatingObject>();
             if (a != null) {
                 a.rotationSpeeds.z = Random.Range(-50, 50);
             }

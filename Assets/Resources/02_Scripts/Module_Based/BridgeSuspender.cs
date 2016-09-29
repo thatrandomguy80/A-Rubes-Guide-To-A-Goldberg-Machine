@@ -116,7 +116,7 @@ public class BridgeSuspender : ObstacleInteraction {
                 cutPos = trail.getPos();
             }
 
-            result = new Vector3(result.x, result.y - 2, 5);
+            result = new Vector3(result.x, result.y - 3, 5);
             Interact(cutPos);
 
         }
