@@ -21,24 +21,32 @@ public class GameCanvasController : GameState {
 
         winPanel.SetActive(EndGame.playerWon);
 
-		SetupStars ();
-		DisplayCurrentWorldAndLevel ();
+
+		if (InGame.gamePaused && !EndGame.playerWon) {
+			SetupStars ();
+			DisplayCurrentWorldAndLevel ();
+		}
 
     }
 
-	//Sets up what stars are showing
+	//Displays the stars the player has collected on the pause screen
 	private void SetupStars(){
+		//Gets the total number of stars
 		int totalStars = InGame.Stars.Get ();
+		//Gets the container
 		GameObject starBorder = GameObject.Find ("StarBorder");
-		for (int i = 0; i < starBorder.transform.childCount; i++) {
-			Image star = starBorder.transform.GetChild (i).GetComponent<Image> ();
-			if (i < totalStars) {
-				star.color = Color.yellow;
-			} else {
-				star.color = Color.white;
+		//Gets each star if the player has enough stars then deisplay them
+			for (int i = 0; i < starBorder.transform.childCount; i++) {
+				Image star = starBorder.transform.GetChild (i).GetComponent<Image> ();
+				if (i < totalStars) {
+					star.color = Color.yellow;
+				} else {
+					star.color = Color.white;
+				}
 			}
-		}
+
 	}
+	//Displays the current world and level selected on the pause screen
 	private void DisplayCurrentWorldAndLevel(){
 		int level = SceneManager.GetActiveScene().buildIndex-1;
 		int[] wrldAndLevel = PreGame.getCurrentWorldAndLevel(level);
