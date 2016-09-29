@@ -12,14 +12,17 @@ public class CameraMovement : MonoBehaviour
     private Vector3 moveTemp;
     private float xDiff, yDiff; //Distance between the center of the camera and the player
     public float moveThresh = 3; //How far the player can move from the center of the camera
-    public float camMoveSpeed = 10;
+    public float camMoveSpeed = 10; //the speed that the camera moves by
+    public float startingZoom = 11; //starting ortho size of the camera so that specific levels can have different levels of zoom.
     [Header("This will lock the axis for some levels if required")]
     public bool xLoc = false;
     public bool yLoc = false;
     //these can be set during runtime if you wan't certain sections to stop looking out.
     void Start()
     {
+        Camera gameCam = Camera.main;
         character = GameObject.FindGameObjectWithTag("Player").transform;
+        gameCam.orthographicSize = startingZoom; //sets starting zoom of the level.
     }
     //Controls camera movement
     private void MoveCamera()
