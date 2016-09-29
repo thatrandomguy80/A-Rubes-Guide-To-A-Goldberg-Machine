@@ -8,7 +8,7 @@ public class PlatformControls : PlatformBuilder {
 
     public DistanceJoint2D[] distJoints;
 
-    private string[] gears = { "gear1", "gear2" };
+    private string[] gears = { "gear1", "gear2", "gear3", "gear4" };
 
     private bool contacts = false;
 
