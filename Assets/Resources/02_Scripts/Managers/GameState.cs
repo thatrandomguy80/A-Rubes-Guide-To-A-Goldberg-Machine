@@ -101,14 +101,18 @@ public class GameState : MonoBehaviour {
 					}
 				}
 			}
+
+			Time.timeScale = 1;
+			gamePaused = EndGame.playerWon = false;
+			/*If the player can progress to a new level then they continue*/
 			if (playerCanProgress) {
 				if (nextLevel < PreGame.nonGameLevels) {
 					nextLevel = PreGame.nonGameLevels;
 				}
-				Time.timeScale = 1;
-				gamePaused = EndGame.playerWon = false;
+
 				//Loads the next level
 				SceneManager.LoadScene (nextLevel);
+			/*else they return to the main menu*/
 			} else {
 				SceneManager.LoadScene (1);
 			}

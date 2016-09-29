@@ -29,6 +29,9 @@ public class GameCanvasController : GameState {
 
     }
 
+	public Sprite activeStar,disabledStar;
+
+
 	//Displays the stars the player has collected on the pause screen
 	private void SetupStars(){
 		//Gets the total number of stars
@@ -39,9 +42,9 @@ public class GameCanvasController : GameState {
 			for (int i = 0; i < starBorder.transform.childCount; i++) {
 				Image star = starBorder.transform.GetChild (i).GetComponent<Image> ();
 				if (i < totalStars) {
-					star.color = Color.yellow;
+					star.sprite = activeStar;
 				} else {
-					star.color = Color.white;
+					star.sprite = disabledStar;
 				}
 			}
 

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Levels/Playtesting/M-13.unity
+- path: Assets/Resources/01_Scenes/Navigational/LevelSelect.unity
   isLoaded: 1
   isActive: 1

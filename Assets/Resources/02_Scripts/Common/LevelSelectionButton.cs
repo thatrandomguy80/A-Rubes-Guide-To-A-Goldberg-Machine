@@ -13,6 +13,9 @@ public class LevelSelectionButton : MonoBehaviour {
     {
         lerp = 0;
         hover = false;
+		RotatingObject rot = gameObject.AddComponent<RotatingObject> ();
+		rot.rotationSpeeds = new Vector3 (0, 0, 10);
+
     }
     //If the player hovers over the button it will move forward
     private void MouseHover()

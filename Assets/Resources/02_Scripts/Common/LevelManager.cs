@@ -77,7 +77,7 @@ public class LevelManager : GameState {
         while (currentButton < levelSide.transform.childCount)
         {
             GameObject button = levelSide.transform.GetChild(currentButton).gameObject;
-			Renderer mat = button.GetComponent<Renderer>();
+			Renderer mat = button.transform.GetChild(1).GetComponent<Renderer>();
             if (latestlevel > 0)
             {
 				mat.material = activeButtonMat;
