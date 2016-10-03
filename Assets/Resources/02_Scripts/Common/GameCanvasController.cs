@@ -84,4 +84,10 @@ public class GameCanvasController : GameState {
     {
         InGame.NextLevel();
     }
+
+    //Mutes or unmutes the music
+    public void MuteButton()
+    {
+        AudioPlayer.Mute();
+    }
 }
