@@ -88,6 +88,6 @@ public class GameCanvasController : GameState {
     //Mutes or unmutes the music
     public void MuteButton()
     {
-        AudioPlayer.Mute();
+        AudioPlayer.instance.Mute();
     }
 }
