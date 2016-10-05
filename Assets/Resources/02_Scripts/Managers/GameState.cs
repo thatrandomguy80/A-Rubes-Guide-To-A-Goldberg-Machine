@@ -9,8 +9,8 @@ public class GameState : MonoBehaviour {
     protected static class PreGame
     {
         public readonly static int nonGameLevels = 2;
-		public readonly static int[] starThreshold = { 12, 30, 50 , 80};
-		public static int[] levelsBetweenWorlds = {10,12,12,20};
+		public readonly static int[] starThreshold = { 12, 22, 40, 80};
+		public static int[] levelsBetweenWorlds = {12,5,2,0};
 
 		private readonly static string levelKey = "levelKey";
 		//Keeps track of what level the player is up to
@@ -266,7 +266,7 @@ public class GameState : MonoBehaviour {
             print("Player Lost");
             InGame.RestartLevel();
         }
-        //Player moves to main menu
+        //Player moves to levelselect
 		public static void LevelSelect()
         {
             InGame.gamePaused = false;
