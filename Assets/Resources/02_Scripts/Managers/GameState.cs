@@ -54,7 +54,6 @@ public class GameState : MonoBehaviour {
     {
         //Keeps track of if the game is paused or not
         public static bool gamePaused;
-
         /*Pause the game*/
         public static void Pause()
         {
@@ -91,31 +90,12 @@ public class GameState : MonoBehaviour {
             int numberOfScenes = SceneManager.sceneCountInBuildSettings;
             //Gets the next level index
             int nextLevel = (currentLevel.buildIndex + 1) % numberOfScenes;
-
-			bool playerCanProgress = true;
-			for (int i = 0; i < PreGame.levelsBetweenWorlds.Length; i++) {
-				if (nextLevel == PreGame.levelsBetweenWorlds [i] + PreGame.nonGameLevels) {
-					if (Stars.Total() < PreGame.starThreshold[i]) {
-						playerCanProgress = false;
-						break;
-					}
-				}
-			}
+		
 
 			Time.timeScale = 1;
 			gamePaused = EndGame.playerWon = false;
-			/*If the player can progress to a new level then they continue*/
-			if (playerCanProgress) {
-				if (nextLevel < PreGame.nonGameLevels) {
-					nextLevel = PreGame.nonGameLevels;
-				}
-
-				//Loads the next level
-				SceneManager.LoadScene (nextLevel);
-			/*else they return to the main menu*/
-			} else {
-				SceneManager.LoadScene (1);
-			}
+			//Loads the next level
+			SceneManager.LoadScene (nextLevel);
         }
         /*Load previous Level*/
         public static void PreviousLevel()

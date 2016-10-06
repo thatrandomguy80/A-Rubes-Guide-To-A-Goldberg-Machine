@@ -86,7 +86,47 @@ public class AudioPlayer : MonoBehaviour {
         AudioClip sound = Resources.Load("09_Audio/" + name) as AudioClip;
         PlaySound(sound);
     }
+    
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            AudioClip newMusic = Resources.Load("09_Audio/" + "Juhani Junkala [Retro Game Music Pack] Level 3") as AudioClip;
+            FadeInNewTrack(newMusic, 2f);
+        }
+    }
 
+    public void FadeInNewTrack(AudioClip newClip,float fadeSpeed)
+    {
+        StartCoroutine(crossFadeToNewTrack(newClip, fadeSpeed));
+    }
+
+
+    //fades out the old track for the newtrack
+    IEnumerator crossFadeToNewTrack(AudioClip newClip,float transSpeed)
+    {
+        //Gets a new track ready and turns the volume to zero
+        AudioSource newAudioP = gameObject.AddComponent<AudioSource>();
+        newAudioP.clip = newClip;
+        newAudioP.loop = true;
+        newAudioP.Play();
+
+        float time = 0;
+        //Fades in the new track
+        //Fades out the old track
+        while(time < 1)
+        {
+            time += Time.deltaTime / transSpeed;
+            audioP.volume = Mathf.Lerp(musicVolume, 0, time);
+            newAudioP.volume = Mathf.Lerp(0, musicVolume, time);
+
+            yield return new WaitForEndOfFrame();
+
+        }
+        //Destorys the old audio player and replaces it with the new one
+        Destroy(audioP);
+        audioP = newAudioP;
+    }
 
 
 }

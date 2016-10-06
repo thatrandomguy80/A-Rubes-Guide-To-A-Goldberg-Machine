@@ -10,6 +10,8 @@ public class GameCanvasController : GameState {
     public GameObject winPanel;
     public GameObject restartButton;
 
+    public GameObject nextLvlButton;
+
 
     void Update()
     {
@@ -20,6 +22,14 @@ public class GameCanvasController : GameState {
         restartButton.SetActive(!InGame.gamePaused && !EndGame.playerWon);
 
         winPanel.SetActive(EndGame.playerWon);
+
+        if (IsThisTheFinalLevelOfWorld())
+        {
+            nextLvlButton.GetComponent<Button>().interactable = DoesPlayerHaveEnoughStars();
+        }else
+        {
+            nextLvlButton.GetComponent<Button>().interactable = true;
+        }
 
 
 		if (InGame.gamePaused && !EndGame.playerWon) {
@@ -78,6 +88,41 @@ public class GameCanvasController : GameState {
     {
 		EndGame.LevelSelect();
     }
+
+    /*Checks if player has enough stars*/
+    private bool DoesPlayerHaveEnoughStars()
+    {
+        int totalNumOfStars = InGame.Stars.Get();
+        int level = SceneManager.GetActiveScene().buildIndex - 1;
+        int world = PreGame.getCurrentWorldAndLevel(level)[0];
+        int starsNeeded = 0;
+        for(int i = 0;i < world; i++)
+        {
+            starsNeeded += PreGame.starThreshold[i];
+        }
+
+        return (totalNumOfStars >= starsNeeded);
+    }
+    //Checks if the current level is the final level in the world
+    private bool IsThisTheFinalLevelOfWorld()
+    {
+        //Current level
+        int level = SceneManager.GetActiveScene().buildIndex - 1;
+        
+        int totLvl = 0;
+        for(int i = 0;i< PreGame.levelsBetweenWorlds.Length; i++)
+        {
+            Debug.Log("CurrLvl : " + level + " - Thresh : " + PreGame.levelsBetweenWorlds[i]);
+            //If the current level is the same as the last level
+            if(level == PreGame.levelsBetweenWorlds[i] + totLvl)
+            {
+                return true;
+            }
+            totLvl += PreGame.levelsBetweenWorlds[i];
+        }
+        return false;
+    }
+
 
     //Player Continues to the next level
     public void NextLevelButton()
