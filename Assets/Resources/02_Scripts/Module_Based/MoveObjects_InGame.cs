@@ -17,7 +17,7 @@ public class MoveObjects_InGame : MonoBehaviour {
     void Start()
     {
         //Puts the point straight in the middle of the end and start
-        transform.localPosition = Vector3.Lerp(startPos, endPos, 0.5f);
+        transform.localPosition = Vector3.Lerp(startPos, endPos, 0);
     }
 
 	void Update () {
@@ -27,7 +27,7 @@ public class MoveObjects_InGame : MonoBehaviour {
     //Moves object selected to where the current pos is
     void ObjToCurrentPos()
     {
-        moveableObj.transform.position = transform.position;
+        moveableObj.transform.localPosition = transform.localPosition;
     }
 
     //Configures movement between two points
