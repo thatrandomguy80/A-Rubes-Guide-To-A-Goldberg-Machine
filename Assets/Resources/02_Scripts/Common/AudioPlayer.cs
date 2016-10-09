@@ -1,25 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class AudioPlayer : MonoBehaviour {
- 
+public class AudioPlayer : GameState {
+
+    #region Members
     //Only instance of one audioplayer
     public static AudioPlayer instance;
-
     //Get the audio player
     AudioSource audioP;
-
     public float musicVolume = 1f;
     public float SFXVolume = 1f;
     private bool isPaused;
 
+    private int currentWorldSelected;
+
+    #endregion
+    #region AudioTracks
+    //Gets all the tracks that can be loaded in
+    public AudioClip menu, world1,world2,world3,world4;
+    private AudioClip[] tracks;
+    #endregion
     void Start()
     {
+        //Fix this later cause this is a horrible way to implement it
+        tracks = new AudioClip[5];
+        tracks[0] = menu;
+        tracks[1] = world1;
+        tracks[2] = world2;
+        tracks[3] = world3;
+        tracks[4] = world4;
+
 		//If there is already an audio player destroy this audio player
-		if (AudioPlayer.instance.audioP != null) {
+		if (instance.audioP != null) {
 			Destroy (gameObject);
 		}
-
+        currentWorldSelected = 0;
         //The music should be playing between scenes
         DontDestroyOnLoad(gameObject);
         audioP = GetComponent<AudioSource>();
@@ -89,18 +105,52 @@ public class AudioPlayer : MonoBehaviour {
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        ChangeTracksBetweenSections();
+    }
+    //Handles music changes between worlds
+    private void ChangeTracksBetweenSections()
+    {
+        int fadeSpeed = 1;
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        int worldNum = PreGame.getCurrentWorldAndLevel(currentScene)[0] + 1;
+
+        
+        
+        //If its in the menu or level select
+        if (currentScene < PreGame.nonGameLevels)
         {
-            AudioClip newMusic = Resources.Load("09_Audio/" + "Juhani Junkala [Retro Game Music Pack] Level 3") as AudioClip;
-            FadeInNewTrack(newMusic, 2f);
+            if (currentWorldSelected != 0)
+            {
+                FadeInNewTrack(tracks[0], fadeSpeed);
+                currentWorldSelected = 0;
+                return;
+            }
+        //else if its one of the worlds
+        }else
+        {
+            //Get the current world
+            int currentLevelWorld = PreGame.getCurrentWorldAndLevel(currentScene)[0];
+
+            //if the levels current world equals the world track and it not already playing
+            for(int i = 1; i < tracks.Length; i++)
+            {
+                if(currentLevelWorld == i && currentWorldSelected != i)
+                {
+                    //Fade in the new track
+                    FadeInNewTrack(tracks[i], fadeSpeed);
+                    currentWorldSelected = i;
+                    return;
+                }
+            }
         }
+        
     }
 
     public void FadeInNewTrack(AudioClip newClip,float fadeSpeed)
     {
         StartCoroutine(crossFadeToNewTrack(newClip, fadeSpeed));
     }
-
+    
 
     //fades out the old track for the newtrack
     IEnumerator crossFadeToNewTrack(AudioClip newClip,float transSpeed)
@@ -108,7 +158,8 @@ public class AudioPlayer : MonoBehaviour {
         //Gets a new track ready and turns the volume to zero
         AudioSource newAudioP = gameObject.AddComponent<AudioSource>();
         newAudioP.clip = newClip;
-        newAudioP.loop = true;
+        newAudioP.loop = audioP.loop;
+        newAudioP.mute = audioP.mute;
         newAudioP.Play();
 
         float time = 0;

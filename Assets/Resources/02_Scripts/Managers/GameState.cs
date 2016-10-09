@@ -10,7 +10,7 @@ public class GameState : MonoBehaviour {
     {
         public readonly static int nonGameLevels = 2;
 		public readonly static int[] starThreshold = { 12, 22, 40, 80};
-		public static int[] levelsBetweenWorlds = {12,5,2,0};
+		public static int[] levelsBetweenWorlds = {12,5,1,1};
 
 		private readonly static string levelKey = "levelKey";
 		//Keeps track of what level the player is up to
@@ -24,7 +24,7 @@ public class GameState : MonoBehaviour {
 			return currLevel;
 		}
 		public static int[] getCurrentWorldAndLevel(int CURRENT_LEVEL){
-			int level = CURRENT_LEVEL;
+			int level = CURRENT_LEVEL-1;
 			int[] wrld = new int[2];
 
 

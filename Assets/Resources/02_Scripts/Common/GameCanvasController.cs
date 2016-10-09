@@ -25,6 +25,7 @@ public class GameCanvasController : GameState {
 
         if (IsThisTheFinalLevelOfWorld())
         {
+            print("This is the final level");
             nextLvlButton.GetComponent<Button>().interactable = DoesPlayerHaveEnoughStars();
         }else
         {
@@ -61,7 +62,7 @@ public class GameCanvasController : GameState {
 	}
 	//Displays the current world and level selected on the pause screen
 	private void DisplayCurrentWorldAndLevel(){
-		int level = SceneManager.GetActiveScene().buildIndex-1;
+		int level = SceneManager.GetActiveScene().buildIndex;
 		int[] wrldAndLevel = PreGame.getCurrentWorldAndLevel(level);
 		print ("World : " + wrldAndLevel[0] + " // Level : " + wrldAndLevel[1]);
 
@@ -93,8 +94,8 @@ public class GameCanvasController : GameState {
     private bool DoesPlayerHaveEnoughStars()
     {
         int totalNumOfStars = InGame.Stars.Get();
-        int level = SceneManager.GetActiveScene().buildIndex - 1;
-        int world = PreGame.getCurrentWorldAndLevel(level)[0];
+        int level = SceneManager.GetActiveScene().buildIndex-1;
+        int world = PreGame.getCurrentWorldAndLevel(level)[0]-1;
         int starsNeeded = 0;
         for(int i = 0;i < world; i++)
         {
