@@ -28,7 +28,7 @@ public class PlatformControls : PlatformBuilder {
 
         //gear adding
         GameObject par = new GameObject();
-        int j = Random.Range(0, 4);
+        int j = 1;//always use 2 gears.
         List<Vector3> prev = new List<Vector3>();
         for (int i = 0; i <= j; j--) {
             prev = AddGears(leftAnchor, rightAnchor, prev);
