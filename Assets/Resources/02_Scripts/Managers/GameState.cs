@@ -254,5 +254,13 @@ public class GameState : MonoBehaviour {
             Time.timeScale = 1;
             SceneManager.LoadScene(1);
         }
+
+		//Move player to main menu
+		public static void MainMenu(){
+			InGame.gamePaused = false;
+			playerWon = false;
+			Time.timeScale = 1;
+			SceneManager.LoadScene(0);
+		}
     }
 }

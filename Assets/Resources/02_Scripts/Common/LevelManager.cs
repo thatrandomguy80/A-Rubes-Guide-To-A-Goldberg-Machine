@@ -9,8 +9,6 @@ public class LevelManager : GameState {
     private GameObject[] worlds;
     private int worldSelected;
 
-	public GameObject leftArrow, rightArrow;
-
 	public Material activeButtonMat,deactiveButtonMat;
 
     private int latestlevel;//Keeps track of what level the player is up to
@@ -113,8 +111,8 @@ public class LevelManager : GameState {
 
     //Handles disabling the GUI arrows
 	void DisableArrows(int totalNumberOfLevels){
-		Button leftBut = leftArrow.GetComponent<Button> ();
-		Button rightBut = rightArrow.GetComponent<Button> ();
+		Button leftBut = LevelSelectCanvas.instance.leftArrow.GetComponent<Button> ();
+		Button rightBut = LevelSelectCanvas.instance.rightArrow.GetComponent<Button> ();
 
         //The left arrow is disables if the player is on the first world
 		if (worldSelected == 0) {
@@ -168,7 +166,7 @@ public class LevelManager : GameState {
     }
     public void changeText()
     {
-		Text txt = rightArrow.transform.GetChild(0).GetComponent<Text>();
+		Text txt = LevelSelectCanvas.instance.rightArrow.transform.GetChild(0).GetComponent<Text>();
 		if (InGame.Stars.Total() < PreGame.starThreshold[worldSelected])
         {
 			txt.text = PreGame.starThreshold[worldSelected].ToString();

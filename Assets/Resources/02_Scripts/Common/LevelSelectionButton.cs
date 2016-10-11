@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 
-public class LevelSelectionButton : MonoBehaviour {
+public class LevelSelectionButton : GameState {
 
 	public int level;//Level button will load too
     public bool hover;//Is the mouse hovering over the button
@@ -13,10 +13,34 @@ public class LevelSelectionButton : MonoBehaviour {
     {
         lerp = 0;
         hover = false;
-		RotatingObject rot = gameObject.AddComponent<RotatingObject> ();
+		RotatingObject rot = transform.GetChild(1).gameObject.AddComponent<RotatingObject> ();
+		rot.Rotation = RotatingObject.RotationTypes.Local;
 		rot.rotationSpeeds = new Vector3 (0, 0, 10);
 
+		SetupLevelNum ();
+
+
     }
+
+	//Sets up some text to display the level number
+	private void SetupLevelNum(){
+		GameObject levelNum = new GameObject ();
+
+		int buttonLevel = level - 1;
+
+		levelNum.name = "LevelNum : " + buttonLevel;
+		levelNum.transform.SetParent (transform);
+		levelNum.transform.localPosition = new Vector3 (0, 0, 0.1f);
+		levelNum.transform.localRotation = new Quaternion (0, 0, 0, 1);
+		levelNum.transform.localScale = Vector3.one * 0.05f;
+
+		TextMesh levelTxt = levelNum.AddComponent<TextMesh> ();
+		levelTxt.text = PreGame.getCurrentWorldAndLevel(level)[1].ToString();
+		levelTxt.fontSize = 110;
+		levelTxt.anchor = TextAnchor.MiddleCenter;
+		levelTxt.alignment = TextAlignment.Center;
+	}
+
     //If the player hovers over the button it will move forward
     private void MouseHover()
     {
@@ -55,4 +79,6 @@ public class LevelSelectionButton : MonoBehaviour {
     {
         SceneManager.LoadScene(levelNum);
     }
+
+
 }
