@@ -21,7 +21,12 @@ public class GameCanvasController : GameState {
         pauseButton.SetActive(!InGame.gamePaused && !EndGame.playerWon);
         restartButton.SetActive(!InGame.gamePaused && !EndGame.playerWon);
 
-        winPanel.SetActive(EndGame.playerWon);
+        
+        if (EndGame.playerWon)
+        {
+            winPanel.SetActive(EndGame.playerWon);
+            SetupStarsForWinGame();
+        }
 
         if (IsThisTheFinalLevelOfWorld())
         {
@@ -34,7 +39,7 @@ public class GameCanvasController : GameState {
 
 
 		if (InGame.gamePaused && !EndGame.playerWon) {
-			SetupStars ();
+			SetupStarsForPause ();
 			DisplayCurrentWorldAndLevel ();
 		}
 
@@ -44,7 +49,7 @@ public class GameCanvasController : GameState {
 
 
 	//Displays the stars the player has collected on the pause screen
-	private void SetupStars(){
+	private void SetupStarsForPause(){
 		//Gets the total number of stars
 		int totalStars = InGame.Stars.Get ();
 		//Gets the container
@@ -58,10 +63,31 @@ public class GameCanvasController : GameState {
 					star.sprite = disabledStar;
 				}
 			}
-
 	}
-	//Displays the current world and level selected on the pause screen
-	private void DisplayCurrentWorldAndLevel(){
+    //Set up stars for Win Game
+    private void SetupStarsForWinGame()
+    {
+        //Gets the total number of stars
+        int totalStars = InGame.Stars.Get();
+        //Gets the container
+        GameObject starBorder = GameObject.Find("BorderStarWin");
+        //Gets each star if the player has enough stars then deisplay them
+        for (int i = 0; i < starBorder.transform.childCount; i++)
+        {
+            Image star = starBorder.transform.GetChild(i).GetComponent<Image>();
+            if (i < totalStars)
+            {
+                star.sprite = activeStar;
+            }
+            else
+            {
+                star.sprite = disabledStar;
+            }
+        }
+
+    }
+    //Displays the current world and level selected on the pause screen
+    private void DisplayCurrentWorldAndLevel(){
 		int level = SceneManager.GetActiveScene().buildIndex;
 		int[] wrldAndLevel = PreGame.getCurrentWorldAndLevel(level);
 		print ("World : " + wrldAndLevel[0] + " // Level : " + wrldAndLevel[1]);
