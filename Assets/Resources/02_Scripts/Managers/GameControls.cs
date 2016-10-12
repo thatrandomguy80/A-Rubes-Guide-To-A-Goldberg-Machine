@@ -26,7 +26,7 @@ public class GameControls : GameState
         }
         if (Input.GetKeyDown(restart))
         {
-            InGame.RestartLevel();
+            InGame.RestartLevel(false);
         }
         if (Input.GetKeyDown(left))
         {

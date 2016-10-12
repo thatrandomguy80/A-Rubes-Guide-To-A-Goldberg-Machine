@@ -1,0 +1,41 @@
+
+
+
+Level: 
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+Time taken: 16.13946 || Reason terminated: Exit to level select
+Time taken: 1.315067 || Reason terminated: Exit to level select
+
+
+
+Level: 
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+
+
+
+Level: 
+Wins: 0 || Loses: 0
+Overall stars: 0
+Attempts
+
+
+
+Level: 
+Wins: 2 || Loses: 2
+Overall stars: 3
+Attempts
+Time taken: 7.52 || Reason terminated: Lost
+Time taken: 1.353364 || Reason terminated: Won but restarted
+Time taken: 4.291995 || Reason terminated: Won but restarted
+Time taken: 9.734641 || Reason terminated: Lost
+
+
+
+Level: 
+Wins: 2 || Loses: 2
+Overall stars: 3
+Attempts
