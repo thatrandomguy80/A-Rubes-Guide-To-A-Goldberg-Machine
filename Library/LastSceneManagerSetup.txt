@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Resources/01_Scenes/Levels/Debugging/M-15.unity
+=======
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/M-12.unity
+>>>>>>> a2a25eb3199a9e2d0f03ecabbbe6762e35782326
   isLoaded: 1
   isActive: 1

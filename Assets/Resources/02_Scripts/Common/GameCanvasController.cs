@@ -107,7 +107,7 @@ public class GameCanvasController : GameState {
     public void RestartButton()
     {
         //Restarts the game
-        InGame.RestartLevel(false);
+        InGame.RestartLevel(true);
         
     }
     //Moves to level select
