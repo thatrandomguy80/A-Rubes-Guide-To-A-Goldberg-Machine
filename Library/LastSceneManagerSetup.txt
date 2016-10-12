@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/HCC-07(first level).unity
+- path: Assets/Resources/01_Scenes/Navigational/Main Menu.unity
   isLoaded: 1
   isActive: 1

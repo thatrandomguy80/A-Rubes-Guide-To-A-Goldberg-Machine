@@ -139,7 +139,6 @@ public class GameCanvasController : GameState {
         int totLvl = 0;
         for(int i = 0;i< PreGame.levelsBetweenWorlds.Length; i++)
         {
-            Debug.Log("CurrLvl : " + level + " - Thresh : " + PreGame.levelsBetweenWorlds[i]);
             //If the current level is the same as the last level
             if(level == PreGame.levelsBetweenWorlds[i] + totLvl)
             {
