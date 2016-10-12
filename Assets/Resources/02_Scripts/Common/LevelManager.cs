@@ -27,7 +27,7 @@ public class LevelManager : GameState {
     private void Init()
     {
         buttonsPlaced = 0;
-        latestlevel = PreGame.getCurrentLevel()-1;
+		latestlevel = PreGame.getCurrentLevel()-PreGame.nonGameLevels;
         int numberOfWorlds = transform.childCount;
         worlds = new GameObject[numberOfWorlds];
         PreGame.levelsBetweenWorlds = new int[worlds.Length];

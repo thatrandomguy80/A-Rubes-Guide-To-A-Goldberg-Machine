@@ -4,6 +4,7 @@ using System.Collections;
 public class PlatformBuilder : MonoBehaviour {
     [Header("This gets Mats from the Materail folder")]
     public string MatName = "Primary Color";
+    public bool menu = false;
 
     protected void CreatePlatform(GameObject leftAnchor, GameObject rightAnchor) {
         //Create a new Platform

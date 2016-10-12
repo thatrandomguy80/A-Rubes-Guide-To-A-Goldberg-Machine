@@ -8,6 +8,7 @@ public class PlatformControls : PlatformBuilder {
 
     public DistanceJoint2D[] distJoints;
 
+
     private string[] gears = { "gear1", "gear2", "gear3", "gear4" };
 
     private bool contacts = false;
@@ -27,12 +28,14 @@ public class PlatformControls : PlatformBuilder {
         base.CreatePlatform(leftAnchor, rightAnchor);
 
         //gear adding
-        GameObject par = new GameObject();
-        int j = 1;//always use 2 gears.
-        List<Vector3> prev = new List<Vector3>();
-        for (int i = 0; i <= j; j--) {
-            prev = AddGears(leftAnchor, rightAnchor, prev);
-            recalls = 0;
+        if (!base.menu) {
+            GameObject par = new GameObject();
+            int j = 1;//always use 2 gears.
+            List<Vector3> prev = new List<Vector3>();
+            for (int i = 0; i <= j; j--) {
+                prev = AddGears(leftAnchor, rightAnchor, prev);
+                recalls = 0;
+            }
         }
 
 

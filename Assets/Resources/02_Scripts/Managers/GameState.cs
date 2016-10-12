@@ -9,7 +9,7 @@ public class GameState : MonoBehaviour {
 
     //Handles before game controls
     protected static class PreGame {
-        public readonly static int nonGameLevels = 2;
+        public readonly static int nonGameLevels = 3;
         public readonly static int[] starThreshold = { 12, 22, 40, 80 };
         public static int[] levelsBetweenWorlds = { 12, 5, 1, 1 };
 
@@ -97,7 +97,7 @@ public class GameState : MonoBehaviour {
             Time.timeScale = 1;
             gamePaused = EndGame.playerWon = false;
             PlayTestMetrics.outputMetrics();
-            PlayTestMetrics.reset(SceneManager.GetSceneAt(nextLevel).name);
+            PlayTestMetrics.reset();
             //Loads the next level
             SceneManager.LoadScene(nextLevel);
         }
@@ -120,7 +120,7 @@ public class GameState : MonoBehaviour {
             Time.timeScale = 1;
             gamePaused = EndGame.playerWon = false;
             PlayTestMetrics.outputMetrics();
-            PlayTestMetrics.reset(SceneManager.GetSceneAt(previousLevel).name);
+            PlayTestMetrics.reset();
             //Loads the next level
             SceneManager.LoadScene(previousLevel);
         }
@@ -236,7 +236,7 @@ public class GameState : MonoBehaviour {
             playerWon = false;
             Time.timeScale = 1;
             PlayTestMetrics.saveTime("Exit to level select");
-            PlayTestMetrics.reset(SceneManager.GetSceneAt(1).name);
+            PlayTestMetrics.reset();
             SceneManager.LoadScene(1);
         }
 
@@ -246,7 +246,7 @@ public class GameState : MonoBehaviour {
             playerWon = false;
             Time.timeScale = 1;
             PlayTestMetrics.saveTime("Exit to menu");
-            PlayTestMetrics.reset(SceneManager.GetSceneAt(0).name);
+            PlayTestMetrics.reset();
             SceneManager.LoadScene(0);
         }
     }
@@ -288,7 +288,8 @@ public class GameState : MonoBehaviour {
                 string pathName = dataPath + "/Report.txt";
                 string Text = "";
                 Text += "\n\n\n";
-                Text += "Level: " + levelName;
+                Text += System.DateTime.Now.ToString("h:mm:ss tt");
+                Text += "Level: " + SceneManager.GetActiveScene();
                 Text += "\nWins: " + numOfWins + " || Loses: " + numOfRestarts;
                 Text += "\nOverall stars: " + starsGathered;
                 Text += "\nAttempts\n";
@@ -304,10 +305,9 @@ public class GameState : MonoBehaviour {
             }
         }
 
-        public static void reset(string mapName) {
+        public static void reset() {
             if (Active) {
                 startTime = Time.time;
-                levelName = mapName;
                 numOfRestarts = 0;
                 numOfWins = 0;
                 starsGathered = 0;
