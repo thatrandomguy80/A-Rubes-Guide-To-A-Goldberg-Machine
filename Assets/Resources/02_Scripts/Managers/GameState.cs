@@ -289,7 +289,7 @@ public class GameState : MonoBehaviour {
                 string Text = "";
                 Text += "\n\n\n";
                 Text += System.DateTime.Now.ToString("h:mm:ss tt");
-                Text += "Level: " + SceneManager.GetActiveScene();
+                Text += " || Level: " + SceneManager.GetActiveScene().name;
                 Text += "\nWins: " + numOfWins + " || Loses: " + numOfRestarts;
                 Text += "\nOverall stars: " + starsGathered;
                 Text += "\nAttempts\n";
