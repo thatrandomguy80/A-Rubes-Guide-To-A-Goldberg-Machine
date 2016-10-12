@@ -88,7 +88,7 @@ public class GameCanvasController : GameState {
     }
     //Displays the current world and level selected on the pause screen
     private void DisplayCurrentWorldAndLevel(){
-		int level = SceneManager.GetActiveScene().buildIndex;
+		int level = SceneManager.GetActiveScene().buildIndex-1;
 		int[] wrldAndLevel = PreGame.getCurrentWorldAndLevel(level);
 		print ("World : " + wrldAndLevel[0] + " // Level : " + wrldAndLevel[1]);
 

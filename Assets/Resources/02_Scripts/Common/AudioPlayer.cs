@@ -111,8 +111,8 @@ public class AudioPlayer : GameState {
     private void ChangeTracksBetweenSections()
     {
         int fadeSpeed = 1;
-        int currentScene = SceneManager.GetActiveScene().buildIndex;
-        int worldNum = PreGame.getCurrentWorldAndLevel(currentScene)[0] + 1;
+        int currentScene = SceneManager.GetActiveScene().buildIndex -1;
+        int worldNum = PreGame.getCurrentWorldAndLevel(currentScene)[0];
 
         
         

@@ -17,6 +17,11 @@ public class MainMenuController : GameState {
         //Temp Function should change later
         SceneManager.LoadScene(1);
     }
+    //Load to Options
+    public void Options()
+    {
+        SceneManager.LoadScene(2);
+    }
 
     void Start()
     {
