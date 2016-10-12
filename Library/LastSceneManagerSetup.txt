@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Resources/01_Scenes/Levels/Playtesting/HCC-11.unity
-=======
-- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/HCC-04.unity
->>>>>>> origin/master
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/HCC-07(first level).unity
   isLoaded: 1
   isActive: 1

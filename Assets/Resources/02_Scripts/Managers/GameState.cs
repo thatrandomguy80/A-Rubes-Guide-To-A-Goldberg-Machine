@@ -264,6 +264,7 @@ public class GameState : MonoBehaviour {
     }
 
     public static class PlayTestMetrics {
+        public static bool Active = false;
         public static int numOfRestarts;
         public static int numOfWins;
         public static int starsGathered;
@@ -273,38 +274,44 @@ public class GameState : MonoBehaviour {
         private static float startTime;
 
         public static void saveTime(string result) {
-            timeTaken.Add(new Attempt(Time.time - startTime, result));
-            startTime = Time.time;
+            if (Active) {
+                timeTaken.Add(new Attempt(Time.time - startTime, result));
+                startTime = Time.time;
+            }
         }
 
         public static void outputMetrics() {
             //write user name,timestamp,and all above vars to file.
-            starsGathered = InGame.Stars.Get();
-            string dataPath = Application.dataPath + "/Playtest Metrics";
-            string pathName = dataPath + "/Report.txt";
-            string Text = "";
-            Text += "\n\n\n";
-            Text += "Level: " + levelName;
-            Text += "\nWins: " + numOfWins + " || Loses: " + numOfRestarts;
-            Text += "\nOverall stars: " + starsGathered;
-            Text += "\nAttempts\n";
-            try {
-                File.AppendAllText(pathName, Text);
+            if (Active) {
+                starsGathered = InGame.Stars.Get();
+                string dataPath = Application.dataPath + "/Playtest Metrics";
+                string pathName = dataPath + "/Report.txt";
+                string Text = "";
+                Text += "\n\n\n";
+                Text += "Level: " + levelName;
+                Text += "\nWins: " + numOfWins + " || Loses: " + numOfRestarts;
+                Text += "\nOverall stars: " + starsGathered;
+                Text += "\nAttempts\n";
+                try {
+                    File.AppendAllText(pathName, Text);
 
-                //iterate over attempts and print;
-                foreach (Attempt a in timeTaken) {
-                    File.AppendAllText(pathName, a.print() + "\n");
-                }
-            } catch { Debug.LogError("Write Playtest File Failed"); }
-            timeTaken = new List<Attempt>();
+                    //iterate over attempts and print;
+                    foreach (Attempt a in timeTaken) {
+                        File.AppendAllText(pathName, a.print() + "\n");
+                    }
+                } catch { Debug.LogError("Write Playtest File Failed"); }
+                timeTaken = new List<Attempt>();
+            }
         }
 
         public static void reset(string mapName) {
-            startTime = Time.time;
-            levelName = mapName;
-            numOfRestarts = 0;
-            numOfWins = 0;
-            starsGathered = 0;
+            if (Active) {
+                startTime = Time.time;
+                levelName = mapName;
+                numOfRestarts = 0;
+                numOfWins = 0;
+                starsGathered = 0;
+            }
         }
     }
 }

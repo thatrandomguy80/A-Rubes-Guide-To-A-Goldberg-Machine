@@ -15,10 +15,10 @@ public class GameControls : GameState
     //Default gameControls
     public void KeyboardControls()
     {
-        KeyboardControls(KeyCode.P, KeyCode.R, KeyCode.LeftArrow, KeyCode.RightArrow);
+        KeyboardControls(KeyCode.P, KeyCode.R, KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.M);
     }
 
-    public void KeyboardControls(KeyCode pause,KeyCode restart, KeyCode left, KeyCode right)
+    public void KeyboardControls(KeyCode pause,KeyCode restart, KeyCode left, KeyCode right,KeyCode playtest)
     {
         if (Input.GetKeyDown(pause))
         {
@@ -35,6 +35,10 @@ public class GameControls : GameState
         if (Input.GetKeyDown(right))
         {
             InGame.NextLevel();
+        }
+        if (Input.GetKeyDown(playtest)) {
+            PlayTestMetrics.Active = !PlayTestMetrics.Active;
+            Debug.Log("Playtest Metrics recording");
         }
     }
 
