@@ -46,9 +46,9 @@ public class LevelSelectCanvas : GameState {
 		float delay = 1;
 		float speed = 0.5f;
 		//Slide in the arrows
-		StartCoroutine (SlideInArrows (delay,speed));
+		//StartCoroutine (SlideInArrows (delay,speed));
 		//Slide in star score
-		StartCoroutine(SlideInScore(delay,speed));
+		//StartCoroutine(SlideInScore(delay,speed));
 	}
 	//Slide in star score
 	IEnumerator SlideInScore(float delay,float speed){

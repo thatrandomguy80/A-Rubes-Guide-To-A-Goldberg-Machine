@@ -1,9 +1,1 @@
 
-
-
-9:56:40 PM || Level: M-03
-Wins: 2 || Loses: 0
-Overall stars: 3
-Attempts
-Time taken: 12.24128 || Reason terminated: Won but restarted
-Time taken: 5.425711 || Reason terminated: Won but restarted
