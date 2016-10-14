@@ -25,7 +25,7 @@ public class GameState : MonoBehaviour {
             return currLevel;
         }
         public static int[] getCurrentWorldAndLevel(int CURRENT_LEVEL) {
-            int level = CURRENT_LEVEL - 1;
+			int level = CURRENT_LEVEL - (PreGame.nonGameLevels-1);
             int[] wrld = new int[2];
 
 

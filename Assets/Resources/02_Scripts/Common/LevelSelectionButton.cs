@@ -26,16 +26,15 @@ public class LevelSelectionButton : GameState {
 	private void SetupLevelNum(){
 		GameObject levelNum = new GameObject ();
 
-		int buttonLevel = level - (PreGame.nonGameLevels-2);
 
-		levelNum.name = "LevelNum : " + buttonLevel;
+		levelNum.name = "LevelNum : " + level;
 		levelNum.transform.SetParent (transform);
 		levelNum.transform.localPosition = new Vector3 (0, 0, 0.1f);
 		levelNum.transform.localRotation = new Quaternion (0, 0, 0, 1);
 		levelNum.transform.localScale = Vector3.one * 0.05f;
 
 		TextMesh levelTxt = levelNum.AddComponent<TextMesh> ();
-		levelTxt.text = PreGame.getCurrentWorldAndLevel(buttonLevel)[1].ToString();
+		levelTxt.text = PreGame.getCurrentWorldAndLevel(level)[1].ToString();
 		levelTxt.fontSize = 110;
 		levelTxt.anchor = TextAnchor.MiddleCenter;
 		levelTxt.alignment = TextAlignment.Center;
