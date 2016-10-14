@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 
 public class LevelSelectionButton : GameState {
@@ -43,10 +44,16 @@ public class LevelSelectionButton : GameState {
     //If the player hovers over the button it will move forward
     private void MouseHover()
     {
+        
         float speed = Time.deltaTime * 5;
         if (hover)
         {
-            lerp += speed;
+            //If the mouse is over a GUI element
+            //cancel the operation
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                lerp += speed;
+            }
         }
         else
         {
@@ -71,7 +78,10 @@ public class LevelSelectionButton : GameState {
 
 	//On mouse Click Load new level
 	void OnMouseDown(){
-		LoadLevel (level);
+        if (!EventSystem.current.IsPointerOverGameObject())
+        {
+            LoadLevel(level);
+        }
 	}
     //Select level to load
     private void LoadLevel(int levelNum)

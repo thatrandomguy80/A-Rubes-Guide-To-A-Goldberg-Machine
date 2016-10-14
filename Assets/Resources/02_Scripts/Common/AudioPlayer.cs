@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class AudioPlayer : GameState {
+public class AudioPlayer : GameState{
 
     #region Members
     //Only instance of one audioplayer
@@ -15,6 +15,8 @@ public class AudioPlayer : GameState {
 
     private int currentWorldSelected;
 
+    public Sound_Effects sfx;
+
     #endregion
     #region AudioTracks
     //Gets all the tracks that can be loaded in
@@ -23,6 +25,7 @@ public class AudioPlayer : GameState {
     #endregion
     void Start()
     {
+        sfx = GetComponent<Sound_Effects>();
         //Fix this later cause this is a horrible way to implement it
         tracks = new AudioClip[5];
         tracks[0] = menu;
@@ -92,12 +95,12 @@ public class AudioPlayer : GameState {
         audioP.volume = Mathf.Clamp01(vol);
     }
     //Play sound effects
-    public void PlaySound(AudioClip clip)
+    private void PlaySound(AudioClip clip)
     {
         audioP.PlayOneShot(clip, SFXVolume);
     }
     //Play sound effects from path
-    public void PlaySound(string name)
+    private void PlaySound(string name)
     {
         AudioClip sound = Resources.Load("09_Audio/" + name) as AudioClip;
         PlaySound(sound);
@@ -106,7 +109,23 @@ public class AudioPlayer : GameState {
     void Update()
     {
         ChangeTracksBetweenSections();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlaySoundEffects(Sound_Effects.SelectSFX.STAR);
+        }
     }
+
+
+    public void PlaySoundEffects(Sound_Effects.SelectSFX selSFX)
+    {
+        if(selSFX == Sound_Effects.SelectSFX.STAR)
+        {
+            PlaySound(sfx.StarCollect);
+        }
+    }
+
+
     //Handles music changes between worlds
     private void ChangeTracksBetweenSections()
     {
@@ -180,5 +199,8 @@ public class AudioPlayer : GameState {
         audioP = newAudioP;
     }
 
+   
+
 
 }
+
