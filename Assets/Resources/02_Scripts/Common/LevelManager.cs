@@ -15,6 +15,8 @@ public class LevelManager : GameState {
     private int buttonsPlaced;//Keeps track of how many buttons are placed
 
     private int completedLevels;
+
+    public GameObject levelSelectStars;
     // Use this for initialization
     void Start () {
         //Set up initial conditions
@@ -39,6 +41,8 @@ public class LevelManager : GameState {
 
             PreGame.levelsBetweenWorlds[i] = worlds[i].transform.GetChild(0).childCount + worlds[i].transform.GetChild(1).childCount;
         }
+
+        levelSelectStars = Camera.main.transform.GetChild(0).gameObject;
     }
 
     /*Sets up which world the camera is looking at*/
@@ -82,6 +86,7 @@ public class LevelManager : GameState {
                 LevelSelectionButton lsBut = button.AddComponent<LevelSelectionButton>();
                 lsBut.level = currentButton + PreGame.nonGameLevels + buttonsPlaced;
                 latestlevel--;
+                lsBut.levelManager = this;
             }
             else
             {

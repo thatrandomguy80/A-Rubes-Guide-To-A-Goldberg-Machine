@@ -21,6 +21,9 @@ public class StarBehaviour : GameState {
             InGame.Stars.Add();
             print("Player has " + InGame.Stars.Get().ToString() + " stars");
             Destroy(gameObject);
+
+            //Play sound effect
+            AudioPlayer.instance.PlaySoundEffects(Sound_Effects.SelectSFX.STAR);
         }
     }
 
@@ -34,8 +37,7 @@ public class StarBehaviour : GameState {
             Destroy(gameObject);
 
 
-            //Play sound effect
-            AudioPlayer.instance.PlaySoundEffects(Sound_Effects.SelectSFX.STAR);
+            
             
         }
 
