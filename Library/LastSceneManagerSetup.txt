@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Levels/Playtesting/HM-05(3rd level).unity
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/M-08.unity
   isLoaded: 1
   isActive: 1
