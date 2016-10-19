@@ -100,6 +100,13 @@ public class GameCanvasController : GameState {
 	}
 
 
+    public void ChangeCameraView()
+    {
+        Camera cam = Camera.main;
+        CameraMovement camMove = cam.GetComponent<CameraMovement>();
+        camMove.ChangeCameraMode();
+    }
+
     //Pauses the game and brings up the pause game GUI
 	public void PauseButton()
     {

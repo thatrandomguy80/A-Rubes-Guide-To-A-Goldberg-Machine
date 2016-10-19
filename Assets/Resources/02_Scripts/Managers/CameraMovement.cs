@@ -74,6 +74,8 @@ public class CameraMovement : MonoBehaviour
         }
         //Camera keeps moving towards player
         transform.Translate(result * (0.5f * result.magnitude) * Time.deltaTime);
+        //Locks z on -10 (FIXING BUG)
+        transform.position = new Vector3(transform.position.x, transform.position.y, -10);
     }
 
     
@@ -111,9 +113,6 @@ public class CameraMovement : MonoBehaviour
             //Move the camera into the middle of all the players
             transform.position = CalculateCameraPosition(boundingBox);
             gameCam.orthographicSize = CalculateOrthographicSize(boundingBox);
-        }
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            ChangeCameraMode();
         }
     }
 
@@ -187,8 +186,12 @@ public class CameraMovement : MonoBehaviour
 
     public void ChangeCameraMode()
     {
-        int currCamType = (int)camType;
-        int newCamType = (currCamType + 1) % 2;
-        camType = (CameraType)newCamType;
+        if(camType == CameraType.LockOn)
+        {
+            camType = CameraType.ViewAll;
+        }else
+        {
+            camType = CameraType.LockOn;
+        }
     }
 }
