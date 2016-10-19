@@ -20,4 +20,21 @@ public class MathExt : MonoBehaviour {
 		float conv = 255;
 		return new Color(r / conv, g / conv, b / conv);
 	}
+
+    //Combines two lists together
+    public static GameObject[] Concat(GameObject[] list1,GameObject[] list2)
+    {
+        GameObject[] newList = new GameObject[list1.Length + list2.Length];
+
+        for(int i = 0; i < list1.Length; i++)
+        {
+            newList[i] = list1[i];
+        }
+        for(int i = list1.Length;i< newList.Length; i++)
+        {
+            newList[i] = list2[i - list1.Length];
+        }
+
+        return newList;
+    }
 }
