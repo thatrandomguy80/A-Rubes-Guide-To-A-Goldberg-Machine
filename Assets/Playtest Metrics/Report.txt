@@ -1,1 +1,208 @@
 
+
+
+
+2:20:39 PM || Level: W1-1 (first)
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+
+
+
+2:20:46 PM || Level: W1-2 (multicut tut)
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+
+
+
+2:21:03 PM || Level: W1-3 (zoom tut)
+Wins: 0 || Loses: 1
+Overall stars: 3
+Attempts
+Time taken: 7.352547 || Reason terminated: Lost
+
+
+
+2:21:12 PM || Level: W1-4 (left right tut)
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+
+
+
+2:21:21 PM || Level: W1-5 (moving bucket)
+Wins: 0 || Loses: 0
+Overall stars: 4
+Attempts
+
+
+
+2:21:32 PM || Level: W1-6 (platform bridge tut)
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+
+
+
+2:21:42 PM || Level: W1-7 (platform bat tut)
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+
+
+
+2:21:59 PM || Level: W1-8 (back along the ramp)
+Wins: 0 || Loses: 1
+Overall stars: 3
+Attempts
+Time taken: 5.184708 || Reason terminated: Lost
+
+
+
+2:22:26 PM || Level: W1-9 (two platform drop)
+Wins: 0 || Loses: 3
+Overall stars: 2
+Attempts
+Time taken: 8.556183 || Reason terminated: Lost
+Time taken: 6.284958 || Reason terminated: Lost
+Time taken: 5.157623 || Reason terminated: Lost
+
+
+
+2:22:44 PM || Level: W1-10 (Bridge the gap)
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+
+
+
+2:24:01 PM || Level: W1-11 (Rolling ramps)
+Wins: 0 || Loses: 5
+Overall stars: 3
+Attempts
+Time taken: 15.57628 || Reason terminated: Lost
+Time taken: 8.889832 || Reason terminated: Lost
+Time taken: 13.42076 || Reason terminated: Lost
+Time taken: 0.1194153 || Reason terminated: Lost
+Time taken: 17.52895 || Reason terminated: Lost
+
+
+
+2:24:52 PM || Level: W1-12 (red herring platform)
+Wins: 0 || Loses: 3
+Overall stars: 2
+Attempts
+Time taken: 18.37881 || Reason terminated: Lost
+Time taken: 3.904816 || Reason terminated: Lost
+Time taken: 21.80716 || Reason terminated: Lost
+
+
+
+2:25:04 PM || Level: W2-1 (Four platform drop)
+Wins: 0 || Loses: 0
+Overall stars: 1
+Attempts
+
+
+
+2:25:24 PM || Level: W2-2 (left roll or right drop)
+Wins: 0 || Loses: 0
+Overall stars: 2
+Attempts
+
+
+
+2:26:36 PM || Level: W2-4 (Harrisons elevator)
+Wins: 0 || Loses: 6
+Overall stars: 1
+Attempts
+Time taken: 10.16794 || Reason terminated: Lost
+Time taken: 14.26001 || Reason terminated: Lost
+Time taken: 0.1557312 || Reason terminated: Lost
+Time taken: 23.26627 || Reason terminated: Lost
+Time taken: 14.61798 || Reason terminated: Lost
+Time taken: 0.3546143 || Reason terminated: Lost
+
+
+
+2:26:57 PM || Level: W2-5 (Michael's elevator)
+Wins: 0 || Loses: 1
+Overall stars: 1
+Attempts
+Time taken: 10.84094 || Reason terminated: Lost
+
+
+
+2:27:04 PM || Level: W2-7 (Steampipe tut)
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+
+
+
+2:27:17 PM || Level: W2-8 (Steampipe block)
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+
+
+
+2:27:55 PM || Level: M-12
+Wins: 0 || Loses: 1
+Overall stars: 3
+Attempts
+Time taken: 14.29807 || Reason terminated: Lost
+
+
+
+2:29:37 PM || Level: HCC-11
+Wins: 0 || Loses: 2
+Overall stars: 1
+Attempts
+Time taken: 13.57639 || Reason terminated: Lost
+Time taken: 62.8595 || Reason terminated: Lost
+
+
+
+2:30:14 PM || Level: HCC-09
+Wins: 0 || Loses: 2
+Overall stars: 1
+Attempts
+Time taken: 21.53729 || Reason terminated: Lost
+Time taken: 0.06329346 || Reason terminated: Lost
+
+
+
+2:30:32 PM || Level: HM-02(Hammer intro)
+Wins: 0 || Loses: 0
+Overall stars: 3
+Attempts
+
+
+
+2:30:35 PM || Level: HM-03(2xHammer bowl)
+Wins: 0 || Loses: 0
+Overall stars: 0
+Attempts
+
+
+
+2:30:39 PM || Level: M-11
+Wins: 0 || Loses: 0
+Overall stars: 0
+Attempts
+
+
+
+2:30:43 PM || Level: M-07
+Wins: 0 || Loses: 0
+Overall stars: 0
+Attempts
+
+
+
+2:30:44 PM || Level: M-13
+Wins: 0 || Loses: 0
+Overall stars: 0
+Attempts
