@@ -2,40 +2,54 @@
 using System.Collections;
 
 public class OpeningController : MonoBehaviour {
-
+    public GameObject canvas;
     public GameObject curtains;
+    public bool curtainOpening;
+    private static bool instanceCreated = false;
+
+    public static OpeningController instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
-        //StartCoroutine(OpenCurtains(2));
+
+        DontDestroyOnLoad(transform.parent.gameObject);
+        curtainOpening = false;
+        if (instanceCreated == false)
+        {
+            instanceCreated = true;
+        }else
+        {
+            Destroy(transform.parent.gameObject);
+        }
     }
     void Update()
     {
-        SkinnedMeshRenderer curtainMesh = curtains.GetComponent<SkinnedMeshRenderer>();
-
-        curtainMesh.SetBlendShapeWeight(1, Mathf.Lerp(curtainMesh.GetBlendShapeWeight(1), 100, Time.deltaTime));
-    }
-        
-    IEnumerator OpeningAnimation()
-    {
-
-        yield return new WaitForEndOfFrame();
-        OpenCurtains(2);
-
-    }
-    IEnumerator OpenCurtains(float speed)
-    {
-        SkinnedMeshRenderer curtainMesh = curtains.GetComponent<SkinnedMeshRenderer>();
-
-        float time = 0;
-        while(time < 1)
+        if (curtainOpening)
         {
-            time += Time.deltaTime/speed;
-            curtainMesh.SetBlendShapeWeight(1, time * 100);
-            
-            yield return new WaitForEndOfFrame();
-        }
+            SkinnedMeshRenderer curtainMesh = curtains.GetComponent<SkinnedMeshRenderer>();
 
-        yield return new WaitForEndOfFrame();
+            curtainMesh.SetBlendShapeWeight(1, Mathf.Lerp(curtainMesh.GetBlendShapeWeight(1), 100, Time.deltaTime));
+        }
     }
+
+    public void OpenCurtain()
+    {
+        curtainOpening = true;
+        //transform.GetChild(1).gameObject.SetActive(false);
+        //transform.GetChild(2).gameObject.SetActive(false);
+        transform.GetChild(3).gameObject.SetActive(false);
+        canvas.SetActive(false);
+    }
+
+    public void DestroyCurtains()
+    {
+        instanceCreated = false;
+        Destroy(transform.parent.gameObject);
+    }
+
 }
