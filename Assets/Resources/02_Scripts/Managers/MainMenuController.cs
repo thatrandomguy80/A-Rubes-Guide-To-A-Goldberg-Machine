@@ -16,6 +16,7 @@ public class MainMenuController : GameState {
     {
         //Temp Function should change later
         SceneManager.LoadScene(1);
+        OpeningController.instance.OpenCurtain();
     }
     //Load to Options
     public void Options()

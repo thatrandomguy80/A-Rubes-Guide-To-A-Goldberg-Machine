@@ -93,7 +93,10 @@ public class LevelSelectionButton : GameState {
 	void OnMouseDown(){
         if (!EventSystem.current.IsPointerOverGameObject())
         {
+            
             LoadLevel(level);
+            OpeningController.instance.DestroyCurtains();
+
         }
 	}
     //Select level to load
