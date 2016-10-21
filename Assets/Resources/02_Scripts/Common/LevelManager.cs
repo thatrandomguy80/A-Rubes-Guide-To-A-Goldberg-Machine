@@ -16,6 +16,8 @@ public class LevelManager : GameState {
 
     private int completedLevels;
 
+
+
     public GameObject levelSelectStars;
     // Use this for initialization
     void Start () {
@@ -26,8 +28,22 @@ public class LevelManager : GameState {
         SetUpCamStartingPos();
     }
 
+	private void InitialiseCurtains(){
+
+		if (OpeningController.instance == null) {
+			GameObject curtain = (GameObject)Instantiate (Resources.Load ("04_Prefabs/CurtainCam"));
+			GameObject curtainModel = curtain.transform.GetChild (0).GetChild (0).GetChild (0).gameObject;
+			SkinnedMeshRenderer curtainModelMesh = curtainModel.GetComponent<SkinnedMeshRenderer> ();
+			curtainModelMesh.SetBlendShapeWeight (1, 100);
+
+			curtain.transform.GetChild (1).gameObject.SetActive (false);
+			curtain.transform.GetChild (0).GetChild (3).gameObject.SetActive (false);
+		}
+	}
+
     private void Init()
     {
+		InitialiseCurtains ();
         buttonsPlaced = 0;
 		latestlevel = PreGame.getCurrentLevel()-(PreGame.nonGameLevels-1);
         int numberOfWorlds = transform.childCount;
@@ -98,10 +114,12 @@ public class LevelManager : GameState {
     }
 
     void Update () {
-        CameraMovement();
-        DisableArrows(completedLevels);
-        //Change the text on the right arrow
-        changeText();
+		if (!OpeningController.instance.movingBackToMainMenu) {
+			CameraMovement ();
+			DisableArrows (completedLevels);
+			//Change the text on the right arrow
+			changeText ();
+		}
     }
 
     //Handles camera movement

@@ -27,33 +27,42 @@ public class LevelSelectCanvas : GameState {
 	}
 
 	public void MainMenu(){
-		EndGame.MainMenu ();
+		StartCoroutine (ToMainMenu ());
 	}
 
+	IEnumerator ToMainMenu(){
+		OpeningController.instance.CloseCurtain ();
+		OpeningController.instance.movingBackToMainMenu = true;
+		Destroy (transform.GetChild(0).gameObject);
+		yield return new WaitForSeconds (1);
+		OpeningController.instance.movingBackToMainMenu = false;
+		EndGame.MainMenu ();
+	}
+		
 	//Sets up the initial conditions of the world
 	void Init(){
 		//Get the UI arrows
-		GameObject worldSelection = GameObject.Find (transform.name + "/World Selection");
+		GameObject worldSelection = GameObject.Find ("World Selection");
 
 		leftArrow = worldSelection.transform.GetChild (0).gameObject;
 		rightArrow = worldSelection.transform.GetChild (1).gameObject;
 
 		//Show the star count
-		Text starCount = transform.GetChild (1).GetChild (0).GetComponent<Text> ();
+		Text starCount = transform.GetChild(0).GetChild (1).GetChild (0).GetComponent<Text> ();
 		starCount.text = InGame.Stars.Total ().ToString();
 
 
-		float delay = 1;
+		float delay = 0;
 		float speed = 0.5f;
 		//Slide in the arrows
-		//StartCoroutine (SlideInArrows (delay,speed));
+		StartCoroutine (SlideInArrows (delay,speed));
 		//Slide in star score
-		//StartCoroutine(SlideInScore(delay,speed));
+		StartCoroutine(SlideInScore(delay,speed));
 	}
 	//Slide in star score
 	IEnumerator SlideInScore(float delay,float speed){
 		//Get the rect transforms for the arrows
-		RectTransform starScore = transform.GetChild (1).GetComponent<RectTransform> ();
+		RectTransform starScore = transform.GetChild(0).GetChild (1).GetComponent<RectTransform> ();
 		//Get the start and end pos of the animation
 		Vector3 scoreEndPos = starScore.transform.localPosition;
 		Vector3 YDiff = new Vector3 (0, starScore.sizeDelta.y + 10);

@@ -18,11 +18,7 @@ public class CameraMovement : MonoBehaviour
     public bool xLoc = false;
     public bool yLoc = false;
 
-    private bool bDragging;
-    private Vector3 oldPos;
-    private Vector3 panOrigin;
-    private float panSpeed = 3;
-
+	//Holds the game camera
     Camera gameCam;
     #endregion
 
@@ -106,6 +102,7 @@ public class CameraMovement : MonoBehaviour
             MoveCamera();
             float zoomSpeed = 20;
             Zoom(zoomSpeed);
+		//Camera zooms out and ziews both the ball and the bucket
         }else if (camType == CameraType.ViewAll)
         {
             //Get a rect that contains all of the players inside
@@ -183,7 +180,7 @@ public class CameraMovement : MonoBehaviour
         return Mathf.Clamp(Mathf.Lerp(gameCam.orthographicSize, orthographicSize, Time.deltaTime * zoomSpeed), minimumOrthographicSize, Mathf.Infinity);
     }
 
-
+	//Handles changing camera mode
     public void ChangeCameraMode()
     {
         if(camType == CameraType.LockOn)

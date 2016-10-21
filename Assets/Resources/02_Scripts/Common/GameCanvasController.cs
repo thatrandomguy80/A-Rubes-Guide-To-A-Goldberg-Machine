@@ -6,21 +6,17 @@ using UnityEngine.SceneManagement;
 public class GameCanvasController : GameState {
 
     public GameObject pausePanel;
-    public GameObject pauseButton;
     public GameObject winPanel;
-    public GameObject restartButton;
-
     public GameObject nextLvlButton;
+	public GameObject onScreenPanel;
 
 
     void Update()
     {
         //If the game is paused and the player has not won display the pause panel
         pausePanel.SetActive(InGame.gamePaused && !EndGame.playerWon);
-        //And Hide the pause button
-        pauseButton.SetActive(!InGame.gamePaused && !EndGame.playerWon);
-        restartButton.SetActive(!InGame.gamePaused && !EndGame.playerWon);
-
+        //And Hide the buttons
+		onScreenPanel.SetActive(!InGame.gamePaused && !EndGame.playerWon);
         
         if (EndGame.playerWon)
         {
@@ -99,7 +95,7 @@ public class GameCanvasController : GameState {
 
 	}
 
-
+	//Changes the camera view
     public void ChangeCameraView()
     {
         Camera cam = Camera.main;

@@ -23,23 +23,9 @@ public class StarBehaviour : GameState {
             Destroy(gameObject);
 
             //Play sound effect
-            AudioPlayer.instance.PlaySoundEffects(Sound_Effects.SelectSFX.STAR);
+			if (AudioPlayer.instance.transform != null) {
+				AudioPlayer.instance.PlaySoundEffects (Sound_Effects.SelectSFX.STAR);
+			}
         }
-    }
-
-    void OnCollisionEnter2D(Collision2D coll)
-    {
-        //If the marble collides with the star
-        if (coll.gameObject.tag == "Player") {
-            //Add a star to the count and Destroy the object
-            InGame.Stars.Add();
-            print("Player has " + InGame.Stars.Get().ToString() + " stars");
-            Destroy(gameObject);
-
-
-            
-            
-        }
-
     }
 }

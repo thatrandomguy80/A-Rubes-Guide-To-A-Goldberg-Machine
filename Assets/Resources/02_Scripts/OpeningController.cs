@@ -6,26 +6,27 @@ public class OpeningController : MonoBehaviour {
     public GameObject curtains;
     public bool curtainOpening;
     private static bool instanceCreated = false;
+	public bool movingBackToMainMenu;
+	public GameObject title;
 
     public static OpeningController instance;
 
-    void Awake()
-    {
-        instance = this;
-    }
 
     void Start()
     {
+		if (instanceCreated == false)
+		{
+			instance = this;
+			instanceCreated = true;
+			movingBackToMainMenu = false;
+			DontDestroyOnLoad(transform.parent.gameObject);
+			curtainOpening = false;
+		}else
+		{
+			Destroy(transform.parent.gameObject);
+		}
 
-        DontDestroyOnLoad(transform.parent.gameObject);
-        curtainOpening = false;
-        if (instanceCreated == false)
-        {
-            instanceCreated = true;
-        }else
-        {
-            Destroy(transform.parent.gameObject);
-        }
+        
     }
     void Update()
     {
@@ -36,15 +37,38 @@ public class OpeningController : MonoBehaviour {
             curtainMesh.SetBlendShapeWeight(1, Mathf.Lerp(curtainMesh.GetBlendShapeWeight(1), 100, Time.deltaTime));
         }
     }
+	public void CloseCurtain(){
+		
+		StartCoroutine (ICloseCurtain (1));
+	}
 
     public void OpenCurtain()
     {
         curtainOpening = true;
-        //transform.GetChild(1).gameObject.SetActive(false);
-        //transform.GetChild(2).gameObject.SetActive(false);
-        transform.GetChild(3).gameObject.SetActive(false);
+		title.SetActive(false);
         canvas.SetActive(false);
     }
+
+
+	IEnumerator ICloseCurtain(float curtainSpeed){
+		curtainOpening = false;
+
+
+		SkinnedMeshRenderer curtainMesh = curtains.GetComponent<SkinnedMeshRenderer>();
+
+		title.gameObject.SetActive(true);
+		canvas.SetActive(true);
+
+
+		while (curtainMesh.GetBlendShapeWeight (1) > 1) {
+			curtainMesh.SetBlendShapeWeight(1, Mathf.Lerp(curtainMesh.GetBlendShapeWeight(1), 0, Time.deltaTime*curtainSpeed));
+			yield return new WaitForEndOfFrame ();
+		}
+
+
+
+
+	}
 
     public void DestroyCurtains()
     {
