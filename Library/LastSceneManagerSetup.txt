@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W1-6 (platform bridge
-    tut).unity
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W3-4 (Hammer and
+    pipe).unity
   isLoaded: 1
   isActive: 1
