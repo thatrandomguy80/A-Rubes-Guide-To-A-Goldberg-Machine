@@ -1,5 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W3-4 (Hammer and
-    pipe).unity
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W3-5 (Hammer speed).unity
   isLoaded: 1
   isActive: 1
