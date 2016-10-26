@@ -6,6 +6,7 @@
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
 		_mixAmount("Blending between texture and color",Range(0,1)) = 0
 		_Range("Range", float) = 1
+		_Pulse("Pulse",Range(0,1)) = 1
 		_OutlineColor("Outline Color" , Color) = (1,1,1,1)
 	}
 		SubShader
@@ -55,6 +56,7 @@
 		float _Range;
 		float4 _OutlineColor;
 		float _mixAmount;
+		float _Pulse;
 		sampler2D _MainTex;
 
 		v2f vert(appdata v)
@@ -64,8 +66,8 @@
 			float3 val = mul((float3x3)UNITY_MATRIX_IT_MV, v.normal);
 			float2 off = TransformViewToProjection(val.xy);//ignore all but xy
 			o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
-			o.vertex.xy += _Range * clamp(sin(_Time.w) + 1,1,2)*  off;// Removed o.vertex.z * for ortho
-
+			o.vertex.xy += _Range *(_Pulse * clamp(sin(_Time.w) + 1,1,2)) *  off;// Removed o.vertex.z * for ortho
+			o.vertex.xy += _Range * off * (-(_Pulse - 1));
 
 			return o;
 		}
