@@ -120,6 +120,8 @@ public class LevelManager : GameState {
 			//Change the text on the right arrow
 			changeText ();
 		}
+		//Just used to restart the game
+		DisposableController ();
     }
 
     //Handles camera movement
@@ -199,4 +201,11 @@ public class LevelManager : GameState {
         }
 
     }
+
+	private void DisposableController(){
+		if (Input.GetKeyDown(KeyCode.R)) {
+			PlayerPrefs.DeleteAll();
+			UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+		}
+	}
 }

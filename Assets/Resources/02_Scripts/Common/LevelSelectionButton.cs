@@ -43,6 +43,7 @@ public class LevelSelectionButton : GameState {
         levelNumber.sprite = levelSprite;
 	}
 
+	//Displays the level stars
     private void DisplayStars()
     {
         GameObject stars = levelManager.levelSelectStars;
@@ -50,7 +51,7 @@ public class LevelSelectionButton : GameState {
 
         for(int i = 0; i < stars.transform.childCount; i++)
         {
-           stars.transform.GetChild(i).gameObject.SetActive(i < starHighscore);
+			stars.transform.GetChild(i).GetChild(1).GetChild(1).gameObject.SetActive(i < starHighscore);
         }
     }
     //If the player hovers over the button it will move forward
