@@ -22,12 +22,15 @@ public class LevelSelectCanvas : GameState {
 
 	// Use this for initialization
 	void Start () {
-		
 		Init ();
 	}
 
 	public void MainMenu(){
 		StartCoroutine (ToMainMenu ());
+	}
+	public void QuitGame(){
+		print ("Quit Game");
+		Application.Quit ();
 	}
 
 	IEnumerator ToMainMenu(){
