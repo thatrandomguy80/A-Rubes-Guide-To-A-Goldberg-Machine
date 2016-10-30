@@ -1,8 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W2-6 (Bucket elevator).unity
-=======
-- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W2-8 (Steampipe block).unity
->>>>>>> 7637e4a0b9dbc645210fec26b9530cee2df806a9
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W2-2 (left roll or
+    right drop).unity
   isLoaded: 1
   isActive: 1

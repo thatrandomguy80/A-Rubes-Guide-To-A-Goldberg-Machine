@@ -36,6 +36,19 @@ public class CameraMovement : MonoBehaviour
         character = GameObject.FindGameObjectWithTag("Player").transform;
         gameCam.orthographicSize = startingZoom; //sets starting zoom of the level.
     }
+
+    Vector2 mouseStartPos, mouseEndPos;
+    Vector3 lastCamPos;
+
+    private void StrafeCamera(float strafeSpeed)
+    {
+        if (Input.GetMouseButton(2))
+        {
+            float deltaX = Input.GetAxis("Mouse X")*strafeSpeed*Time.deltaTime;
+            float deltaY = Input.GetAxis("Mouse Y")*strafeSpeed*Time.deltaTime;
+            Camera.main.transform.localPosition += new Vector3(-deltaX,-deltaY, 0);
+        }
+    }
     //Controls camera movement
     private void MoveCamera()
     {
@@ -102,6 +115,7 @@ public class CameraMovement : MonoBehaviour
             MoveCamera();
             float zoomSpeed = 20;
             Zoom(zoomSpeed);
+            StrafeCamera(10);
 		//Camera zooms out and ziews both the ball and the bucket
         }else if (camType == CameraType.ViewAll)
         {
