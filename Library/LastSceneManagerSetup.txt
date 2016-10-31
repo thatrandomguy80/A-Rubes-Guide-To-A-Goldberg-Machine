@@ -1,9 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Resources/01_Scenes/Levels/Playtesting/M-18.unity
-=======
-- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W2-2 (left roll or
-    right drop).unity
->>>>>>> 6b7857e66bea3cb55bb31819e5e133d43a52effe
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W1-5 (moving bucket).unity
   isLoaded: 1
   isActive: 1
