@@ -5,10 +5,20 @@ public class PlatformBuilder : MonoBehaviour {
     [Header("This gets Mats from the Materail folder")]
     public string MatName = "Primary Color";
     public bool menu = false;
+    public bool newledge = false;
 
     protected void CreatePlatform(GameObject leftAnchor, GameObject rightAnchor) {
         //Create a new Platform
-        GameObject newPlatform = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        GameObject newPlatform;
+        if (newledge)
+        {
+            GameObject prefab = Resources.Load("04_Prefabs/" + "ledge") as GameObject;
+            newPlatform = Instantiate(prefab,Vector3.zero,Quaternion.identity) as GameObject;
+        }
+        else
+        {
+            newPlatform = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        }
         newPlatform.name = "Platform (Display)";
 
         //Create a gameobject to hold the collider
@@ -20,18 +30,29 @@ public class PlatformBuilder : MonoBehaviour {
         Destroy(newPlatform.GetComponent<BoxCollider>());
 
         //Change the material to the one from the main platform
-        Material temp = Resources.Load("03_Materials/" + MatName) as Material;
-        if (temp != null) {
-            newPlatform.transform.GetComponent<Renderer>().material = temp;
-            newPlatform.transform.GetComponent<Renderer>().reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
-            //Don't accept the balls reflection prob
-        } else {
-            Debug.LogError("Not a valid Mat name on: " + this.transform.parent.name);
+        if (!newledge)
+        {
+            Material temp = Resources.Load("03_Materials/" + MatName) as Material;
+            if (temp != null)
+            {
+                newPlatform.transform.GetComponent<Renderer>().material = temp;
+                newPlatform.transform.GetComponent<Renderer>().reflectionProbeUsage = UnityEngine.Rendering.ReflectionProbeUsage.Off;
+                //Don't accept the balls reflection prob
+            }
+            else
+            {
+                Debug.LogError("Not a valid Mat name on: " + this.transform.parent.name);
+            }
         }
 
         //Place the platform in the center
         transform.position = Vector2.Lerp(leftAnchor.transform.position, rightAnchor.transform.position, 0.5f);
         newPlatform.transform.position = Vector2.Lerp(leftAnchor.transform.position, rightAnchor.transform.position, 0.5f);
+
+        //if (newledge)
+        //{
+        //    newPlatform.transform.Translate(0, -0.5f,0);
+        //}
 
 
 

@@ -17,7 +17,7 @@ public class ScreenSwipe : GameState {
         if (Input.GetMouseButton(0))
         {
             transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			transform.position = new Vector3(transform.position.x, transform.position.y-3, 5);
+			transform.position = new Vector3(transform.position.x, transform.position.y-2.5f, 5);
         }
     }
 
