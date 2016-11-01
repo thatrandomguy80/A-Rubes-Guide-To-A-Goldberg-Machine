@@ -69,10 +69,11 @@ public class PlatformControls : PlatformBuilder {
 
             Vector3 midPos = new Vector3(Random.Range(left.x, right.x), Random.Range(left.y, right.y), zee);//pos of the gear
 
-            float offset = 1f;//how close the gears are aloud to be
+            float offset = 2f;//how close the gears are aloud to be
             bool tooClose = false;
             for (int i = 0; i < prevPos.Count; i++) {
                 tooClose = tooClose || offsetCheck(midPos, prevPos[i], offset); // accumulate if it's too close for any prev pos
+                tooClose = tooClose || sameSideCheck(midPos, prevPos[i], left, right);
             }
             //need to check all now.
             if (tooClose) {//gears are too close
@@ -83,6 +84,11 @@ public class PlatformControls : PlatformBuilder {
             prevPos.Add(midPos);
         }
         return prevPos;//new result with midPos appended
+    }
+
+    private bool sameSideCheck(Vector3 midPos, Vector3 prevPos, Vector3 left, Vector3 right) {
+        float middle = Mathf.Lerp(left.x, right.x, 0.5f);
+        return ((midPos.x < middle && prevPos.x < middle) || (midPos.x >= middle && prevPos.x >= middle));
     }
 
     private bool offsetCheck(Vector3 midPos, Vector3 prevPos, float off) {

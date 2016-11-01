@@ -5,7 +5,8 @@ public class PlatformBuilder : MonoBehaviour {
     [Header("This gets Mats from the Materail folder")]
     public string MatName = "Primary Color";
     public bool menu = false;
-    public bool newledge = false;
+
+    private bool newledge = true;
 
     protected void CreatePlatform(GameObject leftAnchor, GameObject rightAnchor) {
         //Create a new Platform

@@ -20,7 +20,7 @@ public class MoveObjects_InGame : MonoBehaviour {
         transform.localPosition = Vector3.Lerp(startPos, endPos, 0);
     }
 
-	void Update () {
+	void FixedUpdate () {//changed to fixed to play nicer with rope - HM
         MovementBetweenTwoPoints();
         ObjToCurrentPos();
 	}
