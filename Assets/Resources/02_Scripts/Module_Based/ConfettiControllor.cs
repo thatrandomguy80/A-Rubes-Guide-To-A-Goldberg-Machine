@@ -15,6 +15,5 @@ public class ConfettiControllor : MonoBehaviour {
 
     public void Play() {
         transform.GetChild(3).gameObject.SetActive(true);
-        Debug.Log("called");
     }
 }

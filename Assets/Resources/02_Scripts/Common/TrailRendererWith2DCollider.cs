@@ -105,6 +105,10 @@ public class TrailRendererWith2DCollider : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButtonUp(0)) {//kills trail if the user lets go of mouse
+            StartCoroutine("killTrail");
+        }
+
         if (!pausing)
         {
             //set the mesh and adjust widths if vertices were added or removed
@@ -121,6 +125,18 @@ public class TrailRendererWith2DCollider : MonoBehaviour
         }
     }
 
+    private IEnumerable killTrail() {//kills trail after 0.5 seconds
+        Debug.Log("killTrail");
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("killTrail 2nd call");
+        if (!Input.GetMouseButton(0)) {
+            //kill trail forceably
+            leftVertices.Clear();
+            rightVertices.Clear();
+            centerPositions.Clear();
+        }
+        StopAllCoroutines(); // incase multiple were started.
+    }
     //************
     //
     // Private Methods

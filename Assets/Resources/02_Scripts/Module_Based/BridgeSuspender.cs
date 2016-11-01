@@ -8,7 +8,7 @@ public class BridgeSuspender : ObstacleInteraction {
 
     public GameObject stationaryAnchor, bridgeAnchor;//Keep track of the anchors
     public int suspenderIndex;//Keeps track of what suspender is being cut [CHANGE]
-    public bool isOneSided = false;
+    private bool isOneSided = false;//shouldn't need anymore
 
     Vector3 result;
 
