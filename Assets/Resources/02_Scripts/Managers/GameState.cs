@@ -282,7 +282,7 @@ public class GameState : MonoBehaviour {
 
         public static void outputMetrics() {
             //write user name,timestamp,and all above vars to file.
-            if (Active) {
+            if (false) {
                 starsGathered = InGame.Stars.Get();
                 string dataPath = Application.dataPath + "/Playtest Metrics";
                 string pathName = dataPath + "/Report.txt";
@@ -306,7 +306,7 @@ public class GameState : MonoBehaviour {
         }
 
         public static void reset() {
-            if (Active) {
+            if (false) {
                 startTime = Time.time;
                 numOfRestarts = 0;
                 numOfWins = 0;
