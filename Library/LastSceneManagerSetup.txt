@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W2-12 (Pipeline).unity
+=======
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W3-6(cat intro).unity
+>>>>>>> 2cf44b6be39203388b8e2148629bc19fb25eb47a
   isLoaded: 1
   isActive: 1
