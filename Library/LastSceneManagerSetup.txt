@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W2-4 (Ramp Elevator).unity
+- path: Assets/Resources/01_Scenes/Levels/Playtesting/W3-7 (Catapault intro).unity
   isLoaded: 1
   isActive: 1
