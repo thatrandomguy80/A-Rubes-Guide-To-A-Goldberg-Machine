@@ -16,6 +16,7 @@ public class MoveObjects_InGame : MonoBehaviour {
 	
     void Start()
     {
+		moveableObj = gameObject;
         //Puts the point straight in the middle of the end and start
         transform.localPosition = Vector3.Lerp(startPos, endPos, 0);
     }
