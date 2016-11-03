@@ -27,6 +27,8 @@ public class BucketController : GameState {
 				cc.Play();
 			}
 
+
+
 			EndGame.Win();
 
 		}
@@ -35,7 +37,6 @@ public class BucketController : GameState {
 		if (coll.transform.tag.Equals("Player")) {
 			Rigidbody2D rig2d = coll.transform.GetComponent<Rigidbody2D>();
 			rig2d.constraints = RigidbodyConstraints2D.FreezeAll;
-			InGame.Stars.Add(); //They also get a sta
 
 			coll.transform.parent = transform;
 
@@ -45,7 +46,9 @@ public class BucketController : GameState {
 				cc.Play();
 			}
 
-			EndGame.Win();
+
+
+            EndGame.Win();
 
 		}
 	}
