@@ -8,11 +8,6 @@ public class StarBehaviour : GameState {
         //At the start of the game reset the score
         InGame.Stars.Reset();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-
-	}
 
     void OnTriggerEnter2D(Collider2D coll) {
         //If the marble collides with the star
@@ -23,7 +18,7 @@ public class StarBehaviour : GameState {
             Destroy(gameObject);
 
             //Play sound effect
-			if (AudioPlayer.instance.transform != null) {
+			if (AudioPlayer.instance != null) {
 				AudioPlayer.instance.PlaySoundEffects (Sound_Effects.SelectSFX.STAR);
 			}
         }
