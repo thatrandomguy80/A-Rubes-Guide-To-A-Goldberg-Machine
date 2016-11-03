@@ -60,6 +60,7 @@ public class GameState : MonoBehaviour {
             if (Time.timeScale == 1) {
                 Time.timeScale = 0;
                 gamePaused = true;
+                GameObject.Find("SwipeControls").GetComponent<TrailRendererWith2DCollider>().deleteTrail();
             } else {
                 Time.timeScale = 1;
                 gamePaused = false;

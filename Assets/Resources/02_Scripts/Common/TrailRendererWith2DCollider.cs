@@ -103,10 +103,15 @@ public class TrailRendererWith2DCollider : MonoBehaviour
         rightVertices = new LinkedList<Vertex>();
     }
 
+    public void deleteTrail() {//outside based hook in to kill trail used during pause
+        StartCoroutine("killTrail");
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonUp(0)) {//kills trail if the user lets go of mouse
             StartCoroutine("killTrail");
+            Debug.Log("called kill trail");
         }
 
         if (!pausing)
@@ -126,7 +131,12 @@ public class TrailRendererWith2DCollider : MonoBehaviour
     }
 
     private IEnumerable killTrail() {//kills trail after 0.5 seconds
+        bool tick = false;
         Debug.Log("killTrail");
+        if (Time.timeScale == 0f) {
+            Time.timeScale = 1;
+            tick = true;
+        }
         yield return new WaitForSeconds(0.1f);
         Debug.Log("killTrail 2nd call");
         if (!Input.GetMouseButton(0)) {
@@ -134,6 +144,9 @@ public class TrailRendererWith2DCollider : MonoBehaviour
             leftVertices.Clear();
             rightVertices.Clear();
             centerPositions.Clear();
+        }
+        if (tick) {
+            Time.timeScale = 0;
         }
         StopAllCoroutines(); // incase multiple were started.
     }
