@@ -10,8 +10,8 @@ public class GameState : MonoBehaviour {
     //Handles before game controls
     protected static class PreGame {
         public readonly static int nonGameLevels = 3;
-        public readonly static int[] starThreshold = { 20, 40, 43, 46 };
-        public static int[] levelsBetweenWorlds = { 12, 5, 1, 1 };
+        public readonly static int[] starThreshold = { 20, 40};
+        public static int[] levelsBetweenWorlds = { 12, 12, 12};
 
         private readonly static string levelKey = "levelKey";
         //Keeps track of what level the player is up to

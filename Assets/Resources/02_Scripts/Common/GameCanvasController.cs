@@ -34,6 +34,19 @@ public class GameCanvasController : GameState {
         {
             nextLvlButton.GetComponent<Button>().interactable = true;
         }*/
+        //If its the final level
+        if (IsThisTheFinalLevelOfWorld())
+        {
+            int world = PreGame.getCurrentWorldAndLevel(SceneManager.GetActiveScene().buildIndex)[0];
+            bool enoughStars = DoesPlayerHaveEnoughStars();
+
+            nextLvlButton.GetComponent<Button>().interactable = enoughStars;
+           
+
+        }else
+        {
+            nextLvlButton.GetComponent<Button>().interactable = true;
+        }
 
 
         if (InGame.gamePaused && !EndGame.playerWon) {
@@ -124,15 +137,15 @@ public class GameCanvasController : GameState {
     /*Checks if player has enough stars*/
     private bool DoesPlayerHaveEnoughStars()
     {
-        int totalNumOfStars = InGame.Stars.Get();
+        int totalNumOfStars = InGame.Stars.Total();
         int level = SceneManager.GetActiveScene().buildIndex- (PreGame.nonGameLevels - 1);
-        int world = PreGame.getCurrentWorldAndLevel(level)[0]-1;
+        int world = PreGame.getCurrentWorldAndLevel(level)[0];
         int starsNeeded = 0;
         for(int i = 0;i < world; i++)
         {
             starsNeeded += PreGame.starThreshold[i];
         }
-
+        print("DPHEStars : " + starsNeeded);
         return (totalNumOfStars >= starsNeeded);
     }
     //Checks if the current level is the final level in the world
