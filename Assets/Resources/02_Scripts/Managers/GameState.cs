@@ -54,14 +54,22 @@ public class GameState : MonoBehaviour {
     protected static class InGame {
         //Keeps track of if the game is paused or not
         public static bool gamePaused;
+        private static GameObject tut;
         /*Pause the game*/
         public static void Pause() {
             Debug.Log("Game has been Paused");
             if (Time.timeScale == 1) {
-                Time.timeScale = 0;
-                gamePaused = true;
+                if (SceneManager.GetActiveScene().name == "W1-1 (first)" || SceneManager.GetActiveScene().name == "W1-2 (multicut tut)" || SceneManager.GetActiveScene().name == "W1-3 (zoom tut)"){
+                    tut = GameObject.Find("Tut");
+                    tut.SetActive(false);
+                }
                 GameObject.Find("SwipeControls").GetComponent<TrailRendererWith2DCollider>().deleteTrail();
+                gamePaused = true;
+                Time.timeScale = 0;
             } else {
+                if (SceneManager.GetActiveScene().name == "W1-1 (first)" || SceneManager.GetActiveScene().name == "W1-2 (multicut tut)" || SceneManager.GetActiveScene().name == "W1-3 (zoom tut)"){
+                    tut.SetActive(true);
+                }
                 Time.timeScale = 1;
                 gamePaused = false;
             }

@@ -74,13 +74,13 @@ public class BridgeSuspender : ObstacleInteraction {
         float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 
         //this is the platforms rope
-        GameObject tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRopeNewshort"), bridgeAnchor.transform.position, Quaternion.Euler(0f, 0f, rot_z + 90)) as GameObject;
+        GameObject tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRopeNewtall"), bridgeAnchor.transform.position, Quaternion.Euler(0f, 0f, rot_z + 90)) as GameObject;
         tempRope.GetComponent<Rope>().startUp(bridgeAnchor, 180f, lowerA);
         tempRope.transform.parent = bridgeAnchor.transform.GetChild(0);
         tempRope.name = bridgeAnchor.name + " Rope";
 
         //this is the upper anchor rope
-        tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRopeNewshort"), stationaryAnchor.transform.position, Quaternion.Euler(0f, 0f, rot_z + 90)) as GameObject;
+        tempRope = Instantiate(Resources.Load("04_Prefabs/cylinderRopeNewtall"), stationaryAnchor.transform.position, Quaternion.Euler(0f, 0f, rot_z + 90)) as GameObject;
         tempRope.GetComponent<Rope>().startUp(stationaryAnchor, 0f, upperA);
         tempRope.transform.parent = platform.transform.parent.GetChild(1).GetChild(0);
         tempRope.name = stationaryAnchor.name + " Rope";
