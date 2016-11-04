@@ -10,8 +10,8 @@ public class GameState : MonoBehaviour {
     //Handles before game controls
     protected static class PreGame {
         public readonly static int nonGameLevels = 3;
-        public readonly static int[] starThreshold = { 20, 40};
-        public static int[] levelsBetweenWorlds = { 12, 12, 12};
+        public readonly static int[] starThreshold = { 20, 40 };
+        public static int[] levelsBetweenWorlds = { 12, 12, 12 };
 
         private readonly static string levelKey = "levelKey";
         //Keeps track of what level the player is up to
@@ -25,7 +25,7 @@ public class GameState : MonoBehaviour {
             return currLevel;
         }
         public static int[] getCurrentWorldAndLevel(int CURRENT_LEVEL) {
-			int level = CURRENT_LEVEL - (PreGame.nonGameLevels-1);
+            int level = CURRENT_LEVEL - (PreGame.nonGameLevels - 1);
             int[] wrld = new int[2];
 
 
@@ -59,7 +59,7 @@ public class GameState : MonoBehaviour {
         public static void Pause() {
             Debug.Log("Game has been Paused");
             if (Time.timeScale == 1) {
-                if (SceneManager.GetActiveScene().name == "W1-1 (first)" || SceneManager.GetActiveScene().name == "W1-2 (multicut tut)" || SceneManager.GetActiveScene().name == "W1-3 (zoom tut)"){
+                if (SceneManager.GetActiveScene().name == "W1-1 (first)" || SceneManager.GetActiveScene().name == "W1-2 (multicut tut)" || SceneManager.GetActiveScene().name == "W1-3 (zoom tut)") {
                     tut = GameObject.Find("Tut");
                     tut.SetActive(false);
                 }
@@ -67,7 +67,7 @@ public class GameState : MonoBehaviour {
                 gamePaused = true;
                 Time.timeScale = 0;
             } else {
-                if (SceneManager.GetActiveScene().name == "W1-1 (first)" || SceneManager.GetActiveScene().name == "W1-2 (multicut tut)" || SceneManager.GetActiveScene().name == "W1-3 (zoom tut)"){
+                if (SceneManager.GetActiveScene().name == "W1-1 (first)" || SceneManager.GetActiveScene().name == "W1-2 (multicut tut)" || SceneManager.GetActiveScene().name == "W1-3 (zoom tut)") {
                     tut.SetActive(true);
                 }
                 Time.timeScale = 1;
