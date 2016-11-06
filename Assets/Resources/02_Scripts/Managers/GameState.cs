@@ -10,7 +10,7 @@ public class GameState : MonoBehaviour {
     //Handles before game controls
     protected static class PreGame {
         public readonly static int nonGameLevels = 3;
-        public readonly static int[] starThreshold = { 20, 40 };
+        public readonly static int[] starThreshold = { 20, 40,60 };
         public static int[] levelsBetweenWorlds = { 12, 12, 12 };
 
         private readonly static string levelKey = "levelKey";
@@ -207,7 +207,7 @@ public class GameState : MonoBehaviour {
                 PreGame.setNextLevel();
 
                 //Hide the cutting trail
-                GameObject.Find("Trail").SetActive(false);
+                //GameObject.Find("Trail").SetActive(false);
 
                 //if the players current star count is higher the highscore
                 //Save the new score
