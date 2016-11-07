@@ -57,32 +57,34 @@ public class PlatformControls : PlatformBuilder {
 
     public List<Vector3> AddGears(GameObject leftAnchor, GameObject rightAnchor, List<Vector3> prevPos) {
         recalls++;
-        if (recalls < 10) {
-            Vector2 left = leftAnchor.transform.position;
-            Vector2 right = rightAnchor.transform.position;
-            float zee;
-            if (Random.Range(-1, 1) > -1) {//sets behind or infront of platform.
-                zee = 1f;
-            } else {
-                zee = -1f;
-            }
+		if (recalls < 10) {
+			Vector2 left = leftAnchor.transform.position;
+			Vector2 right = rightAnchor.transform.position;
+			float zee;
+			if (Random.Range (-1, 1) > -1) {//sets behind or infront of platform.
+				zee = 1f;
+			} else {
+				zee = -1f;
+			}
 
-            Vector3 midPos = new Vector3(Random.Range(left.x, right.x), Random.Range(left.y, right.y), zee);//pos of the gear
+			Vector3 midPos = new Vector3 (Random.Range (left.x, right.x), Random.Range (left.y, right.y), zee);//pos of the gear
 
-            float offset = 2f;//how close the gears are aloud to be
-            bool tooClose = false;
-            for (int i = 0; i < prevPos.Count; i++) {
-                tooClose = tooClose || offsetCheck(midPos, prevPos[i], offset); // accumulate if it's too close for any prev pos
-                tooClose = tooClose || sameSideCheck(midPos, prevPos[i], left, right);
-            }
-            //need to check all now.
-            if (tooClose) {//gears are too close
-                AddGears(leftAnchor, rightAnchor, prevPos);
-            } else {//gears arn't too close and isn't first call.
-                makeGear(leftAnchor, rightAnchor, midPos, prevPos);
-            }
-            prevPos.Add(midPos);
-        }
+			float offset = 2f;//how close the gears are aloud to be
+			bool tooClose = false;
+			for (int i = 0; i < prevPos.Count; i++) {
+				tooClose = tooClose || offsetCheck (midPos, prevPos [i], offset); // accumulate if it's too close for any prev pos
+				tooClose = tooClose || sameSideCheck (midPos, prevPos [i], left, right);
+			}
+			//need to check all now.
+			if (tooClose) {//gears are too close
+				AddGears (leftAnchor, rightAnchor, prevPos);
+			} else {//gears arn't too close and isn't first call.
+				makeGear (leftAnchor, rightAnchor, midPos, prevPos);
+			}
+			prevPos.Add (midPos);
+		} else {
+			Debug.Log ("TOO many Recalls");
+		}
         return prevPos;//new result with midPos appended
     }
 
