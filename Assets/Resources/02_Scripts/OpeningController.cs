@@ -7,7 +7,6 @@ public class OpeningController : MonoBehaviour {
     public bool curtainOpening;
     private static bool instanceCreated = false;
 	public bool movingBackToMainMenu;
-	public GameObject title;
 
     public static OpeningController instance;
 
@@ -45,7 +44,6 @@ public class OpeningController : MonoBehaviour {
     public void OpenCurtain()
     {
         curtainOpening = true;
-		title.SetActive(false);
         canvas.SetActive(false);
     }
 
@@ -56,7 +54,6 @@ public class OpeningController : MonoBehaviour {
 
 		SkinnedMeshRenderer curtainMesh = curtains.GetComponent<SkinnedMeshRenderer>();
 
-		title.gameObject.SetActive(true);
 		canvas.SetActive(true);
 
 
