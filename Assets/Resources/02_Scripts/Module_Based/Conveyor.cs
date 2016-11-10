@@ -4,7 +4,6 @@ using System.Collections;
 public class Conveyor : MonoBehaviour {
 
 
-    public Vector2 startPos, endPos;
     public float speed; //Keeps track of how fast it is moving
     public bool moveTowardsEnd; //Checks weather its moving to the end point or the starting point
     public Material conMat;
