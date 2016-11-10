@@ -82,15 +82,14 @@ public class PlatformControls : PlatformBuilder {
 				makeGear (leftAnchor, rightAnchor, midPos, prevPos);
 			}
 			prevPos.Add (midPos);
-		} else {
-			Debug.Log ("TOO many Recalls");
-		}
+		} 
         return prevPos;//new result with midPos appended
     }
 
     private bool sameSideCheck(Vector3 midPos, Vector3 prevPos, Vector3 left, Vector3 right) {
         float middle = Mathf.Lerp(left.x, right.x, 0.5f);
-        return ((midPos.x < middle && prevPos.x < middle) || (midPos.x >= middle && prevPos.x >= middle));
+        bool result = ((midPos.x < middle && prevPos.x < middle) || (midPos.x >= middle && prevPos.x >= middle));
+        return result;
     }
 
     private bool offsetCheck(Vector3 midPos, Vector3 prevPos, float off) {
@@ -100,7 +99,7 @@ public class PlatformControls : PlatformBuilder {
     private void makeGear(GameObject leftAnchor, GameObject rightAnchor, Vector3 midPos, List<Vector3> prev) {
         Vector2 left = leftAnchor.transform.position;
         Vector2 right = rightAnchor.transform.position;
-        if (Physics.Raycast(new Vector3(midPos.x, midPos.y, 3), new Vector3(0, 0, -1), 10)) {//double check your infront of a platform
+       // if (Physics.Raycast(new Vector3(midPos.x, midPos.y, 3), new Vector3(0, 0, -1), 10)) {//double check your infront of a platform
             int rand = Random.Range(0, gears.Length);
             GameObject gear = Instantiate(Resources.Load("04_Prefabs/" + gears[rand]) as GameObject, midPos, Quaternion.identity) as GameObject;
             gear.transform.parent = transform.parent.GetChild(0);
@@ -111,9 +110,9 @@ public class PlatformControls : PlatformBuilder {
             if (a != null) {
                 a.rotationSpeeds.z = Random.Range(-50, 50);
             }
-        } else {
-            AddGears(leftAnchor, rightAnchor, prev);//recall if not infront of platform.
-        }
+       // } else {
+       //     AddGears(leftAnchor, rightAnchor, prev);//recall if not infront of platform.
+       // }
     }
 
     //Sets up the joint positions
