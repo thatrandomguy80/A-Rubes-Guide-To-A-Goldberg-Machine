@@ -13,12 +13,19 @@ public class MoveObjects_InGame : MonoBehaviour {
     public Vector2 startPos, endPos;
     public float speed; //Keeps track of how fast it is moving
     public bool moveTowardsEnd; //Checks weather its moving to the end point or the starting point
-	
+    public GameObject conveyor;
+    private Conveyor conScript;
+
+
     void Start()
     {
 		moveableObj = gameObject;
         //Puts the point straight in the middle of the end and start
         transform.localPosition = Vector3.Lerp(startPos, endPos, 0);
+        if(conveyor!= null)
+        {
+             conScript = conveyor.GetComponent<Conveyor>();
+        }
     }
 
 	void FixedUpdate () {//changed to fixed to play nicer with rope - HM
@@ -46,6 +53,10 @@ public class MoveObjects_InGame : MonoBehaviour {
         if(Vector3.Distance(transform.localPosition,startPos) <= distThresh || Vector3.Distance(transform.localPosition, endPos) <= distThresh)
         {
             moveTowardsEnd = !moveTowardsEnd;
+            if(conScript != null)
+            {
+                conScript.moveTowardsEnd = moveTowardsEnd;
+            }
         }
     }
 }
