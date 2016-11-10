@@ -114,8 +114,9 @@ public class CameraMovement : MonoBehaviour
         {
             MoveCamera();
             float zoomSpeed = 20;
+			float strafeSpeed = 20;
             Zoom(zoomSpeed);
-            StrafeCamera(10);
+			StrafeCamera(strafeSpeed);
 		//Camera zooms out and ziews both the ball and the bucket
         }else if (camType == CameraType.ViewAll)
         {
