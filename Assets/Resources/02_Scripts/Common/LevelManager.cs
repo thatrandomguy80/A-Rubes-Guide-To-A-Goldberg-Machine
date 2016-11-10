@@ -37,7 +37,6 @@ public class LevelManager : GameState {
 			curtainModelMesh.SetBlendShapeWeight (1, 100);
 
 			curtain.transform.GetChild (1).gameObject.SetActive (false);
-			curtain.transform.GetChild (0).GetChild (3).gameObject.SetActive (false);
 		}
 	}
 
@@ -129,7 +128,7 @@ public class LevelManager : GameState {
     {
         //Moves the camera to the world selected
         float speed = Time.deltaTime * 2;
-        Camera cam = Camera.main;
+		Camera cam = GameObject.Find ("Main Camera").GetComponent<Camera> ();
         float newXPos = Mathf.Lerp(cam.transform.position.x, worlds[worldSelected].transform.position.x, speed);
         cam.transform.position = new Vector3(newXPos, cam.transform.position.y, cam.transform.position.z);
     }
