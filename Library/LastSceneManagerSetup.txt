@@ -1,4 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W3-12 (Finale).unity
+=======
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W3-8 (upside down
+    catapault).unity
+>>>>>>> 1fb094d53f61170913dcdbeba36c384869749065
   isLoaded: 1
   isActive: 1
