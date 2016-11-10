@@ -1,4 +1,5 @@
 sceneSetups:
-- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W2-9 (HCC09).unity
+- path: Assets/Resources/01_Scenes/Levels/Production(Playtested)/W2-1 (Four platform
+    drop).unity
   isLoaded: 1
   isActive: 1
