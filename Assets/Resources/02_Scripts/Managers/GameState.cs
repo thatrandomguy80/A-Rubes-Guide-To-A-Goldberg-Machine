@@ -57,7 +57,6 @@ public class GameState : MonoBehaviour {
         private static GameObject tut;
         /*Pause the game*/
         public static void Pause() {
-            Debug.Log("Game has been Paused");
             if (Time.timeScale == 1) {
                 if (SceneManager.GetActiveScene().name == "W1-1 (first)" || SceneManager.GetActiveScene().name == "W1-2 (multicut tut)" || SceneManager.GetActiveScene().name == "W1-3 (zoom tut)") {
                     tut = GameObject.Find("Tut");
@@ -119,12 +118,10 @@ public class GameState : MonoBehaviour {
             //Gets the previous level index
             int previousLevel = (currentLevel.buildIndex - 1) % numberOfScenes;
 
-            print(previousLevel);
             if (previousLevel < PreGame.nonGameLevels) {
                 previousLevel = numberOfScenes - 1;
             }
 
-            Debug.Log("Level : " + previousLevel + "will be loaded");
 
             Time.timeScale = 1;
             gamePaused = EndGame.playerWon = false;
@@ -226,17 +223,13 @@ public class GameState : MonoBehaviour {
 
             //If the player has gained a new highscore
             if (starCount > highScoreStars) {
-                print("New HighScore");
                 //Then the new highscore will be saved
                 InGame.Stars.SaveHighScore(currentScene, starCount);
-            } else {
-                print("Failed to get new highscore");
-            }
+            } 
         }
 
         //Player Loses the Game
         public static void Lose() {
-            print("Player Lost");
             InGame.RestartLevel(true);
         }
         //Player moves to levelselect

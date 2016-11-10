@@ -35,7 +35,6 @@ public class ExcessSteam : MonoBehaviour {
             {
                 //Push the ball away
                 rig2d.AddForce(rayDir * power);
-                print("Steam hit the ball");
             }
             else
             {
@@ -57,7 +56,6 @@ public class ExcessSteam : MonoBehaviour {
                     excSteam.rayDir = rDir;
                     excSteam.rSteam = remainingSteam;
 
-                    print("Deflect off " + hit2d.transform.name);
                     createdExcessSteam = true;
                 }
             }

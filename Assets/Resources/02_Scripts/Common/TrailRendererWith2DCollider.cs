@@ -287,7 +287,6 @@ public class TrailRendererWith2DCollider : MonoBehaviour {
 
     public Vector3 getPos() {
         Vector3 result = centerPositions.First.Value;
-        Debug.Log(result);
         return result;
     }
 

@@ -14,7 +14,6 @@ public class StarBehaviour : GameState {
         if (coll.gameObject.tag == "Player") {
             //Add a star to the count and Destroy the object
             InGame.Stars.Add();
-            print("Player has " + InGame.Stars.Get().ToString() + " stars");
             Destroy(gameObject);
 
             //Play sound effect

@@ -27,10 +27,6 @@ public class MainMenuController : GameState {
     void Start()
     {
         int[] highscores = InGame.Stars.GetAllHighScores();
-        for(int i = 0; i < highscores.Length; i++)
-        {
-            print((i+1) + " " + highscores[i]);
-        }
     }
 
 }

@@ -149,7 +149,6 @@ public class AudioPlayer : GameState{
         {
             //Get the current world
             int currentLevelWorld = PreGame.getCurrentWorldAndLevel(currentScene)[0];
-			print ("Audio : " + currentLevelWorld);
 
             //if the levels current world equals the world track and it not already playing
             for(int i = 1; i < tracks.Length; i++)

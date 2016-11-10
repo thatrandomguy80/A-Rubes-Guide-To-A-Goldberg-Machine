@@ -29,7 +29,6 @@ public class LevelSelectCanvas : GameState {
 		StartCoroutine (ToMainMenu ());
 	}
 	public void QuitGame(){
-		print ("Quit Game");
 		Application.Quit ();
 	}
 

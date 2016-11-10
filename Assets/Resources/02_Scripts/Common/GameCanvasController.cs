@@ -101,7 +101,6 @@ public class GameCanvasController : GameState {
     private void DisplayCurrentWorldAndLevel(){
 		int level = SceneManager.GetActiveScene().buildIndex;
 		int[] wrldAndLevel = PreGame.getCurrentWorldAndLevel(level);
-		print ("World : " + wrldAndLevel[0] + " // Level : " + wrldAndLevel[1]);
 
 		Text worldDet = GameObject.Find ("SceneDetails/World").GetComponent<Text> ();
 		worldDet.text = "World " + wrldAndLevel [0] + "-" + wrldAndLevel [1];
@@ -145,7 +144,6 @@ public class GameCanvasController : GameState {
         {
             starsNeeded += PreGame.starThreshold[i];
         }
-        print("DPHEStars : " + starsNeeded);
         return (totalNumOfStars >= starsNeeded);
     }
     //Checks if the current level is the final level in the world

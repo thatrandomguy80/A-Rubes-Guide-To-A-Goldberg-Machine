@@ -4,10 +4,14 @@ using System.Collections;
 public class GameControls : GameState
 {
     // degbug mode of all scripts
-    public bool Debugging = true;
+    public bool Debugging = false;
     /**
      * Controls how the game will be played between levels
      **/
+     void Start()
+    {
+        Debugging = false;
+    }
     void Update()
     {
         KeyboardControls();//Use Default Controls when navigating around the game
@@ -20,25 +24,22 @@ public class GameControls : GameState
 
     public void KeyboardControls(KeyCode pause,KeyCode restart, KeyCode left, KeyCode right,KeyCode playtest)
     {
-        if (Input.GetKeyDown(pause))
+        KeyCode DevKey = KeyCode.F1;
+        if (Input.GetKeyDown(pause) && Input.GetKey(DevKey))
         {
             InGame.Pause();
         }
-        if (Input.GetKeyDown(restart))
+        if (Input.GetKeyDown(restart) && Input.GetKey(DevKey))
         {
             InGame.RestartLevel(false);
         }
-        if (Input.GetKeyDown(left))
+        if (Input.GetKeyDown(left) && Input.GetKey(DevKey))
         {
             InGame.PreviousLevel();
         }
-        if (Input.GetKeyDown(right))
+        if (Input.GetKeyDown(right) && Input.GetKey(DevKey))
         {
             InGame.NextLevel();
-        }
-        if (Input.GetKeyDown(playtest)) {
-            PlayTestMetrics.Active = !PlayTestMetrics.Active;
-            Debug.Log("Playtest Metrics recording");
         }
     }
 

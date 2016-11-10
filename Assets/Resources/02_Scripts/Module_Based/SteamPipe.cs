@@ -51,14 +51,12 @@ public class SteamPipe : MonoBehaviour {
             {
                 //Push the ball away
                 rig2d.AddForce(rayDir * power);
-                print("Steam hit the ball");
             }
             else
             {
                 if (!createdExcessSteam)
                 {
                     //CreateExcess(hit2d);
-                    print("Deflect off " + hit2d.transform.name);
                     createdExcessSteam = true;
                 }
             }
